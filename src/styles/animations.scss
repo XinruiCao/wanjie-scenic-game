@@ -1,0 +1,10 @@
+@keyframes ui-fade{from{opacity:0}to{opacity:1}}
+@keyframes glass-shimmer{from{filter:brightness(1)}to{filter:brightness(1.12)}}
+@keyframes gold-sweep{from{background-position:100% 0}to{background-position:0 0}}
+@keyframes choice-enter{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:translateX(0)}}
+@keyframes choice-hover{to{filter:brightness(1.12)}}
+@keyframes crack-reveal{from{opacity:0}to{opacity:.2}}
+@keyframes destiny-flow{from{left:0;opacity:0}30%{opacity:.6}to{left:100%;opacity:0}}
+@keyframes panel-slide{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes soft-pulse{from{opacity:.45}to{opacity:.7}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}

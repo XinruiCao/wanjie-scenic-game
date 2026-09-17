@@ -1,0 +1,1068 @@
+[
+  {
+    "key": "menu.active",
+    "source": "scripts/a18e31b1-3a58-46e2-a2a6-d4208f6d1782.png",
+    "box": [
+      638,
+      704,
+      1106,
+      797
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/menu/active.png",
+    "note": ""
+  },
+  {
+    "key": "menu.idle",
+    "source": "scripts/a18e31b1-3a58-46e2-a2a6-d4208f6d1782.png",
+    "box": [
+      638,
+      807,
+      1106,
+      900
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/menu/idle.png",
+    "note": ""
+  },
+  {
+    "key": "panel.large",
+    "source": "scripts/a18e31b1-3a58-46e2-a2a6-d4208f6d1782.png",
+    "box": [
+      204,
+      183,
+      877,
+      474
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/panel/large.png",
+    "note": ""
+  },
+  {
+    "key": "panel.sidebar",
+    "source": "scripts/a18e31b1-3a58-46e2-a2a6-d4208f6d1782.png",
+    "box": [
+      895,
+      193,
+      1162,
+      622
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/panel/sidebar.png",
+    "note": ""
+  },
+  {
+    "key": "panel.small",
+    "source": "scripts/a18e31b1-3a58-46e2-a2a6-d4208f6d1782.png",
+    "box": [
+      1126,
+      662,
+      1291,
+      902
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/panel/small.png",
+    "note": ""
+  },
+  {
+    "key": "panel.light",
+    "source": "scripts/a18e31b1-3a58-46e2-a2a6-d4208f6d1782.png",
+    "box": [
+      1303,
+      662,
+      1463,
+      902
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/panel/light.png",
+    "note": ""
+  },
+  {
+    "key": "frames.photo",
+    "source": "scripts/a18e31b1-3a58-46e2-a2a6-d4208f6d1782.png",
+    "box": [
+      26,
+      720,
+      150,
+      890
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/frames/photo.png",
+    "note": "白底去除；相框内窗透明化，避免遮挡实际照片。",
+    "cutout": [
+      11,
+      14,
+      113,
+      152
+    ]
+  },
+  {
+    "key": "frames.card",
+    "source": "scripts/a18e31b1-3a58-46e2-a2a6-d4208f6d1782.png",
+    "box": [
+      309,
+      720,
+      448,
+      890
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/frames/card.png",
+    "note": "白底去除；卡片内窗透明化，保留装饰边框。",
+    "cutout": [
+      15,
+      15,
+      122,
+      152
+    ]
+  },
+  {
+    "key": "phone.shell",
+    "source": "scripts/a18e31b1-3a58-46e2-a2a6-d4208f6d1782.png",
+    "box": [
+      1180,
+      193,
+      1399,
+      622
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/phone/shell.png",
+    "note": ""
+  },
+  {
+    "key": "decorations.ornament",
+    "source": "scripts/a18e31b1-3a58-46e2-a2a6-d4208f6d1782.png",
+    "box": [
+      840,
+      19,
+      1168,
+      88
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/decorations/ornament.png",
+    "note": ""
+  },
+  {
+    "key": "decorations.divider",
+    "source": "scripts/a18e31b1-3a58-46e2-a2a6-d4208f6d1782.png",
+    "box": [
+      840,
+      91,
+      1170,
+      133
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/decorations/divider.png",
+    "note": ""
+  },
+  {
+    "key": "decorations.orbit",
+    "source": "scripts/a18e31b1-3a58-46e2-a2a6-d4208f6d1782.png",
+    "box": [
+      839,
+      138,
+      1170,
+      182
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/decorations/orbit.png",
+    "note": ""
+  },
+  {
+    "key": "choice.hover",
+    "source": "scripts/30b90080-f605-4196-9f33-2d1ce857df3e.png",
+    "box": [
+      37,
+      164,
+      823,
+      260
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/choice/hover.png",
+    "note": ""
+  },
+  {
+    "key": "choice.normal",
+    "source": "scripts/30b90080-f605-4196-9f33-2d1ce857df3e.png",
+    "box": [
+      843,
+      164,
+      1640,
+      260
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/choice/normal.png",
+    "note": ""
+  },
+  {
+    "key": "choice.selected",
+    "source": "scripts/30b90080-f605-4196-9f33-2d1ce857df3e.png",
+    "box": [
+      37,
+      269,
+      823,
+      365
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/choice/selected.png",
+    "note": ""
+  },
+  {
+    "key": "choice.disabled",
+    "source": "scripts/30b90080-f605-4196-9f33-2d1ce857df3e.png",
+    "box": [
+      843,
+      269,
+      1640,
+      365
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/choice/disabled.png",
+    "note": ""
+  },
+  {
+    "key": "buttons.active",
+    "source": "scripts/30b90080-f605-4196-9f33-2d1ce857df3e.png",
+    "box": [
+      591,
+      646,
+      825,
+      720
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/buttons/active.png",
+    "note": ""
+  },
+  {
+    "key": "buttons.idle",
+    "source": "scripts/30b90080-f605-4196-9f33-2d1ce857df3e.png",
+    "box": [
+      848,
+      648,
+      1092,
+      720
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/buttons/idle.png",
+    "note": ""
+  },
+  {
+    "key": "buttons.light",
+    "source": "scripts/30b90080-f605-4196-9f33-2d1ce857df3e.png",
+    "box": [
+      1111,
+      648,
+      1358,
+      720
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/buttons/light.png",
+    "note": ""
+  },
+  {
+    "key": "character.active",
+    "source": "scripts/30b90080-f605-4196-9f33-2d1ce857df3e.png",
+    "box": [
+      43,
+      631,
+      552,
+      711
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/character/active.png",
+    "note": ""
+  },
+  {
+    "key": "character.idle",
+    "source": "scripts/30b90080-f605-4196-9f33-2d1ce857df3e.png",
+    "box": [
+      43,
+      715,
+      552,
+      790
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/character/idle.png",
+    "note": ""
+  },
+  {
+    "key": "icons.play",
+    "source": "scripts/30b90080-f605-4196-9f33-2d1ce857df3e.png",
+    "box": [
+      592,
+      740,
+      738,
+      882
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/icons/play.png",
+    "note": ""
+  },
+  {
+    "key": "icons.pause",
+    "source": "scripts/30b90080-f605-4196-9f33-2d1ce857df3e.png",
+    "box": [
+      753,
+      740,
+      897,
+      882
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/icons/pause.png",
+    "note": ""
+  },
+  {
+    "key": "icons.close",
+    "source": "scripts/30b90080-f605-4196-9f33-2d1ce857df3e.png",
+    "box": [
+      917,
+      740,
+      1057,
+      882
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/icons/close.png",
+    "note": ""
+  },
+  {
+    "key": "icons.back",
+    "source": "scripts/30b90080-f605-4196-9f33-2d1ce857df3e.png",
+    "box": [
+      1076,
+      740,
+      1217,
+      882
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/icons/back.png",
+    "note": ""
+  },
+  {
+    "key": "icons.settings",
+    "source": "scripts/30b90080-f605-4196-9f33-2d1ce857df3e.png",
+    "box": [
+      1264,
+      762,
+      1359,
+      860
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/icons/settings.png",
+    "note": ""
+  },
+  {
+    "key": "icons.sound",
+    "source": "scripts/30b90080-f605-4196-9f33-2d1ce857df3e.png",
+    "box": [
+      1389,
+      762,
+      1487,
+      860
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/icons/sound.png",
+    "note": ""
+  },
+  {
+    "key": "icons.fullscreen",
+    "source": "scripts/30b90080-f605-4196-9f33-2d1ce857df3e.png",
+    "box": [
+      1516,
+      762,
+      1619,
+      860
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/icons/fullscreen.png",
+    "note": ""
+  },
+  {
+    "key": "decorations.diamond",
+    "source": "scripts/30b90080-f605-4196-9f33-2d1ce857df3e.png",
+    "box": [
+      836,
+      57,
+      894,
+      133
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/decorations/diamond.png",
+    "note": ""
+  },
+  {
+    "key": "decorations.line",
+    "source": "scripts/30b90080-f605-4196-9f33-2d1ce857df3e.png",
+    "box": [
+      1188,
+      78,
+      1410,
+      121
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/decorations/line.png",
+    "note": ""
+  },
+  {
+    "key": "destiny.ring",
+    "source": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "box": [
+      183,
+      28,
+      318,
+      174
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/destiny/ring.png",
+    "note": "圆环内窗透明化，保留金边；人物头像显示在内窗。",
+    "ellipseCutout": [
+      67,
+      77,
+      50,
+      49
+    ]
+  },
+  {
+    "key": "destiny.node",
+    "source": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "box": [
+      326,
+      28,
+      464,
+      176
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/destiny/node.png",
+    "note": ""
+  },
+  {
+    "key": "destiny.closed",
+    "source": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "box": [
+      615,
+      31,
+      754,
+      178
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/destiny/closed.png",
+    "note": ""
+  },
+  {
+    "key": "icons.countdown",
+    "source": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "box": [
+      759,
+      28,
+      906,
+      179
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/icons/countdown.png",
+    "note": ""
+  },
+  {
+    "key": "destiny.compass",
+    "source": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "box": [
+      30,
+      197,
+      194,
+      346
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/destiny/compass.png",
+    "note": ""
+  },
+  {
+    "key": "destiny.fan",
+    "source": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "box": [
+      191,
+      197,
+      348,
+      346
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/destiny/fan.png",
+    "note": ""
+  },
+  {
+    "key": "destiny.fire",
+    "source": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "box": [
+      353,
+      197,
+      489,
+      346
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/destiny/fire.png",
+    "note": ""
+  },
+  {
+    "key": "destiny.eye",
+    "source": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "box": [
+      510,
+      197,
+      653,
+      346
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/destiny/eye.png",
+    "note": ""
+  },
+  {
+    "key": "destiny.lotus",
+    "source": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "box": [
+      660,
+      195,
+      795,
+      345
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/destiny/lotus.png",
+    "note": ""
+  },
+  {
+    "key": "destiny.moon",
+    "source": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "box": [
+      807,
+      196,
+      957,
+      345
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/destiny/moon.png",
+    "note": ""
+  },
+  {
+    "key": "destiny.true",
+    "source": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "box": [
+      963,
+      185,
+      1108,
+      345
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/destiny/true.png",
+    "note": ""
+  },
+  {
+    "key": "icons.subtitles",
+    "source": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "box": [
+      201,
+      373,
+      332,
+      501
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/icons/subtitles.png",
+    "note": ""
+  },
+  {
+    "key": "phone.call",
+    "source": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "box": [
+      43,
+      373,
+      175,
+      501
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/phone/call.png",
+    "note": ""
+  },
+  {
+    "key": "phone.messages",
+    "source": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "box": [
+      201,
+      373,
+      332,
+      501
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/phone/messages.png",
+    "note": ""
+  },
+  {
+    "key": "phone.photos",
+    "source": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "box": [
+      368,
+      373,
+      497,
+      501
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/phone/photos.png",
+    "note": ""
+  },
+  {
+    "key": "phone.files",
+    "source": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "box": [
+      530,
+      373,
+      660,
+      501
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/phone/files.png",
+    "note": ""
+  },
+  {
+    "key": "phone.news",
+    "source": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "box": [
+      1011,
+      373,
+      1141,
+      501
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/phone/news.png",
+    "note": ""
+  },
+  {
+    "key": "phone.map",
+    "source": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "box": [
+      1177,
+      373,
+      1306,
+      501
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/phone/map.png",
+    "note": ""
+  },
+  {
+    "key": "phone.settings",
+    "source": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "box": [
+      1334,
+      373,
+      1469,
+      501
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/phone/settings.png",
+    "note": ""
+  },
+  {
+    "key": "status.trust",
+    "source": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "box": [
+      1332,
+      273,
+      1435,
+      326
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/status/trust.png",
+    "note": ""
+  },
+  {
+    "key": "status.alert",
+    "source": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "box": [
+      1136,
+      273,
+      1235,
+      326
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/status/alert.png",
+    "note": ""
+  },
+  {
+    "key": "status.control",
+    "source": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "box": [
+      1432,
+      273,
+      1530,
+      326
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/status/control.png",
+    "note": ""
+  },
+  {
+    "key": "status.fracture",
+    "source": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "box": [
+      1234,
+      273,
+      1337,
+      326
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/status/fracture.png",
+    "note": ""
+  },
+  {
+    "key": "status.dependence",
+    "source": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "box": [
+      1531,
+      273,
+      1632,
+      326
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/status/dependence.png",
+    "note": ""
+  },
+  {
+    "key": "decorations.spark",
+    "source": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "box": [
+      34,
+      830,
+      203,
+      904
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/decorations/spark.png",
+    "note": ""
+  },
+  {
+    "key": "decorations.red",
+    "source": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "box": [
+      993,
+      824,
+      1189,
+      904
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/decorations/red.png",
+    "note": ""
+  },
+  {
+    "key": "decorations.crack",
+    "source": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "box": [
+      227,
+      684,
+      327,
+      781
+    ],
+    "removeWhite": false,
+    "target": "src/static/ui/decorations/crack.png",
+    "note": "从素材表的碎玻璃样本裁出，以 screen 叠加，非整张参考页。"
+  },
+  {
+    "key": "scenes.engagement",
+    "source": "scripts/60582090-c233-4a29-81b8-de7e4ad198f2.png",
+    "box": null,
+    "removeWhite": false,
+    "target": "src/static/backgrounds/engagement.png",
+    "note": ""
+  },
+  {
+    "key": "scenes.hospital7",
+    "source": "scripts/443934e0-7111-4e04-8056-61c848e4fc4c.png",
+    "box": null,
+    "removeWhite": false,
+    "target": "src/static/backgrounds/hospital7.png",
+    "note": ""
+  },
+  {
+    "key": "scenes.paintedSkin",
+    "source": "scripts/4b8d9d45-0278-4ae2-bcab-c9f260ad2662.png",
+    "box": null,
+    "removeWhite": false,
+    "target": "src/static/backgrounds/paintedSkin.png",
+    "note": ""
+  },
+  {
+    "key": "scenes.lotus",
+    "source": "scripts/visual-sources/lotus-landscape.png",
+    "removeWhite": false,
+    "target": "src/static/backgrounds/lotus.png",
+    "note": "使用用户已有独立场景/人物素材替换旧参考小裁片。"
+  },
+  {
+    "key": "scenes.harbor",
+    "source": "scripts/visual-sources/wanjie-harbor.png",
+    "removeWhite": false,
+    "target": "src/static/backgrounds/harbor.png",
+    "note": "使用用户已有独立场景/人物素材替换旧参考小裁片。"
+  },
+  {
+    "key": "scenes.highDimension",
+    "source": "scripts/visual-sources/high-dimension.png",
+    "removeWhite": false,
+    "target": "src/static/backgrounds/highDimension.png",
+    "note": "使用用户已有独立场景/人物素材替换旧参考小裁片。"
+  },
+  {
+    "key": "scenes.school",
+    "source": "docs/ui-reference/11-chapter-selection-reference.png",
+    "box": [
+      97,
+      49,
+      158,
+      132
+    ],
+    "removeWhite": false,
+    "target": "src/static/backgrounds/school.png",
+    "note": "参考图纯画面裁片；去掉章节字样和边框。"
+  },
+  {
+    "key": "scenes.ascension",
+    "source": "scripts/visual-sources/high-dimension.png",
+    "removeWhite": false,
+    "target": "src/static/backgrounds/ascension.png",
+    "note": "使用用户已有独立场景/人物素材替换旧参考小裁片。"
+  },
+  {
+    "key": "scenes.trueEnding",
+    "source": "scripts/visual-sources/true-ending-shore.png",
+    "removeWhite": false,
+    "target": "src/static/backgrounds/true-ending.png",
+    "note": "使用用户已有独立场景/人物素材替换旧参考小裁片。"
+  },
+  {
+    "key": "evidence.ring",
+    "source": "docs/ui-reference/05-evidence-reference.png",
+    "box": [
+      19,
+      65,
+      220,
+      194
+    ],
+    "removeWhite": false,
+    "target": "src/static/ui/evidence/ring-tracker.png",
+    "note": "纯证据照片裁片，无工具栏或文字。"
+  },
+  {
+    "key": "evidence.detail",
+    "source": "docs/ui-reference/05-evidence-reference.png",
+    "box": [
+      243,
+      68,
+      315,
+      111
+    ],
+    "removeWhite": false,
+    "target": "src/static/ui/evidence/detail.png",
+    "note": "戒托放大画面裁片。"
+  },
+  {
+    "key": "evidence.back",
+    "source": "docs/ui-reference/05-evidence-reference.png",
+    "box": [
+      244,
+      134,
+      314,
+      192
+    ],
+    "removeWhite": false,
+    "target": "src/static/ui/evidence/back.png",
+    "note": "戒指背面纯照片裁片。"
+  },
+  {
+    "key": "portraits.shenzhiyi",
+    "source": "scripts/visual-sources/shenzhiyi-sheet.png",
+    "removeWhite": false,
+    "target": "src/static/characters/shenzhiyi/portrait.png",
+    "note": "使用用户已有独立场景/人物素材替换旧参考小裁片。",
+    "box": [
+      2,
+      0,
+      224,
+      270
+    ]
+  },
+  {
+    "key": "portraits.zhouxuchuan",
+    "source": "scripts/visual-sources/zhouxuchuan-sheet.png",
+    "removeWhite": false,
+    "target": "src/static/characters/zhouxuchuan/portrait.png",
+    "note": "使用用户已有独立场景/人物素材替换旧参考小裁片。",
+    "box": [
+      350,
+      150,
+      730,
+      620
+    ]
+  },
+  {
+    "key": "portraits.liangyan",
+    "source": "scripts/visual-sources/liangyan-sheet.png",
+    "removeWhite": false,
+    "target": "src/static/characters/liangyan/portrait.png",
+    "note": "使用用户已有独立场景/人物素材替换旧参考小裁片。",
+    "box": [
+      0,
+      0,
+      375,
+      477
+    ]
+  },
+  {
+    "key": "portraits.linxiaoman",
+    "source": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "box": [
+      979,
+      542,
+      1060,
+      624
+    ],
+    "removeWhite": false,
+    "target": "src/static/characters/linxiaoman/portrait.png",
+    "note": "素材表无名角色头像暂配；不是已确认的角色定妆图。"
+  },
+  {
+    "key": "portraits.gulinchuan",
+    "source": "scripts/visual-sources/gulinchuan-sheet.png",
+    "removeWhite": false,
+    "target": "src/static/characters/gulinchuan/portrait.png",
+    "note": "使用用户已有独立场景/人物素材替换旧参考小裁片。",
+    "box": [
+      0,
+      0,
+      270,
+      365
+    ]
+  },
+  {
+    "key": "portraits.wuxuanzhen",
+    "source": "scripts/visual-sources/wuxuanzhen-sheet.png",
+    "removeWhite": false,
+    "target": "src/static/characters/wuxuanzhen/portrait.png",
+    "note": "使用用户已有独立场景/人物素材替换旧参考小裁片。",
+    "box": [
+      457,
+      0,
+      744,
+      410
+    ]
+  },
+  {
+    "key": "portraits.shentingshan",
+    "source": "scripts/visual-sources/shentingshan-sheet.png",
+    "removeWhite": false,
+    "target": "src/static/characters/shentingshan/portrait.png",
+    "note": "使用用户已有独立场景/人物素材替换旧参考小裁片。",
+    "box": [
+      0,
+      0,
+      355,
+      452
+    ]
+  },
+  {
+    "key": "portraits.xuzhe",
+    "source": "docs/ui-reference/01-home-reference.png",
+    "box": [
+      162,
+      117,
+      219,
+      207
+    ],
+    "removeWhite": false,
+    "target": "src/static/characters/xuzhe/portrait.png",
+    "note": "首页群像配角暂配，缺少独立角色定妆图。"
+  },
+  {
+    "key": "menu.activeWave",
+    "source": "scripts/home-menu-wave-source.png",
+    "box": [
+      48,
+      60,
+      2440,
+      550
+    ],
+    "removeWhite": true,
+    "target": "src/static/ui/menu/menu-active-wave.png",
+    "note": "用户提供碎镜波光条，保留原图，裁边并去除连通白底。"
+  },
+  {
+    "key": "hero.shenzhiyi",
+    "source": "scripts/visual-sources/shenzhiyi-outfit.png",
+    "box": [
+      345,
+      38,
+      800,
+      991
+    ],
+    "removeWhite": false,
+    "target": "src/static/characters/shenzhiyi/hero.png",
+    "note": "从用户角色设定表拆出的独立人物区域；非整表运行。",
+    "greenKey": true
+  },
+  {
+    "key": "hero.zhouxuchuan",
+    "source": "scripts/visual-sources/zhouxuchuan-sheet.png",
+    "box": [
+      311,
+      138,
+      780,
+      1402
+    ],
+    "removeWhite": true,
+    "target": "src/static/characters/zhouxuchuan/hero.png",
+    "note": "从用户角色设定表拆出的独立人物区域；非整表运行。"
+  },
+  {
+    "key": "hero.liangyan",
+    "source": "scripts/visual-sources/liangyan-sheet.png",
+    "box": [
+      400,
+      0,
+      735,
+      1430
+    ],
+    "removeWhite": true,
+    "target": "src/static/characters/liangyan/hero.png",
+    "note": "从用户角色设定表拆出的独立人物区域；非整表运行。"
+  },
+  {
+    "key": "hero.shentingshan",
+    "source": "scripts/visual-sources/shentingshan-sheet.png",
+    "box": [
+      390,
+      0,
+      742,
+      1430
+    ],
+    "removeWhite": true,
+    "target": "src/static/characters/shentingshan/hero.png",
+    "note": "从用户角色设定表拆出的独立人物区域；非整表运行。"
+  },
+  {
+    "key": "hero.gulinchuan",
+    "source": "scripts/visual-sources/gulinchuan-sheet.png",
+    "box": [
+      422,
+      304,
+      643,
+      1265
+    ],
+    "removeWhite": true,
+    "target": "src/static/characters/gulinchuan/hero.png",
+    "note": "从用户角色设定表拆出的独立人物区域；非整表运行。"
+  },
+  {
+    "key": "hero.wuxuanzhen",
+    "source": "scripts/visual-sources/wuxuanzhen-sheet.png",
+    "box": [
+      0,
+      0,
+      183,
+      599
+    ],
+    "removeWhite": true,
+    "target": "src/static/characters/wuxuanzhen/hero.png",
+    "note": "从用户角色设定表拆出的独立人物区域；非整表运行。"
+  }
+]

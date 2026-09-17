@@ -1,0 +1,7 @@
+@use './variables' as *;
+:root,page{--bg:#{$bg-main};--text:#{$text-main};--muted:#{$text-secondary};--gold:#{$gold};--true:#{$gold-bright};--red:#{$crimson};--cyan:#{$cyan};--line:rgba(182,145,85,.3);--panel:#{$glass-dark};--panel-2:#{$glass-soft};--ui-safe-x:max(4vw,env(safe-area-inset-left),20px);--ui-safe-y:max(24px,env(safe-area-inset-top));--choice-safe-left:clamp(76px,18%,118px);--choice-safe-right:clamp(24px,8%,40px);--title-safe-width:42vw;--panel-opacity:.35;--gold-line-width:1px;--z-film:0;--z-film-overlay:10;--z-ui:20;--z-choice:30;--z-phone:40;--z-modal:50;--z-debug:100}
+*{box-sizing:border-box}page{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;color:var(--text);background:var(--bg)}
+button{touch-action:manipulation}button:focus-visible,[tabindex]:focus-visible{outline:1px solid var(--true);outline-offset:4px}button:after{border:0}.safe{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+.glass{background:var(--panel);border:1px solid var(--line)}.mono{font-family:ui-monospace,monospace}.ui-btn{background:var(--panel-2);color:var(--text);border:1px solid var(--line);min-height:44px}.app-page{min-height:100vh;background:var(--bg)}
+
+uni-button:focus-visible{outline:1px solid var(--true);outline-offset:3px}uni-button[disabled]{cursor:default}

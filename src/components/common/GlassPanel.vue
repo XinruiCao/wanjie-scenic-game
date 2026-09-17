@@ -1,0 +1,1 @@
+<template><AssetPanel><slot>{{title}}</slot></AssetPanel></template><script setup lang="ts">import AssetPanel from './AssetPanel.vue';defineProps<{title?:string}>()</script>

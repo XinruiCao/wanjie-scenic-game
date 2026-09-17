@@ -1,0 +1,132 @@
+[
+  {
+    "key": "light-title",
+    "size": [
+      2172,
+      724
+    ],
+    "transparentPercent": 64,
+    "partialAlphaPercent": 35,
+    "hasAlpha": true
+  },
+  {
+    "key": "dark-title",
+    "size": [
+      2172,
+      724
+    ],
+    "transparentPercent": 54,
+    "partialAlphaPercent": 46,
+    "hasAlpha": true
+  },
+  {
+    "key": "light-button",
+    "size": [
+      2172,
+      724
+    ],
+    "transparentPercent": 86,
+    "partialAlphaPercent": 14,
+    "hasAlpha": true
+  },
+  {
+    "key": "dark-button",
+    "size": [
+      1983,
+      793
+    ],
+    "transparentPercent": 91,
+    "partialAlphaPercent": 9,
+    "hasAlpha": true
+  },
+  {
+    "key": "light-panel",
+    "size": [
+      1536,
+      1024
+    ],
+    "transparentPercent": 90,
+    "partialAlphaPercent": 10,
+    "hasAlpha": true
+  },
+  {
+    "key": "dark-panel",
+    "size": [
+      1536,
+      1024
+    ],
+    "transparentPercent": 87,
+    "partialAlphaPercent": 13,
+    "hasAlpha": true
+  },
+  {
+    "key": "icon-characters",
+    "size": [
+      1254,
+      1254
+    ],
+    "transparentPercent": 81,
+    "partialAlphaPercent": 19,
+    "hasAlpha": true
+  },
+  {
+    "key": "icon-routes",
+    "size": [
+      1254,
+      1254
+    ],
+    "transparentPercent": 78,
+    "partialAlphaPercent": 22,
+    "hasAlpha": true
+  },
+  {
+    "key": "icon-archive",
+    "size": [
+      1254,
+      1254
+    ],
+    "transparentPercent": 75,
+    "partialAlphaPercent": 25,
+    "hasAlpha": true
+  },
+  {
+    "key": "icon-gallery",
+    "size": [
+      1254,
+      1254
+    ],
+    "transparentPercent": 84,
+    "partialAlphaPercent": 16,
+    "hasAlpha": true
+  },
+  {
+    "key": "gold-flare",
+    "size": [
+      2172,
+      724
+    ],
+    "transparentPercent": 90,
+    "partialAlphaPercent": 10,
+    "hasAlpha": true
+  },
+  {
+    "key": "grain",
+    "size": [
+      1254,
+      1254
+    ],
+    "transparentPercent": 99,
+    "partialAlphaPercent": 1,
+    "hasAlpha": true
+  },
+  {
+    "key": "seal",
+    "size": [
+      1254,
+      1254
+    ],
+    "transparentPercent": 87,
+    "partialAlphaPercent": 13,
+    "hasAlpha": true
+  }
+]

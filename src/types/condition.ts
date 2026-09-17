@@ -1,0 +1,2 @@
+export type Condition = { all: Condition[] } | { any: Condition[] } | { flag: string; equals?: boolean | string | number; exists?: boolean } | { stat: string; gte?: number; lte?: number } | { ending: string; unlocked?: boolean } | { playthrough: number }
+export interface ConditionState { flags: Record<string, boolean|string|number>; stats: Record<string, number>; unlockedEndings: string[]; playthrough: number }

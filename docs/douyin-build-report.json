@@ -1,0 +1,117 @@
+{
+  "mode": "demo",
+  "packageBytes": 711316,
+  "packageFiles": 20,
+  "startupBudgetBytes": 4194304,
+  "videoNodes": 25,
+  "configuredVideos": 0,
+  "assets": [
+    {
+      "file": "assets/light-title.png",
+      "bytes": 69800,
+      "width": 1050,
+      "height": 350,
+      "alpha": true
+    },
+    {
+      "file": "assets/dark-title.png",
+      "bytes": 134586,
+      "width": 1050,
+      "height": 321,
+      "alpha": true
+    },
+    {
+      "file": "assets/light-button.png",
+      "bytes": 17968,
+      "width": 720,
+      "height": 168,
+      "alpha": true
+    },
+    {
+      "file": "assets/dark-button.png",
+      "bytes": 16875,
+      "width": 720,
+      "height": 122,
+      "alpha": true
+    },
+    {
+      "file": "assets/light-panel.png",
+      "bytes": 20941,
+      "width": 600,
+      "height": 366,
+      "alpha": true
+    },
+    {
+      "file": "assets/dark-panel.png",
+      "bytes": 25338,
+      "width": 600,
+      "height": 363,
+      "alpha": true
+    },
+    {
+      "file": "assets/icon-characters.png",
+      "bytes": 11273,
+      "width": 144,
+      "height": 187,
+      "alpha": true
+    },
+    {
+      "file": "assets/icon-routes.png",
+      "bytes": 8944,
+      "width": 144,
+      "height": 153,
+      "alpha": true
+    },
+    {
+      "file": "assets/icon-archive.png",
+      "bytes": 8700,
+      "width": 144,
+      "height": 100,
+      "alpha": true
+    },
+    {
+      "file": "assets/icon-gallery.png",
+      "bytes": 9235,
+      "width": 144,
+      "height": 133,
+      "alpha": true
+    },
+    {
+      "file": "assets/gold-flare.png",
+      "bytes": 8510,
+      "width": 720,
+      "height": 72,
+      "alpha": true
+    },
+    {
+      "file": "assets/grain.png",
+      "bytes": 1477,
+      "width": 256,
+      "height": 257,
+      "alpha": true
+    },
+    {
+      "file": "assets/seal.png",
+      "bytes": 12239,
+      "width": 144,
+      "height": 140,
+      "alpha": true
+    },
+    {
+      "file": "assets/hero.jpg",
+      "bytes": 153367
+    },
+    {
+      "file": "assets/engagement.jpg",
+      "bytes": 48045
+    },
+    {
+      "file": "assets/hospital7.jpg",
+      "bytes": 32692
+    },
+    {
+      "file": "assets/true-ending.jpg",
+      "bytes": 75147
+    }
+  ]
+}

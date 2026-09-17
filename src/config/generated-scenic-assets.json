@@ -1,0 +1,171 @@
+{
+  "light-title": {
+    "src": "/static/scenic/generated/light-title.png",
+    "size": [
+      2172,
+      724
+    ],
+    "box": [
+      38,
+      4,
+      2116,
+      705
+    ]
+  },
+  "dark-title": {
+    "src": "/static/scenic/generated/dark-title.png",
+    "size": [
+      2172,
+      724
+    ],
+    "box": [
+      13,
+      25,
+      2145,
+      655
+    ]
+  },
+  "light-button": {
+    "src": "/static/scenic/generated/light-button.png",
+    "size": [
+      2172,
+      724
+    ],
+    "box": [
+      7,
+      107,
+      2159,
+      503
+    ]
+  },
+  "dark-button": {
+    "src": "/static/scenic/generated/dark-button.png",
+    "size": [
+      1983,
+      793
+    ],
+    "box": [
+      19,
+      222,
+      1945,
+      330
+    ]
+  },
+  "light-panel": {
+    "src": "/static/scenic/generated/light-panel.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "box": [
+      50,
+      74,
+      1436,
+      875
+    ]
+  },
+  "dark-panel": {
+    "src": "/static/scenic/generated/dark-panel.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "box": [
+      52,
+      78,
+      1433,
+      867
+    ]
+  },
+  "icon-characters": {
+    "src": "/static/scenic/generated/icon-characters.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "box": [
+      204,
+      78,
+      846,
+      1100
+    ]
+  },
+  "icon-routes": {
+    "src": "/static/scenic/generated/icon-routes.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "box": [
+      74,
+      29,
+      1105,
+      1175
+    ]
+  },
+  "icon-archive": {
+    "src": "/static/scenic/generated/icon-archive.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "box": [
+      62,
+      227,
+      1130,
+      788
+    ]
+  },
+  "icon-gallery": {
+    "src": "/static/scenic/generated/icon-gallery.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "box": [
+      197,
+      237,
+      876,
+      809
+    ]
+  },
+  "gold-flare": {
+    "src": "/static/scenic/generated/gold-flare.png",
+    "size": [
+      2172,
+      724
+    ],
+    "box": [
+      156,
+      261,
+      1903,
+      191
+    ]
+  },
+  "grain": {
+    "src": "/static/scenic/generated/grain.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "box": [
+      23,
+      28,
+      1189,
+      1194
+    ]
+  },
+  "seal": {
+    "src": "/static/scenic/generated/seal.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "box": [
+      306,
+      313,
+      642,
+      622
+    ]
+  }
+}

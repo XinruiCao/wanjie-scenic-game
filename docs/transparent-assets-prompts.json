@@ -1,0 +1,57 @@
+{
+  "mode": "built-in image_gen",
+  "prompts": [
+    {
+      "key": "light-title",
+      "prompt": "Use case: logo-brand. Produce ONE finished PNG game title asset on a genuinely TRANSPARENT BACKGROUND with alpha channel. Not a mockup, not a sheet, no checkerboard painted into pixels, no solid background. Chinese ink brush calligraphy, deep blue-black ink #203d44, cinematic strong brush strokes and subtle ink feathering. Two lines exact text: first line '万界开了，' second line '我在末日景区搞基建'. The second line slightly smaller and wide, overall composition 3:1 landscape. Only the lettering and a few elegant brush flicks; NO landscape, NO buildings, NO paper, no rectangular backing, no subtitle, no other text. Entire margin and holes between strokes must be fully transparent. Elegant premium Chinese post-apocalyptic rebuilding game title, clean readable accurate Chinese characters."
+    },
+    {
+      "key": "dark-button",
+      "prompt": "Use case: ui-mockup. ONE production game UI button BORDER asset as a PNG with actual TRANSPARENT ALPHA background. Thin intricately engraved antique gold metallic elongated hexagonal frame, restrained delicate curved filigree just at left and right ends. Cinematic ruined-world RPG aesthetic, elegant realistic worn gold, no chunky bevel. Button shape ratio 5:1, centered occupying most of a wide canvas, ample clean transparent margins. IMPORTANT: outside AND INSIDE the frame are completely transparent, ONLY the gold outline and tiny corner ornaments are opaque. No text, no words, no symbols inside, no badge, no fill, no black or white rectangle, no checkerboard texture. Straight horizontal long rails suitable for resizable UI."
+    },
+    {
+      "key": "icon-characters",
+      "prompt": "Use case: ui-mockup. ONE standalone small game navigation ICON PNG with genuine transparent alpha. Subject: A front-facing elegant bust silhouette, head and shoulders, no face details. Consistent thin antique gold metal line work, elegant understated cinematic game UI, crisp recognisable silhouette, restrained bevel and weathering. Square canvas, centered, icon takes 70% width with generous transparent margin. No text, no letters, no card or button background, no solid backing, no atmosphere, no glow cloud, no checkerboard. All negative space and canvas outside the icon fully transparent. One single icon only."
+    },
+    {
+      "key": "icon-routes",
+      "prompt": "Use case: ui-mockup. ONE standalone small game navigation ICON PNG with genuine transparent alpha. Subject: An eight-point compass rose with a single thin circular ring, clear long north pointer. Consistent thin antique gold metal line work, elegant understated cinematic game UI, crisp recognisable silhouette, restrained bevel and weathering. Square canvas, centered, icon takes 70% width with generous transparent margin. No text, no letters, no card or button background, no solid backing, no atmosphere, no glow cloud, no checkerboard. All negative space and canvas outside the icon fully transparent. One single icon only."
+    },
+    {
+      "key": "icon-archive",
+      "prompt": "Use case: ui-mockup. ONE standalone small game navigation ICON PNG with genuine transparent alpha. Subject: An open archival book, two clearly separated pages with three subtle engraved lines. Consistent thin antique gold metal line work, elegant understated cinematic game UI, crisp recognisable silhouette, restrained bevel and weathering. Square canvas, centered, icon takes 70% width with generous transparent margin. No text, no letters, no card or button background, no solid backing, no atmosphere, no glow cloud, no checkerboard. All negative space and canvas outside the icon fully transparent. One single icon only."
+    },
+    {
+      "key": "icon-gallery",
+      "prompt": "Use case: ui-mockup. ONE standalone small game navigation ICON PNG with genuine transparent alpha. Subject: Two slightly overlapping empty rectangular photograph outlines with a tiny simple mountain line inside the front one. Consistent thin antique gold metal line work, elegant understated cinematic game UI, crisp recognisable silhouette, restrained bevel and weathering. Square canvas, centered, icon takes 70% width with generous transparent margin. No text, no letters, no card or button background, no solid backing, no atmosphere, no glow cloud, no checkerboard. All negative space and canvas outside the icon fully transparent. One single icon only."
+    },
+    {
+      "key": "dark-title",
+      "prompt": "Use case: logo-brand. ONE polished cinematic Chinese game title PNG on a genuine transparent alpha background. Two lines of exact Chinese brush calligraphy: first line '重生后，' second line '我在末日景区当老板娘'. Warm antique ivory-gold lettering, expressive elegant hand-brushed strokes, subtle gold engraved filigree extending a little from bottom left/right, fine worn metallic texture. Overall ratio 3:1, second line fits entirely, all Chinese characters accurate. ONLY calligraphy and sparse decorative gold strokes. No landscape, no rectangle, no backing material, no paper, no extra English, no shadows filling background. Actual transparent alpha around every letter and between strokes. No simulated checkerboard."
+    },
+    {
+      "key": "light-button",
+      "prompt": "Use case: ui-mockup. ONE standalone PNG game UI button BORDER with genuine transparent alpha, outside AND inside the frame completely transparent. Wide horizontal ratio 5:1, silver blue-grey fine etched metal double outline, clipped chamfered corners, tiny geometric construction-blueprint corner detailing. Thin elegant lines and faint cyan light just along outline, weathered matte silver, hopeful mountain rebuilding game aesthetic. Occupy most canvas, clean margins, strictly straight long top and bottom rails. ONLY border, nothing in center. No text, no icon, no fill, no white card, no scene, no checkerboard. Designed to layer on top of a live HTML button."
+    },
+    {
+      "key": "dark-panel",
+      "prompt": "Use case: ui-mockup. ONE production ornate rectangular UI PANEL FRAME PNG. Genuine transparent alpha; entire central opening and whole exterior fully transparent. Landscape 3:2 aspect, perfectly rectangular straight thin double antique gold rails, delicate restrained twisting vine filigree concentrated at four corners only, tiny metallic imperfections, fine elegant relief gold lines. Post apocalyptic scenic-park cinematic game. Borders narrow relative to large EMPTY center. No characters, no text, no icons, no filled backing, no wood or stone slab, no black rectangle, no white rectangle, no checkerboard. Isolated gold frame only. Leave clean padding beyond all edges."
+    },
+    {
+      "key": "light-panel",
+      "prompt": "Use case: ui-mockup. ONE production rectangular UI PANEL FRAME PNG on genuine transparent alpha. Landscape 3:2 aspect. Silver grey and muted lake teal extremely thin double perimeter rails, subtly weathered brushed metal, small geometric beveled corner joints, restrained archival expedition document feel, fine etched construction plan markings only near corners. EMPTY fully transparent central opening and transparent outside. Only four slim connected edges, no solid panel or fill, no paper backing, no photo, no icons, no writing, no checkerboard. Clean margin around frame. Designed to overlay arbitrary live page content."
+    },
+    {
+      "key": "gold-flare",
+      "prompt": "Use case: stylized-concept. ONE transparent PNG UI light effect overlay. A very fine horizontal antique gold streak with a small elegant four-point star at center and a few tiny sparse floating gold motes. Wide 5:1 composition, restrained warm luminous metallic light, tapered ends vanish smoothly to alpha zero. Actual transparent alpha background including all empty areas; no black or white background, no fog rectangle, no lens scene, no text, no opaque backing, no checkerboard. It must composite cleanly on any color background. Single delicate line of light, subtle premium game UI effect."
+    },
+    {
+      "key": "grain",
+      "prompt": "Use case: stylized-concept. ONE production transparent PNG texture overlay. Very sparse fine weathered paper fibres and tiny soft muted grey scratches, irregular microscopic speckles distributed lightly over square canvas. 90 percent visually empty transparent negative space, delicate semi-transparent isolated fibres, a few faint longer irregular diagonal hairline scratches. Genuine alpha background fully clear between flecks. No solid color paper sheet, no material rectangle, no border, no vignette, no shadow, no checkerboard, no text. The only visible marks are sparse small fibres and tiny dust specks to overlay on arbitrary UI surfaces."
+    },
+    {
+      "key": "seal",
+      "prompt": "Use case: logo-brand. ONE small Chinese expedition park seal stamp PNG on actual transparent alpha. A tasteful aged vermilion round ink stamp with thin double circle perimeter, inside a simple stylized three-peak mountain drawing and tiny pine tree. Elegantly worn red ink with irregular gaps, handcrafted Chinese heritage hiking permit aesthetic. No Chinese or English text at all. No paper, no badge material, no backing, no rectangle, no shadow, no checkerboard. Only the vermilion ink imprint, with all surrounding canvas and unprinted spaces fully transparent. Square canvas with generous empty margin."
+    }
+  ]
+}

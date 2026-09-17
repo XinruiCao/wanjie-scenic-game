@@ -1,0 +1,69 @@
+[data-skin='light']{--bg:#eee9df;--text:#253b40;--muted:#657578;--gold:#426873;--true:#326879;--red:#9e5548;--cyan:#7fb3c9;--line:#526b7040;--panel:#f6f4eddc;--panel-2:#eeeee5a8;--on-accent:#fff8e7;--panel-opacity:.12}
+[data-skin='dark']{--bg:#11191d;--text:#eaddc7;--muted:#b0a694;--gold:#c3a16b;--true:#edcf96;--red:#8b4148;--cyan:#569193;--line:#c3a16b55;--panel:#131b20e8;--panel-2:#263033aa;--on-accent:#182023;--panel-opacity:.3}
+.visual-page[data-skin]{background:var(--bg);color:var(--text);font-family:'Songti SC','STSong',serif}
+.visual-page[data-skin] .asset-button{background:var(--panel);color:var(--text);border-color:var(--line)}
+.visual-page[data-skin] .asset-panel{background:var(--panel);color:var(--text);border:1px solid var(--line)}
+.visual-page[data-skin] .top{border-bottom:1px solid var(--line);background:var(--panel)}
+.visual-page[data-skin] .section-label,.visual-page[data-skin] .eyebrow,.visual-page[data-skin] .icon-control{color:var(--gold)}
+.visual-page[data-skin] .visual-copy,.visual-page[data-skin] .muted,.visual-page[data-skin] .session-note,.visual-page[data-skin] .save-note{color:var(--muted)}
+.visual-page[data-skin] .settings-copy text,.visual-page[data-skin] .settings-tabs button,.visual-page[data-skin] .chapter-heading{color:var(--text)}
+.visual-page[data-skin] .settings-tabs button.active{color:var(--gold);border-color:var(--gold)}
+.visual-page[data-skin] .scene-backdrop{opacity:.18;filter:saturate(.5)}
+.visual-page.player[data-skin] .scene-backdrop{opacity:1;filter:none}
+.visual-page[data-skin] .chapter-card{border:1px solid var(--line)}
+.visual-page[data-skin='light'] .chapter-frame{display:none}
+.visual-page[data-skin='light'] .chapter-caption{background:linear-gradient(0deg,#f6f4ed 55%,#f6f4eddf 72%,transparent);color:#253b40;left:0;right:0;bottom:0;padding:80px 16px 18px}
+.visual-page[data-skin='dark'] .chapter-caption{color:#f0dfbb}
+.visual-page[data-skin] .settings-panel{background:var(--panel)}
+.visual-page[data-skin] .page-card{color:var(--text)}
+.visual-page[data-skin] .top .icon-control .asset-image{filter:sepia(.6)}
+.visual-page[data-skin='light'] .top .icon-control .asset-image{filter:brightness(.6) saturate(.5)}
+.visual-page[data-skin] button{transition:background .2s,box-shadow .2s}
+.visual-page[data-skin] button:hover:not([disabled]){box-shadow:inset 0 0 0 1px var(--gold)}
+.visual-page[data-skin] .choice-item{background:var(--panel);border:1px solid var(--line);color:var(--text);clip-path:none}
+.visual-page[data-skin] .choice-item .choice-art{opacity:.1}
+.visual-page[data-skin] .choice-item.selected{color:var(--gold)}
+.visual-page[data-skin] .profile-tabs button,.visual-page[data-skin] .profile-tab-copy,.visual-page[data-skin] .character-list button,.visual-page[data-skin] .choice-history,.visual-page[data-skin] .unlocked,.visual-page[data-skin] .empty-note{color:var(--text)}
+.visual-page[data-skin] .profile-tabs button.active{color:var(--gold)}
+.visual-page[data-skin='light'] .portrait-caption{background:linear-gradient(0deg,#eee9df,transparent)}
+.visual-page[data-skin='light'] .list-skin{opacity:.15}
+@media(prefers-reduced-motion:reduce){.visual-page[data-skin] button{transition:none}}
+.visual-page[data-skin] .category,.visual-page[data-skin] .inference{color:var(--text)}
+.visual-page[data-skin] .source-note,.visual-page[data-skin] .saved{color:var(--muted)}
+/* Actual reference-sheet materials and eight-slice borders. */
+[data-skin='light']{--button-fill:#e6e9e3}
+[data-skin='dark']{--button-fill:#232323}
+.visual-page[data-skin] .asset-button{background:var(--button-fill);border:0;padding:15px 30px;min-height:52px;isolation:isolate}
+.visual-page[data-skin] .asset-button.primary{background:var(--button-fill);color:var(--gold)}
+.visual-page[data-skin] .asset-button__label{z-index:2}
+.visual-page[data-skin] .asset-panel{border:0}
+.visual-page[data-skin] .choice-item{border:0;min-height:80px;padding:22px 36px}
+.visual-page[data-skin] .choice-item .choice-art,.visual-page[data-skin] .choice-item .choice-highlight,.visual-page[data-skin] .choice-item .mirror-crack{display:none}
+.visual-page[data-skin] .choice-copy{z-index:2}
+.visual-page[data-skin] .choice-item:hover{filter:drop-shadow(0 0 6px var(--line))}
+.visual-page[data-skin='dark'] .scenic-frame--button{filter:drop-shadow(0 0 3px #d4a45430)}
+.visual-page[data-skin] button:hover:not([disabled]){box-shadow:none;filter:brightness(1.08)}
+.visual-page[data-skin] button:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+/* Let lettering blend with the actual scenic backdrop, not an isolated UI layer. */
+.scenic-home[data-skin] .home-body{z-index:auto}
+.scenic-home .hero-lettering{position:relative;z-index:2}
+.scenic-home[data-skin] .continue-button{padding-left:34px;padding-right:30px}
+.scenic-home .reference-icon{mask-image:radial-gradient(ellipse,#000 48%,transparent 75%)}
+.scenic-home[data-skin='light'] .journey-button{--button-fill:#bed9e2}
+.scenic-home[data-skin='light'] .journey-button .button-surface{opacity:.1}
+/* Independent alpha PNGs: no background keying, screen blending, or feathered cutouts. */
+.scenic-home[data-skin] .reference-icon{mask-image:none;mix-blend-mode:normal}
+.scenic-home[data-skin] .hero-lettering,.scenic-home[data-skin] .reference-stamp,.scenic-home[data-skin] .button-flare{mix-blend-mode:normal;mask-image:none}
+.scenic-home[data-skin='light'] .reference-icon,.scenic-home[data-skin='light'] .ambient-compass{filter:grayscale(1) sepia(.4) hue-rotate(130deg) saturate(.6) brightness(.58)}
+.scenic-home[data-skin='light'] .button-flare{filter:hue-rotate(155deg) saturate(.55)}
+.visual-page[data-skin='dark'] .panel-material,.scenic-home[data-skin='dark'] .journal-texture,.scenic-home[data-skin='dark'] .button-surface{filter:invert(1);opacity:.12}
+.visual-page[data-skin] .asset-button{background:transparent}
+.scenic-home[data-skin] .journey-button,.scenic-home[data-skin] .continue-button{background:transparent!important}
+/* Only the inner silhouette carries color. Keep PNG tips and cut corners transparent. */
+.visual-page[data-skin] .asset-button,.visual-page[data-skin] .asset-panel,.visual-page[data-skin] .choice-item,.scenic-home[data-skin] .field-journal{background:transparent!important;border:0}
+.visual-page[data-skin] .asset-button{--scenic-fill:var(--button-fill)}
+.visual-page[data-skin] .choice-item{--scenic-fill:var(--panel)}
+.scenic-home[data-skin='light'] .journey-button{--scenic-fill:#bed9e2}
+.scenic-home[data-skin='dark'] .journey-button{--scenic-fill:#54242a}
+.scenic-home[data-skin] .continue-button{--scenic-fill:var(--panel-2)}
+.scenic-home[data-skin] .journey-button::after,.scenic-home[data-skin] .continue-button::after{border:0}

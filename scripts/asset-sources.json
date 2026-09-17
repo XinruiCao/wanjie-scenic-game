@@ -1,0 +1,432 @@
+[
+  {
+    "path": "scripts/4b8d9d45-0278-4ae2-bcab-c9f260ad2662.png",
+    "size": [
+      1672,
+      941
+    ],
+    "status": "runtime",
+    "origin": "scripts/4b8d9d45-0278-4ae2-bcab-c9f260ad2662.png",
+    "note": "原始电影大图，语义化复制后用于运行界面。"
+  },
+  {
+    "path": "scripts/60582090-c233-4a29-81b8-de7e4ad198f2.png",
+    "size": [
+      1672,
+      941
+    ],
+    "status": "runtime",
+    "origin": "scripts/60582090-c233-4a29-81b8-de7e4ad198f2.png",
+    "note": "原始电影大图，语义化复制后用于运行界面。"
+  },
+  {
+    "path": "scripts/a18e31b1-3a58-46e2-a2a6-d4208f6d1782.png",
+    "size": [
+      1672,
+      941
+    ],
+    "status": "source-sheet",
+    "origin": "scripts/a18e31b1-3a58-46e2-a2a6-d4208f6d1782.png",
+    "note": "按 manifest 中矩形裁切，保留原图。"
+  },
+  {
+    "path": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "size": [
+      1672,
+      941
+    ],
+    "status": "source-sheet",
+    "origin": "scripts/3c37c129-cf83-45bc-a41b-dc3172abae74.png",
+    "note": "按 manifest 中矩形裁切，保留原图。"
+  },
+  {
+    "path": "scripts/443934e0-7111-4e04-8056-61c848e4fc4c.png",
+    "size": [
+      1672,
+      941
+    ],
+    "status": "runtime",
+    "origin": "scripts/443934e0-7111-4e04-8056-61c848e4fc4c.png",
+    "note": "原始电影大图，语义化复制后用于运行界面。"
+  },
+  {
+    "path": "scripts/30b90080-f605-4196-9f33-2d1ce857df3e.png",
+    "size": [
+      1672,
+      941
+    ],
+    "status": "source-sheet",
+    "origin": "scripts/30b90080-f605-4196-9f33-2d1ce857df3e.png",
+    "note": "按 manifest 中矩形裁切，保留原图。"
+  },
+  {
+    "path": "src/static/posters/opening.jpg",
+    "size": [
+      1600,
+      900
+    ],
+    "status": "reference",
+    "origin": "src/static/posters/opening.jpg",
+    "note": "旧版带测试文案的占位海报，仅归档参考，不再进入运行页面。"
+  },
+  {
+    "path": "docs/ui-reference/16-player-choice-button-reference.png",
+    "size": [
+      210,
+      41
+    ],
+    "status": "reference",
+    "origin": "scripts/ui_reference_split.zip!16-player-choice-button-reference.png",
+    "note": "页面布局或组件外观参考；整图不用于运行界面。"
+  },
+  {
+    "path": "docs/ui-reference/08-destiny-map-reference.png",
+    "size": [
+      533,
+      202
+    ],
+    "status": "reference",
+    "origin": "scripts/ui_reference_split.zip!08-destiny-map-reference.png",
+    "note": "页面布局或组件外观参考；整图不用于运行界面。"
+  },
+  {
+    "path": "docs/ui-reference/23-evidence-thumbnail-card-reference.png",
+    "size": [
+      58,
+      57
+    ],
+    "status": "reference",
+    "origin": "scripts/ui_reference_split.zip!23-evidence-thumbnail-card-reference.png",
+    "note": "页面布局或组件外观参考；整图不用于运行界面。"
+  },
+  {
+    "path": "docs/ui-reference/22-top-player-controls-reference.png",
+    "size": [
+      86,
+      34
+    ],
+    "status": "reference",
+    "origin": "scripts/ui_reference_split.zip!22-top-player-controls-reference.png",
+    "note": "页面布局或组件外观参考；整图不用于运行界面。"
+  },
+  {
+    "path": "docs/ui-reference/05-evidence-reference.png",
+    "size": [
+      338,
+      263
+    ],
+    "status": "reference",
+    "origin": "scripts/ui_reference_split.zip!05-evidence-reference.png",
+    "note": "页面布局或组件外观参考；整图不用于运行界面。"
+  },
+  {
+    "path": "docs/ui-reference/18-countdown-ring-reference.png",
+    "size": [
+      97,
+      77
+    ],
+    "status": "reference",
+    "origin": "scripts/ui_reference_split.zip!18-countdown-ring-reference.png",
+    "note": "页面布局或组件外观参考；整图不用于运行界面。"
+  },
+  {
+    "path": "docs/ui-reference/19-destiny-node-reference.png",
+    "size": [
+      73,
+      71
+    ],
+    "status": "reference",
+    "origin": "scripts/ui_reference_split.zip!19-destiny-node-reference.png",
+    "note": "页面布局或组件外观参考；整图不用于运行界面。"
+  },
+  {
+    "path": "docs/ui-reference/13-gallery-reference.png",
+    "size": [
+      377,
+      180
+    ],
+    "status": "reference",
+    "origin": "scripts/ui_reference_split.zip!13-gallery-reference.png",
+    "note": "页面布局或组件外观参考；整图不用于运行界面。"
+  },
+  {
+    "path": "docs/ui-reference/01-home-reference.png",
+    "size": [
+      800,
+      372
+    ],
+    "status": "reference",
+    "origin": "scripts/ui_reference_split.zip!01-home-reference.png",
+    "note": "页面布局或组件外观参考；整图不用于运行界面。"
+  },
+  {
+    "path": "docs/ui-reference/06-character-reference.png",
+    "size": [
+      476,
+      263
+    ],
+    "status": "reference",
+    "origin": "scripts/ui_reference_split.zip!06-character-reference.png",
+    "note": "页面布局或组件外观参考；整图不用于运行界面。"
+  },
+  {
+    "path": "docs/ui-reference/21-destiny-legend-reference.png",
+    "size": [
+      122,
+      126
+    ],
+    "status": "reference",
+    "origin": "scripts/ui_reference_split.zip!21-destiny-legend-reference.png",
+    "note": "页面布局或组件外观参考；整图不用于运行界面。"
+  },
+  {
+    "path": "docs/ui-reference/09-route-closed-reference.png",
+    "size": [
+      430,
+      180
+    ],
+    "status": "reference",
+    "origin": "scripts/ui_reference_split.zip!09-route-closed-reference.png",
+    "note": "页面布局或组件外观参考；整图不用于运行界面。"
+  },
+  {
+    "path": "docs/ui-reference/07-major-choice-reference.png",
+    "size": [
+      504,
+      202
+    ],
+    "status": "reference",
+    "origin": "scripts/ui_reference_split.zip!07-major-choice-reference.png",
+    "note": "页面布局或组件外观参考；整图不用于运行界面。"
+  },
+  {
+    "path": "docs/ui-reference/10-ending-reference.png",
+    "size": [
+      490,
+      180
+    ],
+    "status": "reference",
+    "origin": "scripts/ui_reference_split.zip!10-ending-reference.png",
+    "note": "页面布局或组件外观参考；整图不用于运行界面。"
+  },
+  {
+    "path": "docs/ui-reference/04-message-reference.png",
+    "size": [
+      231,
+      263
+    ],
+    "status": "reference",
+    "origin": "scripts/ui_reference_split.zip!04-message-reference.png",
+    "note": "页面布局或组件外观参考；整图不用于运行界面。"
+  },
+  {
+    "path": "docs/ui-reference/17-character-sidebar-item-reference.png",
+    "size": [
+      90,
+      32
+    ],
+    "status": "reference",
+    "origin": "scripts/ui_reference_split.zip!17-character-sidebar-item-reference.png",
+    "note": "页面布局或组件外观参考；整图不用于运行界面。"
+  },
+  {
+    "path": "docs/ui-reference/24-character-status-chip-reference.png",
+    "size": [
+      69,
+      43
+    ],
+    "status": "reference",
+    "origin": "scripts/ui_reference_split.zip!24-character-status-chip-reference.png",
+    "note": "页面布局或组件外观参考；整图不用于运行界面。"
+  },
+  {
+    "path": "docs/ui-reference/03-phone-reference.png",
+    "size": [
+      275,
+      263
+    ],
+    "status": "reference",
+    "origin": "scripts/ui_reference_split.zip!03-phone-reference.png",
+    "note": "页面布局或组件外观参考；整图不用于运行界面。"
+  },
+  {
+    "path": "docs/ui-reference/02-player-choice-reference.png",
+    "size": [
+      734,
+      372
+    ],
+    "status": "reference",
+    "origin": "scripts/ui_reference_split.zip!02-player-choice-reference.png",
+    "note": "页面布局或组件外观参考；整图不用于运行界面。"
+  },
+  {
+    "path": "docs/ui-reference/12-settings-reference.png",
+    "size": [
+      235,
+      180
+    ],
+    "status": "reference",
+    "origin": "scripts/ui_reference_split.zip!12-settings-reference.png",
+    "note": "页面布局或组件外观参考；整图不用于运行界面。"
+  },
+  {
+    "path": "docs/ui-reference/11-chapter-selection-reference.png",
+    "size": [
+      495,
+      202
+    ],
+    "status": "reference",
+    "origin": "scripts/ui_reference_split.zip!11-chapter-selection-reference.png",
+    "note": "页面布局或组件外观参考；整图不用于运行界面。"
+  },
+  {
+    "path": "docs/ui-reference/14-chat-detail-reference.png",
+    "size": [
+      211,
+      263
+    ],
+    "status": "reference",
+    "origin": "scripts/ui_reference_split.zip!14-chat-detail-reference.png",
+    "note": "页面布局或组件外观参考；整图不用于运行界面。"
+  },
+  {
+    "path": "docs/ui-reference/15-home-selected-menu-item-reference.png",
+    "size": [
+      197,
+      42
+    ],
+    "status": "reference",
+    "origin": "scripts/ui_reference_split.zip!15-home-selected-menu-item-reference.png",
+    "note": "页面布局或组件外观参考；整图不用于运行界面。"
+  },
+  {
+    "path": "docs/ui-reference/20-ending-primary-button-reference.png",
+    "size": [
+      146,
+      34
+    ],
+    "status": "reference",
+    "origin": "scripts/ui_reference_split.zip!20-ending-primary-button-reference.png",
+    "note": "页面布局或组件外观参考；整图不用于运行界面。"
+  },
+  {
+    "path": "scripts/home-menu-wave-source.png",
+    "size": [
+      2508,
+      627
+    ],
+    "status": "runtime",
+    "origin": "/Users/jc/Desktop/影游/第一个剧本/UI/310bbcb4-1a39-46e3-a485-90171a9af7e0 (1).png",
+    "note": "用户提供独立波光条；保留原图，裁白边并透明化后用作首页选中态。"
+  },
+  {
+    "path": "scripts/visual-sources/shenzhiyi-sheet.png",
+    "size": [
+      1448,
+      1086
+    ],
+    "status": "source-sheet",
+    "origin": "/Users/jc/Desktop/影游/第一个剧本/女主.png",
+    "note": "本轮从用户剧本素材库导入；仅裁取独立素材，原件保留。"
+  },
+  {
+    "path": "scripts/visual-sources/zhouxuchuan-sheet.png",
+    "size": [
+      1122,
+      1402
+    ],
+    "status": "source-sheet",
+    "origin": "/Users/jc/Desktop/影游/第一个剧本/周.png",
+    "note": "本轮从用户剧本素材库导入；仅裁取独立素材，原件保留。"
+  },
+  {
+    "path": "scripts/visual-sources/liangyan-sheet.png",
+    "size": [
+      1086,
+      1448
+    ],
+    "status": "source-sheet",
+    "origin": "/Users/jc/Desktop/影游/第一个剧本/梁.png",
+    "note": "本轮从用户剧本素材库导入；仅裁取独立素材，原件保留。"
+  },
+  {
+    "path": "scripts/visual-sources/shentingshan-sheet.png",
+    "size": [
+      1086,
+      1448
+    ],
+    "status": "source-sheet",
+    "origin": "/Users/jc/Desktop/影游/第一个剧本/沈父.png",
+    "note": "本轮从用户剧本素材库导入；仅裁取独立素材，原件保留。"
+  },
+  {
+    "path": "scripts/visual-sources/gulinchuan-sheet.png",
+    "size": [
+      1122,
+      1402
+    ],
+    "status": "source-sheet",
+    "origin": "/Users/jc/Desktop/影游/第一个剧本/顾临川.png",
+    "note": "本轮从用户剧本素材库导入；仅裁取独立素材，原件保留。"
+  },
+  {
+    "path": "scripts/visual-sources/wuxuanzhen-sheet.png",
+    "size": [
+      1122,
+      1402
+    ],
+    "status": "source-sheet",
+    "origin": "/Users/jc/Desktop/影游/第一个剧本/吴玄真道士.png",
+    "note": "本轮从用户剧本素材库导入；仅裁取独立素材，原件保留。"
+  },
+  {
+    "path": "scripts/visual-sources/shenzhiyi-outfit.png",
+    "size": [
+      1086,
+      1448
+    ],
+    "status": "source-sheet",
+    "origin": "/Users/jc/Desktop/影游/第一个剧本/造型2.png",
+    "note": "本轮从用户剧本素材库导入；仅裁取独立素材，原件保留。"
+  },
+  {
+    "path": "scripts/visual-sources/wanjie-harbor.png",
+    "size": [
+      1672,
+      941
+    ],
+    "status": "runtime",
+    "origin": "/Users/jc/Desktop/影游/第一个剧本/关键场景/01ee284d-2881-4c24-8097-278ca89c014b.png",
+    "note": "本轮从用户剧本素材库导入无页面 UI 的完整场景原图。"
+  },
+  {
+    "path": "scripts/visual-sources/high-dimension.png",
+    "size": [
+      1672,
+      941
+    ],
+    "status": "runtime",
+    "origin": "/Users/jc/Desktop/影游/第一个剧本/关键场景/78ecd1bd-1bc8-4d2c-9b55-28c93d85c904.png",
+    "note": "本轮从用户剧本素材库导入无页面 UI 的完整场景原图。"
+  },
+  {
+    "path": "scripts/visual-sources/lotus-landscape.png",
+    "size": [
+      1672,
+      941
+    ],
+    "status": "runtime",
+    "origin": "/Users/jc/Desktop/影游/第一个剧本/关键场景/ab65d09a-fd5d-4f3d-9a47-d464895c4148.png",
+    "note": "本轮从用户剧本素材库导入无页面 UI 的完整场景原图。"
+  },
+  {
+    "path": "scripts/visual-sources/true-ending-shore.png",
+    "size": [
+      1456,
+      816
+    ],
+    "status": "runtime",
+    "origin": "/Users/jc/Desktop/影游/第一个剧本/关键场景/0_0.png",
+    "note": "本轮从用户剧本素材库导入无页面 UI 的完整场景原图。"
+  }
+]

@@ -1,0 +1,781 @@
+{
+  "version": 1,
+  "nodes": {
+    "V_M01": {
+      "id": "V_M01",
+      "type": "VIDEO",
+      "title": "求婚，是他最后一次努力",
+      "next": "C_M01",
+      "chapter": "序章",
+      "video": "/static/videos/prologue/V_M01.mp4",
+      "poster": "/static/backgrounds/engagement.png",
+      "loop": false
+    },
+    "C_M01": {
+      "id": "C_M01",
+      "type": "CHOICE",
+      "title": "婚后安排",
+      "choices": [
+        {
+          "id": "C_M01_A",
+          "text": "今天开心，先不扫兴",
+          "next": "V_M02_A",
+          "set": {
+            "endure_engagement": true
+          },
+          "add": {
+            "control": 1
+          }
+        },
+        {
+          "id": "C_M01_B",
+          "text": "现在把话说清楚",
+          "next": "V_M02_B",
+          "add": {
+            "independence": 1
+          }
+        },
+        {
+          "id": "C_M01_C",
+          "text": "不吵，拍下婚后安排",
+          "next": "V_M02_C",
+          "set": {
+            "evidence_marriage_plan": true,
+            "familyAgreementSaved": true
+          },
+          "add": {
+            "truth": 1
+          },
+          "evidenceIds": [
+            "marriage_plan"
+          ]
+        }
+      ]
+    },
+    "V_M02_A": {
+      "id": "V_M02_A",
+      "type": "VIDEO",
+      "title": "你笑着收起了自己的疑问。",
+      "next": "V_M03",
+      "chapter": "序章",
+      "video": "/static/videos/prologue/V_M02_A.mp4",
+      "poster": "/static/backgrounds/engagement.png",
+      "loop": false
+    },
+    "V_M02_B": {
+      "id": "V_M02_B",
+      "type": "VIDEO",
+      "title": "你要求他尊重自己的工作。",
+      "next": "V_M03",
+      "chapter": "序章",
+      "video": "/static/videos/prologue/V_M02_B.mp4",
+      "poster": "/static/backgrounds/engagement.png",
+      "loop": false
+    },
+    "V_M02_C": {
+      "id": "V_M02_C",
+      "type": "VIDEO",
+      "title": "照片留下了他要求你辞职的字句。",
+      "next": "V_M03",
+      "chapter": "序章",
+      "video": "/static/videos/prologue/V_M02_C.mp4",
+      "poster": "/static/backgrounds/engagement.png",
+      "loop": false
+    },
+    "V_M03": {
+      "id": "V_M03",
+      "type": "VIDEO",
+      "title": "手机震动：今晚的事，就当没发生。",
+      "next": "C_M03",
+      "chapter": "序章",
+      "video": "/static/videos/prologue/V_M03.mp4",
+      "poster": "/static/backgrounds/engagement.png",
+      "loop": false
+    },
+    "C_M03": {
+      "id": "C_M03",
+      "type": "CHOICE",
+      "title": "你决定先做什么？",
+      "choices": [
+        {
+          "id": "C_M03_A",
+          "text": "继续相信周叙川",
+          "next": "V_TRUST",
+          "set": {
+            "trust_zhou": true
+          },
+          "add": {
+            "control": 1
+          },
+          "defaultChoice": true
+        },
+        {
+          "id": "C_M03_B",
+          "text": "开始查他的手机",
+          "next": "V_PHONE",
+          "set": {
+            "checked_phone": true
+          },
+          "add": {
+            "truth": 1,
+            "independence": 1
+          }
+        },
+        {
+          "id": "C_M03_C",
+          "text": "先去见父亲",
+          "next": "V_FATHER",
+          "set": {
+            "met_father": true
+          },
+          "add": {
+            "family": 2
+          }
+        }
+      ],
+      "countdown": 30
+    },
+    "V_TRUST": {
+      "id": "V_TRUST",
+      "type": "VIDEO",
+      "title": "他的安慰，仍然避开了那个问题。",
+      "next": "P_PHONE",
+      "chapter": "序章",
+      "video": "/static/videos/prologue/V_TRUST.mp4",
+      "poster": "/static/backgrounds/engagement.png",
+      "loop": false
+    },
+    "V_PHONE": {
+      "id": "V_PHONE",
+      "type": "VIDEO",
+      "title": "消息里出现了反复修改的人生安排。",
+      "next": "P_PHONE",
+      "chapter": "序章",
+      "video": "/static/videos/prologue/V_PHONE.mp4",
+      "poster": "/static/backgrounds/engagement.png",
+      "loop": false
+    },
+    "V_FATHER": {
+      "id": "V_FATHER",
+      "type": "VIDEO",
+      "title": "父亲说：回家不是认输，你也可以自己决定。",
+      "next": "P_PHONE",
+      "chapter": "序章",
+      "video": "/static/videos/prologue/V_FATHER.mp4",
+      "poster": "/static/backgrounds/engagement.png",
+      "loop": false
+    },
+    "P_PHONE": {
+      "id": "P_PHONE",
+      "type": "PAGE",
+      "page": "phone",
+      "title": "深夜来信",
+      "description": "爸爸：无论如何，先确认你自己想要什么。周叙川：不要把事情闹大。",
+      "next": "P_EVIDENCE"
+    },
+    "P_EVIDENCE": {
+      "id": "P_EVIDENCE",
+      "type": "PAGE",
+      "page": "evidence",
+      "title": "戒指里的异物",
+      "description": "戒托内侧藏着一个微型元件。保存这条线索，继续核实。",
+      "payloadId": "ring_tracker",
+      "next": "V_M05"
+    },
+    "V_M05": {
+      "id": "V_M05",
+      "type": "VIDEO",
+      "title": "学校争议：他声称辞职完全是你的意愿。",
+      "next": "P_TEST_EVIDENCE",
+      "chapter": "序章",
+      "video": "/static/videos/prologue/V_M05.mp4",
+      "poster": "/static/backgrounds/engagement.png",
+      "loop": false
+    },
+    "P_TEST_EVIDENCE": {
+      "id": "P_TEST_EVIDENCE",
+      "type": "PAGE",
+      "title": "你如何回应这场争议？",
+      "choices": [
+        {
+          "id": "PROOF",
+          "text": "拿出当时拍下的婚后安排",
+          "next": "V_EVIDENCE",
+          "condition": {
+            "flag": "evidence_marriage_plan"
+          },
+          "set": {
+            "proved_pattern": true
+          },
+          "add": {
+            "truth": 1,
+            "independence": 1
+          }
+        },
+        {
+          "id": "ARGUE",
+          "text": "要求大家相信自己的口头解释",
+          "next": "V_NO_PROOF",
+          "set": {
+            "failed_claim": true
+          },
+          "add": {
+            "control": 1
+          }
+        },
+        {
+          "id": "LEAVE",
+          "text": "停止争辩，先离开这段关系",
+          "next": "V_LEAVE",
+          "add": {
+            "independence": 1
+          }
+        }
+      ]
+    },
+    "V_NO_PROOF": {
+      "id": "V_NO_PROOF",
+      "type": "VIDEO",
+      "title": "空口的辩解被新的说辞淹没了。",
+      "next": "R_NO_EVIDENCE",
+      "chapter": "序章",
+      "video": "/static/videos/prologue/V_NO_PROOF.mp4",
+      "poster": "/static/backgrounds/engagement.png",
+      "loop": false
+    },
+    "V_EVIDENCE": {
+      "id": "V_EVIDENCE",
+      "type": "VIDEO",
+      "title": "照片证实了他早已设计好的控制。",
+      "next": "V_M04",
+      "chapter": "序章",
+      "video": "/static/videos/prologue/V_EVIDENCE.mp4",
+      "poster": "/static/backgrounds/engagement.png",
+      "loop": false
+    },
+    "V_LEAVE": {
+      "id": "V_LEAVE",
+      "type": "VIDEO",
+      "title": "你不再向他索取认可。",
+      "next": "V_M04",
+      "chapter": "序章",
+      "video": "/static/videos/prologue/V_LEAVE.mp4",
+      "poster": "/static/backgrounds/engagement.png",
+      "loop": false
+    },
+    "V_M04": {
+      "id": "V_M04",
+      "type": "VIDEO",
+      "title": "你的人生，由你决定。",
+      "next": "P028",
+      "chapter": "序章",
+      "video": "/static/videos/prologue/V_M04.mp4",
+      "poster": "/static/backgrounds/engagement.png",
+      "loop": false
+    },
+    "P028": {
+      "id": "P028",
+      "type": "CHOICE",
+      "title": "命运裂缝",
+      "choices": [
+        {
+          "id": "C_P028_A",
+          "text": "退婚，隐藏身份",
+          "next": "V_A01",
+          "set": {
+            "route": "teacher"
+          }
+        },
+        {
+          "id": "C_P028_B",
+          "text": "公开身份",
+          "next": "V_B01",
+          "condition": {
+            "stat": "truth",
+            "gte": 2
+          },
+          "set": {
+            "route": "truth"
+          }
+        },
+        {
+          "id": "C_P028_C",
+          "text": "继续装普通人",
+          "next": "V_C01",
+          "set": {
+            "route": "control"
+          }
+        },
+        {
+          "id": "C_P028_D",
+          "text": "调查跟踪者",
+          "next": "V_D01",
+          "condition": {
+            "flag": "evidence_marriage_plan"
+          },
+          "set": {
+            "route": "investigation"
+          }
+        },
+        {
+          "id": "C_P028_E",
+          "text": "自己创业",
+          "next": "V_E01",
+          "condition": {
+            "stat": "independence",
+            "gte": 2
+          },
+          "set": {
+            "route": "career"
+          },
+          "add": {
+            "career": 2
+          }
+        },
+        {
+          "id": "C_P028_F",
+          "text": "回沈氏掌权",
+          "next": "V_F01",
+          "condition": {
+            "stat": "family",
+            "gte": 2
+          },
+          "set": {
+            "route": "shen_group"
+          }
+        }
+      ]
+    },
+    "V_A01": {
+      "id": "V_A01",
+      "type": "VIDEO",
+      "title": "在教室里找回自己的声音",
+      "next": "P_A02",
+      "chapter": "序章",
+      "video": "/static/videos/prologue/V_A01.mp4",
+      "poster": "/static/backgrounds/engagement.png",
+      "loop": false
+    },
+    "P_A02": {
+      "id": "P_A02",
+      "type": "PAGE",
+      "title": "新的生活",
+      "description": "这一次决定留下的影响，正在成为你的日常。",
+      "next": "V_A03"
+    },
+    "V_A03": {
+      "id": "V_A03",
+      "type": "VIDEO",
+      "title": "你承担选择，也收下它带来的未来。",
+      "next": "END01",
+      "chapter": "序章",
+      "video": "/static/videos/prologue/V_A03.mp4",
+      "poster": "/static/backgrounds/engagement.png",
+      "loop": false
+    },
+    "V_B01": {
+      "id": "V_B01",
+      "type": "VIDEO",
+      "title": "公开证据与真实身份",
+      "next": "P_B02",
+      "chapter": "序章",
+      "video": "/static/videos/prologue/V_B01.mp4",
+      "poster": "/static/backgrounds/engagement.png",
+      "loop": false
+    },
+    "P_B02": {
+      "id": "P_B02",
+      "type": "PAGE",
+      "title": "新的生活",
+      "description": "这一次决定留下的影响，正在成为你的日常。",
+      "next": "V_B03"
+    },
+    "V_B03": {
+      "id": "V_B03",
+      "type": "VIDEO",
+      "title": "你承担选择，也收下它带来的未来。",
+      "next": "END02",
+      "chapter": "序章",
+      "video": "/static/videos/prologue/V_B03.mp4",
+      "poster": "/static/backgrounds/engagement.png",
+      "loop": false
+    },
+    "V_C01": {
+      "id": "V_C01",
+      "type": "VIDEO",
+      "title": "梁砚递来一份看似完美的契约",
+      "next": "P_C02",
+      "chapter": "序章",
+      "video": "/static/videos/prologue/V_C01.mp4",
+      "poster": "/static/backgrounds/engagement.png",
+      "loop": false
+    },
+    "P_C02": {
+      "id": "P_C02",
+      "type": "PAGE",
+      "title": "新的生活",
+      "description": "这一次决定留下的影响，正在成为你的日常。",
+      "next": "V_C03"
+    },
+    "V_C03": {
+      "id": "V_C03",
+      "type": "VIDEO",
+      "title": "你承担选择，也收下它带来的未来。",
+      "next": "END03",
+      "chapter": "序章",
+      "video": "/static/videos/prologue/V_C03.mp4",
+      "poster": "/static/backgrounds/engagement.png",
+      "loop": false
+    },
+    "V_E01": {
+      "id": "V_E01",
+      "type": "VIDEO",
+      "title": "第一份属于自己的订单",
+      "next": "P_E02",
+      "chapter": "序章",
+      "video": "/static/videos/prologue/V_E01.mp4",
+      "poster": "/static/backgrounds/engagement.png",
+      "loop": false
+    },
+    "P_E02": {
+      "id": "P_E02",
+      "type": "PAGE",
+      "title": "新的生活",
+      "description": "这一次决定留下的影响，正在成为你的日常。",
+      "next": "V_E03"
+    },
+    "V_E03": {
+      "id": "V_E03",
+      "type": "VIDEO",
+      "title": "你承担选择，也收下它带来的未来。",
+      "next": "END04",
+      "chapter": "序章",
+      "video": "/static/videos/prologue/V_E03.mp4",
+      "poster": "/static/backgrounds/engagement.png",
+      "loop": false
+    },
+    "V_F01": {
+      "id": "V_F01",
+      "type": "VIDEO",
+      "title": "你坐上沈氏的会议主位",
+      "next": "P_F02",
+      "chapter": "序章",
+      "video": "/static/videos/prologue/V_F01.mp4",
+      "poster": "/static/backgrounds/engagement.png",
+      "loop": false
+    },
+    "P_F02": {
+      "id": "P_F02",
+      "type": "PAGE",
+      "title": "新的生活",
+      "description": "这一次决定留下的影响，正在成为你的日常。",
+      "next": "V_F03"
+    },
+    "V_F03": {
+      "id": "V_F03",
+      "type": "VIDEO",
+      "title": "你承担选择，也收下它带来的未来。",
+      "next": "END05",
+      "chapter": "序章",
+      "video": "/static/videos/prologue/V_F03.mp4",
+      "poster": "/static/backgrounds/engagement.png",
+      "loop": false
+    },
+    "V_D01": {
+      "id": "V_D01",
+      "type": "VIDEO",
+      "title": "追踪信号指向旧影院",
+      "next": "P_D02",
+      "chapter": "序章",
+      "video": "/static/videos/prologue/V_D01.mp4",
+      "poster": "/static/backgrounds/hospital7.png",
+      "loop": false
+    },
+    "P_D02": {
+      "id": "P_D02",
+      "type": "CHOICE",
+      "title": "你看见了另一层世界",
+      "choices": [
+        {
+          "id": "D_TRUTH",
+          "text": "公开调查结果，回到现实",
+          "next": "V_B01",
+          "set": {
+            "route": "truth"
+          },
+          "add": {
+            "truth": 2
+          }
+        },
+        {
+          "id": "D_TRUE",
+          "text": "带着记忆，走出既定剧本",
+          "next": "V_TRUE",
+          "condition": {
+            "all": [
+              {
+                "playthrough": 2
+              },
+              {
+                "flag": "proved_pattern"
+              },
+              {
+                "flag": "checked_phone"
+              },
+              {
+                "flag": "evidence_ring_tracker"
+              },
+              {
+                "flag": "route_locked",
+                "exists": false
+              }
+            ]
+          },
+          "set": {
+            "high_dimension": true,
+            "route": "high_dimension"
+          }
+        }
+      ]
+    },
+    "V_TRUE": {
+      "id": "V_TRUE",
+      "type": "VIDEO",
+      "title": "你认出了每一段人生里，始终没有消失的自己。",
+      "next": "P_TRUE",
+      "chapter": "序章",
+      "video": "/static/videos/prologue/V_TRUE.mp4",
+      "poster": "/static/backgrounds/true-ending.png",
+      "loop": false
+    },
+    "P_TRUE": {
+      "id": "P_TRUE",
+      "type": "PAGE",
+      "title": "完整的记忆",
+      "description": "不再用任何一个人的期待定义自己。",
+      "next": "END06"
+    },
+    "R_NO_EVIDENCE": {
+      "id": "R_NO_EVIDENCE",
+      "type": "ROUTE_CLOSED",
+      "title": "没有证据的争辩",
+      "description": "这一次，你无法证明他的安排早已存在。",
+      "reason": "第一幕没有保存婚后安排，或在争议时没有出示照片。回到本章可以重新收集。",
+      "returnNodeId": "P_TEST_EVIDENCE",
+      "chapterStartNodeId": "V_M01"
+    },
+    "END01": {
+      "id": "END01",
+      "type": "ENDING",
+      "title": "沈老师"
+    },
+    "END02": {
+      "id": "END02",
+      "type": "ENDING",
+      "title": "真相大白"
+    },
+    "END03": {
+      "id": "END03",
+      "type": "ENDING",
+      "title": "梁砚的王国"
+    },
+    "END04": {
+      "id": "END04",
+      "type": "ENDING",
+      "title": "第一个亿"
+    },
+    "END05": {
+      "id": "END05",
+      "type": "ENDING",
+      "title": "新任掌舵者"
+    },
+    "END06": {
+      "id": "END06",
+      "type": "ENDING",
+      "title": "完整的沈知意"
+    }
+  },
+  "layout": {
+    "V_M01": {
+      "x": 0,
+      "y": 0
+    },
+    "C_M01": {
+      "x": 360,
+      "y": 0
+    },
+    "V_M02_A": {
+      "x": 720,
+      "y": 0
+    },
+    "V_M02_B": {
+      "x": 720,
+      "y": 390
+    },
+    "V_M02_C": {
+      "x": 720,
+      "y": 780
+    },
+    "V_M03": {
+      "x": 1080,
+      "y": 0
+    },
+    "C_M03": {
+      "x": 1440,
+      "y": 0
+    },
+    "V_TRUST": {
+      "x": 1800,
+      "y": 0
+    },
+    "V_PHONE": {
+      "x": 1800,
+      "y": 390
+    },
+    "V_FATHER": {
+      "x": 1800,
+      "y": 780
+    },
+    "P_PHONE": {
+      "x": 2160,
+      "y": 0
+    },
+    "P_EVIDENCE": {
+      "x": 2520,
+      "y": 0
+    },
+    "V_M05": {
+      "x": 2880,
+      "y": 0
+    },
+    "P_TEST_EVIDENCE": {
+      "x": 3240,
+      "y": 0
+    },
+    "V_NO_PROOF": {
+      "x": 3600,
+      "y": 0
+    },
+    "V_EVIDENCE": {
+      "x": 3600,
+      "y": 390
+    },
+    "V_LEAVE": {
+      "x": 3600,
+      "y": 780
+    },
+    "V_M04": {
+      "x": 3960,
+      "y": 0
+    },
+    "P028": {
+      "x": 4320,
+      "y": 0
+    },
+    "V_A01": {
+      "x": 4680,
+      "y": 0
+    },
+    "P_A02": {
+      "x": 5040,
+      "y": 0
+    },
+    "V_A03": {
+      "x": 5400,
+      "y": 0
+    },
+    "V_B01": {
+      "x": 4680,
+      "y": 390
+    },
+    "P_B02": {
+      "x": 5040,
+      "y": 390
+    },
+    "V_B03": {
+      "x": 5400,
+      "y": 390
+    },
+    "V_C01": {
+      "x": 4680,
+      "y": 780
+    },
+    "P_C02": {
+      "x": 5040,
+      "y": 780
+    },
+    "V_C03": {
+      "x": 5400,
+      "y": 780
+    },
+    "V_E01": {
+      "x": 4680,
+      "y": 1170
+    },
+    "P_E02": {
+      "x": 5040,
+      "y": 1170
+    },
+    "V_E03": {
+      "x": 5400,
+      "y": 1170
+    },
+    "V_F01": {
+      "x": 4680,
+      "y": 1560
+    },
+    "P_F02": {
+      "x": 5040,
+      "y": 1560
+    },
+    "V_F03": {
+      "x": 5400,
+      "y": 1560
+    },
+    "V_D01": {
+      "x": 4680,
+      "y": 1950
+    },
+    "P_D02": {
+      "x": 5040,
+      "y": 1950
+    },
+    "V_TRUE": {
+      "x": 5400,
+      "y": 1950
+    },
+    "P_TRUE": {
+      "x": 5760,
+      "y": 0
+    },
+    "R_NO_EVIDENCE": {
+      "x": 3960,
+      "y": 390
+    },
+    "END01": {
+      "x": 5760,
+      "y": 390
+    },
+    "END02": {
+      "x": 5760,
+      "y": 780
+    },
+    "END03": {
+      "x": 5760,
+      "y": 1170
+    },
+    "END04": {
+      "x": 5760,
+      "y": 1560
+    },
+    "END05": {
+      "x": 5760,
+      "y": 1950
+    },
+    "END06": {
+      "x": 6120,
+      "y": 0
+    }
+  },
+  "trash": []
+}

@@ -1,0 +1,3 @@
+<template><view :data-skin="scenicSkin" class="visual-page"><SceneBackdrop :src="backgrounds.engagement" :shade=".7"/><TopBar title="消息" eyebrow="PRIVATE MESSAGES" @back="back" @settings="back"/><PhoneScene continue-label="返回" @continue="back"/></view></template><script setup lang="ts">
+import {goBack} from '../../utils/navigation'
+import PhoneScene from '../../components/phone/PhoneScene.vue';import SceneBackdrop from '../../components/common/SceneBackdrop.vue';import TopBar from '../../components/TopBar.vue';import {backgrounds} from '../../data/backgrounds';function back(){goBack()}</script>
