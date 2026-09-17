@@ -21,7 +21,8 @@
     "dev:douyin": "npm run build:douyin && vite --config douyin/preview/vite.config.mjs",
     "check:douyin": "node scripts/check-douyin.mjs",
     "typecheck:douyin": "tsc --noEmit -p douyin/tsconfig.json",
-    "test:douyin": "node scripts/test-douyin.mjs"
+    "test:douyin": "node scripts/test-douyin.mjs",
+    "verify:base": "npm run validate:story && npm run story:test && npm run test:skins && npm run typecheck:douyin && npm run build:h5 && npm run build:douyin && npm run test:douyin"
   },
   "dependencies": {
     "@dcloudio/uni-app": "3.0.0-5020420260813003",
