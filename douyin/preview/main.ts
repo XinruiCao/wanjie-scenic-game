@@ -10,7 +10,7 @@ let app: GameApp
 let targetSignature = ''
 const platform: Platform = {
   canvas,
-  viewport: () => ({ width: device.clientWidth, height: device.clientHeight, dpr: devicePixelRatio, top: 48, bottom: 24 }),
+  viewport: () => ({ width: device.clientWidth, height: device.clientHeight, dpr: devicePixelRatio, top: device.clientWidth > device.clientHeight ? 10 : 48, bottom: 24 }),
   storage: { get: key => localStorage.getItem(key), set: (key, value) => localStorage.setItem(key, typeof value === 'string' ? value : JSON.stringify(value)) },
   loadImage: src => new Promise((resolve, reject) => { const im = new Image(); im.onload = () => resolve(im); im.onerror = reject; im.src = '/' + src }),
   video(src, muted, events) {

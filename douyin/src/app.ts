@@ -9,7 +9,6 @@ import { Movie } from './movie'
 import type { Platform, Rect, HitTarget, ReleaseConfig } from './platform'
 
 type Page = 'home' | 'play' | 'journal' | 'endings' | 'settings'
-const W = 390
 const serif = '"Songti SC", "STSong", serif'
 const sans = 'sans-serif'
 const palettes = {
@@ -23,6 +22,8 @@ export class GameApp {
   targets: HitTarget[] = []
   private ctx: CanvasRenderingContext2D
   private images: Record<string, HTMLImageElement> = {}
+  private width = 390
+  private landscape = false
   private height = 844
   private scale = 1
   private pixelScale = 1
@@ -61,12 +62,17 @@ export class GameApp {
   get colors() { return palettes[this.session.skin] }
   resize() {
     const v = this.platform.viewport()
-    this.scale = v.width / W
+    this.landscape = v.width > v.height
+    this.width = this.landscape ? v.width : 390
+    this.scale = v.width / this.width
+    this.down = undefined
+    this.targets = []
+    this.scrollBounds = undefined
     this.height = v.height / this.scale
-    this.top = Math.max(48, v.top / this.scale)
+    this.top = Math.max(this.landscape ? 10 : 48, v.top / this.scale)
     this.bottom = Math.max(16, v.bottom / this.scale)
     this.pixelScale = this.scale * Math.min(2, v.dpr || 1)
-    this.platform.canvas.width = Math.round(W * this.pixelScale)
+    this.platform.canvas.width = Math.round(this.width * this.pixelScale)
     this.platform.canvas.height = Math.round(this.height * this.pixelScale)
     this.dirty = true
   }
@@ -238,10 +244,10 @@ export class GameApp {
     const hitHeight = Math.max(44, 44 / this.scale)
     this.target(id, label, { x, y: y - (hitHeight - 44) / 2, w, h: hitHeight }, action)
   }
-  private beginScroll(y: number, bottom: number) {
-    this.scrollArea = { x: 18, y, w: W - 36, h: Math.max(40, bottom - y) }
+  private beginScroll(y: number, bottom: number, x = 18, width = this.width - 36) {
+    this.scrollArea = { x, y, w: width, h: Math.max(40, bottom - y) }
     this.scrollBounds = this.scrollArea
-    this.ctx.save(); this.ctx.beginPath(); this.ctx.rect(0, y, W, this.scrollArea.h); this.ctx.clip()
+    this.ctx.save(); this.ctx.beginPath(); this.ctx.rect(x, y, width, this.scrollArea.h); this.ctx.clip()
     return y - this.scroll
   }
   private endScroll(contentBottom: number) {
@@ -250,8 +256,8 @@ export class GameApp {
     this.scroll = Math.min(this.scroll, this.maxScroll)
     this.ctx.restore()
     if (this.maxScroll > 0) {
-      this.rect(W - 8, r.y, 2, r.h, this.colors.line)
-      this.rect(W - 8, r.y + this.scroll / this.maxScroll * (r.h - 32), 2, 32, this.colors.accent)
+      this.rect(this.width - 8, r.y, 2, r.h, this.colors.line)
+      this.rect(this.width - 8, r.y + this.scroll / this.maxScroll * (r.h - 32), 2, 32, this.colors.accent)
     }
     this.scrollArea = undefined
   }
@@ -259,49 +265,86 @@ export class GameApp {
     this.link('home', '‹ 返回', 12, this.top, 66, () => this.show('home'))
     this.text(kicker, 94, this.top + 4, 9, this.colors.muted)
     this.text(title, 94, this.top + 21, 19, this.colors.ink, serif)
-    this.rect(24, this.top + 57, W - 48, 1, this.colors.line)
+    this.rect(24, this.top + 57, this.width - 48, 1, this.colors.line)
   }
   render(now = Date.now()) {
     const ctx = this.ctx
     ctx.setTransform(this.pixelScale, 0, 0, this.pixelScale, 0, 0)
     this.targets = []; this.scrollArea = undefined; this.scrollBounds = undefined; this.maxScroll = 0
-    this.rect(0, 0, W, this.height, this.colors.bg)
-    this.image('grain', { x: 0, y: 0, w: W, h: this.height }, 'cover', .5, .2)
-    if (this.page === 'home') this.home(now)
-    else if (this.page === 'play') this.play()
+    this.rect(0, 0, this.width, this.height, this.colors.bg)
+    this.image('grain', { x: 0, y: 0, w: this.width, h: this.height }, 'cover', .5, .2)
+    if (this.page === 'home') {if(this.landscape)this.landscapeHome();else this.home(now)}
+    else if (this.page === 'play') {if(this.landscape&&this.node.type!=='ENDING'&&this.node.type!=='ROUTE_CLOSED')this.landscapePlay();else this.play()}
     else if (this.page === 'journal') this.journal()
     else if (this.page === 'endings') this.endings()
     else this.settings()
     if (this.session.saveError) {
-      this.rect(12, this.height - this.bottom - 38, W - 24, 34, '#763c2e')
-      this.text('保存提示 · 点此重试', W / 2, this.height - this.bottom - 28, 12, '#fff3de', sans, 'center')
-      this.target('retry-save', this.session.saveError, { x: 12, y: this.height - this.bottom - 42, w: W - 24, h: 44 }, () => { this.session.save(); this.notify(this.session.saveError || '进度已保存') })
+      this.rect(12, this.height - this.bottom - 38, this.width - 24, 34, '#763c2e')
+      this.text('保存提示 · 点此重试', this.width / 2, this.height - this.bottom - 28, 12, '#fff3de', sans, 'center')
+      this.target('retry-save', this.session.saveError, { x: 12, y: this.height - this.bottom - 42, w: this.width - 24, h: 44 }, () => { this.session.save(); this.notify(this.session.saveError || '进度已保存') })
     }
     if (Date.now() < this.toastUntil) {
-      this.rect(18, this.top + 60, W - 36, 48, '#203d3f')
-      this.paragraph(this.toastText, 32, this.top + 69, W - 64, 12, '#fff4dc', 19)
+      this.rect(18, this.top + 60, this.width - 36, 48, '#203d3f')
+      this.paragraph(this.toastText, 32, this.top + 69, this.width - 64, 12, '#fff4dc', 19)
     }
     this.platform.targets?.(this.targets.map(t => ({ ...t, x: t.x * this.scale, y: t.y * this.scale, w: t.w * this.scale, h: t.h * this.scale })))
+  }
+  private landscapeHome() {
+    const c=this.colors, split=Math.round(this.width*.53), right=split+26, w=this.width-right-32
+    this.image('hero',{x:0,y:0,w:split,h:this.height},'cover',.7)
+    const shade=this.ctx.createLinearGradient(0,0,0,this.height);shade.addColorStop(0,'#071c1910');shade.addColorStop(1,'#071c19d9');this.ctx.fillStyle=shade;this.ctx.fillRect(0,0,split,this.height)
+    this.text('青 崖 山 / WORLDS UNLOCKED',32,this.top+12,11,'#f5e7c7')
+    this.text('万界开了，',32,this.height-124,34,'#f5e7c7',serif)
+    this.text('我在末日景区搞基建',32,this.height-78,24,'#f5e7c7',serif)
+    let y=this.beginScroll(this.top+8,this.height-this.bottom,right,w)
+    this.text('从一张准考证开始',right+14,y,22,c.ink,serif);y+=43
+    this.button('start',this.session.state.hasSave?'继续旅程  ›':'开启旅程  ›',{x:right,y,w,h:56},()=>this.start(),true);y+=68
+    for(const [page,label] of [['journal','重建手记'],['endings','结局收藏'],['settings','旅程设置']]){this.button(page,label,{x:right,y,w,h:48},()=>this.show(page as Page));y+=55}
+    this.link('skin',this.session.state.metaFlags.darkSkinUnlocked?'切换外观 · '+themes[this.session.skin].name:'深色外观 · 序章通关解锁',right,y,w,()=>{if(!this.session.switchSkin())this.notify('完成序章后开启深色外观')});y+=48
+    this.text('转动手机，故事继续。',right+14,y,11,c.muted);y+=30
+    this.endScroll(y)
+  }
+  private landscapePlay() {
+    const n=this.node,c=this.colors,left=32,split=Math.round(this.width*.46),x=split+28,w=this.width-x-32
+    this.header(n.title||'你的故事',`EP. ${n.episode||''} / ${n.chapter||''}`)
+    const r={x:left,y:this.top+72,w:split-left,h:Math.max(80,this.height-this.top-this.bottom-143)}
+    this.frameInterior('panel',r,18,()=>{this.image(n.scene||'qingya',r,'cover');this.movie.paint(r,this.pixelScale)})
+    this.frameArt(`${this.session.skin}-panel`,r,18)
+    let y=this.beginScroll(this.top+73,this.height-this.bottom-60,x,w)
+    if(n.location)y+=this.paragraph(n.location,x+8,y,w-16,11,c.accent,18)+12
+    if(n.description)y+=this.paragraph(n.description,x+8,y,w-16,15,c.ink,26,serif)+18
+    for(const [i,choice] of this.session.engine.getVisibleChoices().entries()){
+      const h=Math.max(54,this.lines(choice.text,w-75,16,serif).length*23+26)
+      this.button(choice.id,choice.text,{x,y,w,h},()=>this.transition(()=>this.session.engine.applyChoice(choice.id)),false,choice.disabled,String.fromCharCode(65+i));y+=h+7
+      if(choice.hint)y+=this.paragraph(choice.hint,x+8,y,w-16,11,c.accent,19)+10
+    }
+    if(!n.choices?.length){
+      if(n.type!=='VIDEO'||this.movie.status==='demo'){this.button('advance','继续故事  ›',{x,y,w,h:56},()=>this.transition(()=>this.session.engine.advance()),true);y+=68}
+      else if(this.movie.status==='error'){y+=this.paragraph(this.movie.message,x+8,y,w-16,13,c.muted,23)+12;this.button('retry-video','重新加载影像',{x,y,w,h:56},()=>this.enterNode());y+=68}
+      else{this.button('pause',this.movie.status==='paused'?'继续播放':'暂停播放',{x,y,w,h:56},()=>this.movie.toggle(),false,this.movie.status==='loading');y+=68}
+    }
+    const outcome=latestOutcome(this.session.state);if(outcome)y+=this.paragraph('上一步的回声 · '+outcome,x+8,y,w-16,11,c.muted,20)+16
+    this.endScroll(y);this.footer()
   }
   private home(now: number) {
     const H = this.height, c = this.colors, dark = this.session.skin === 'dark'
     const heroH = Math.max(this.top + 134, H - this.bottom - 362)
-    this.image('hero', { x: 0, y: 0, w: W, h: heroH + 90 }, 'cover', .76)
+    this.image('hero', { x: 0, y: 0, w: this.width, h: heroH + 90 }, 'cover', .76)
     const shade = this.ctx.createLinearGradient(0, 0, 0, heroH + 90)
     shade.addColorStop(0, dark ? '#11171785' : '#d6e4e02e'); shade.addColorStop(.5, '#17292c00'); shade.addColorStop(1, c.bg)
-    this.ctx.fillStyle = shade; this.ctx.fillRect(0, 0, W, heroH + 90)
+    this.ctx.fillStyle = shade; this.ctx.fillRect(0, 0, this.width, heroH + 90)
     this.text('青 崖 山  /  Q I N G Y A', 25, this.top + 2, 10, dark ? '#ecd5ad' : '#263f41')
     this.text('一 张 通 往 新 世 界 的 入 场 券', 25, this.top + 22, 9, dark ? '#ddd0b8' : '#334a4c')
-    this.image('seal', { x: W - 73, y: this.top + 5, w: 48, h: 48 }, 'contain', .5, .7)
+    this.image('seal', { x: this.width - 73, y: this.top + 5, w: 48, h: 48 }, 'contain', .5, .7)
     if(dark){this.text('万界开了，',25,heroH-57,38,c.ink,serif);this.text('我在末日景区搞基建',25,heroH-7,29,c.ink,serif)}
-    else this.image('light-title', { x: 21, y: heroH - 69, w: W - 42, h: 120 })
-    this.image('gold-flare', { x: 42, y: heroH + 40, w: W - 84, h: 24 }, 'contain', .5, .65)
-    this.text('废墟之上，重建人间值得的风景。', W / 2, heroH + 67, 13, c.ink, serif, 'center')
+    else this.image('light-title', { x: 21, y: heroH - 69, w: this.width - 42, h: 120 })
+    this.image('gold-flare', { x: 42, y: heroH + 40, w: this.width - 84, h: 24 }, 'contain', .5, .65)
+    this.text('废墟之上，重建人间值得的风景。', this.width / 2, heroH + 67, 13, c.ink, serif, 'center')
     const mainY = heroH + 103
-    this.button('start', this.session.state.hasSave ? '继续旅程  ›' : '开启旅程  ›', { x: 42, y: mainY, w: W - 84, h: 58 }, () => this.start(), true)
+    this.button('start', this.session.state.hasSave ? '继续旅程  ›' : '开启旅程  ›', { x: 42, y: mainY, w: this.width - 84, h: 58 }, () => this.start(), true)
     const saveLabel = this.session.state.hasSave ? `已保存 · ${this.node.title || '当前剧情'}` : '轻触开始 · 每一次选择，都通往不同的未来'
-    const label = this.lines(saveLabel, W - 48, 11)[0]
-    this.text(label, W / 2, mainY + 66, 11, c.muted, sans, 'center')
+    const label = this.lines(saveLabel, this.width - 48, 11)[0]
+    this.text(label, this.width / 2, mainY + 66, 11, c.muted, sans, 'center')
     const navY = mainY + 102
     ;[['icon-routes', '重建手记', 'journal'], ['icon-gallery', '结局收藏', 'endings'], ['icon-archive', '旅程设置', 'settings']].forEach(([icon, label, page], i) => {
       const x = 37 + i * 109
@@ -311,14 +354,14 @@ export class GameApp {
       this.target(page, label, { x, y: navY, w: 98, h: 80 }, () => this.show(page as Page))
     })
     const footerY = navY + 91
-    this.link('skin', this.session.state.metaFlags.darkSkinUnlocked ? `${themes[this.session.skin].name} · 切换外观` : '余烬鎏金 · 序章通关后解锁', 35, footerY, W - 70, () => {
+    this.link('skin', this.session.state.metaFlags.darkSkinUnlocked ? `${themes[this.session.skin].name} · 切换外观` : '余烬鎏金 · 序章通关后解锁', 35, footerY, this.width - 70, () => {
       if (!this.session.switchSkin()) this.notify('完成序章「世界真的坏了」的选择后解锁黑金皮肤')
     })
-    this.text(this.session.config.mode === 'demo' ? '青崖山开门 / 35 段图文剧情' : 'STILL BEAUTIFUL · 青崖山景区', W / 2, H - this.bottom - 10, 9, c.muted, sans, 'center')
+    this.text(this.session.config.mode === 'demo' ? '青崖山开门 / 35 段图文剧情' : 'STILL BEAUTIFUL · 青崖山景区', this.width / 2, H - this.bottom - 10, 9, c.muted, sans, 'center')
     if (!this.session.reducedMotion) {
       this.ctx.save(); this.ctx.fillStyle = dark ? '#f9dca8' : '#fff8e7'
       for (let i = 0; i < 14; i++) {
-        const x = (i * 79 + Math.sin(now / 4200 + i) * 12) % W
+        const x = (i * 79 + Math.sin(now / 4200 + i) * 12) % this.width
         const y = 110 + ((i * 47 - now / (130 + i * 10)) % Math.max(120, heroH - 120) + Math.max(120, heroH - 120)) % Math.max(120, heroH - 120)
         this.ctx.globalAlpha = .18 + (Math.sin(now / 1100 + i) + 1) * .15
         this.ctx.beginPath(); this.ctx.arc(x, y, i % 3 === 0 ? 1.6 : .9, 0, Math.PI * 2); this.ctx.fill()
@@ -331,7 +374,7 @@ export class GameApp {
     this.header(n.type === 'ENDING' ? '旅程落款' : n.type === 'ROUTE_CLOSED' ? '未完的岔路' : '你的故事', `${this.session.state.currentChapterId}  /  第 ${this.session.state.playthrough} 次旅程`)
     if (n.type === 'ENDING' || n.type === 'ROUTE_CLOSED') { this.result(); return }
     const videoY = this.top + 73, videoH = Math.min(230, this.height * .28)
-    const r = { x: 18, y: videoY, w: W - 36, h: videoH }
+    const r = { x: 18, y: videoY, w: this.width - 36, h: videoH }
     const poster = n.scene || 'qingya'
     this.frameInterior('panel', r, 18, () => {
       this.image(poster, r, 'cover')
@@ -341,69 +384,69 @@ export class GameApp {
     this.rect(27, videoY + 11, 151, 23, '#152d31d9')
     this.text(this.session.config.mode === 'demo' ? '青 崖 山 · 现 场 手 记' : 'WORLDS UNLOCKED', 39, videoY + 17, 10, '#efe6d4')
     if (this.movie.status === 'loading') {
-      this.rect(75, videoY + videoH / 2 - 20, W - 150, 40, '#172c30e8')
-      this.text('正在载入这段故事…', W / 2, videoY + videoH / 2 - 7, 13, '#f7eedc', sans, 'center')
+      this.rect(75, videoY + videoH / 2 - 20, this.width - 150, 40, '#172c30e8')
+      this.text('正在载入这段故事…', this.width / 2, videoY + videoH / 2 - 7, 13, '#f7eedc', sans, 'center')
     }
     const contentY = videoY + videoH + 18
     let y = this.beginScroll(contentY, this.height - this.bottom - 60)
     if (n.choices?.length) {
       this.text(this.remaining > 0 ? `做出选择  ·  ${Math.ceil(this.remaining)} 秒` : '这一刻，由你决定', 26, y, 11, c.accent)
       y += 25
-      y += this.paragraph(n.title || '你会怎么选？', 26, y, W - 52, 23, c.ink, 32, serif) + 16
-      if(n.description)y += this.paragraph(n.description,26,y,W-52,15,c.muted,27)+20
+      y += this.paragraph(n.title || '你会怎么选？', 26, y, this.width - 52, 23, c.ink, 32, serif) + 16
+      if(n.description)y += this.paragraph(n.description,26,y,this.width-52,15,c.muted,27)+20
       this.session.engine.getVisibleChoices().forEach((choice, i) => {
-        const h = Math.max(58, this.lines(choice.text, W - 125, 16, serif).length * 23 + 26)
-        this.button(choice.id, choice.text, { x: 22, y, w: W - 44, h }, () => this.transition(() => this.session.engine.applyChoice(choice.id)), false, choice.disabled, String.fromCharCode(65 + i))
+        const h = Math.max(58, this.lines(choice.text, this.width - 125, 16, serif).length * 23 + 26)
+        this.button(choice.id, choice.text, { x: 22, y, w: this.width - 44, h }, () => this.transition(() => this.session.engine.applyChoice(choice.id)), false, choice.disabled, String.fromCharCode(65 + i))
         y += h + 8
-        if(choice.hint)y += this.paragraph(choice.hint,30,y,W-60,11,c.accent,18)+12
+        if(choice.hint)y += this.paragraph(choice.hint,30,y,this.width-60,11,c.accent,18)+12
       })
       this.text('选择将自动保存，稍后也能继续。', 26, y + 5, 11, c.muted); y += 36
     } else {
       this.text(n.type === 'PAGE' ? (n.page === 'evidence' ? '现场观察' : n.page === 'phone' ? '收到来信' : '故事手记') : '正在发生', 26, y, 11, c.accent); y += 26
-      y += this.paragraph(n.title || '', 26, y, W - 52, 24, c.ink, 35, serif) + 18
-      if (n.description) y += this.paragraph(n.description, 26, y, W - 52, 16, c.muted, 29) + 20
+      y += this.paragraph(n.title || '', 26, y, this.width - 52, 24, c.ink, 35, serif) + 18
+      if (n.description) y += this.paragraph(n.description, 26, y, this.width - 52, 16, c.muted, 29) + 20
       if (n.type === 'VIDEO') {
         if (this.movie.status === 'demo') {
           this.text('影像待接入，可先体验剧情与分支。', 26, y, 12, c.muted); y += 37
-          this.button('advance', '继续剧情  ›', { x: 24, y, w: W - 48, h: 58 }, () => this.transition(() => this.session.engine.advance()), true); y += 74
+          this.button('advance', '继续剧情  ›', { x: 24, y, w: this.width - 48, h: 58 }, () => this.transition(() => this.session.engine.advance()), true); y += 74
         } else if (this.movie.status === 'error') {
-          y += this.paragraph(this.movie.message, 26, y, W - 52, 14, c.muted, 25) + 15
-          this.button('retry-video', '重新加载影像', { x: 24, y, w: W - 48, h: 58 }, () => this.enterNode()); y += 74
+          y += this.paragraph(this.movie.message, 26, y, this.width - 52, 14, c.muted, 25) + 15
+          this.button('retry-video', '重新加载影像', { x: 24, y, w: this.width - 48, h: 58 }, () => this.enterNode()); y += 74
         } else {
-          this.button('pause', this.movie.status === 'paused' ? '继续播放' : '暂停播放', { x: 24, y, w: W - 48, h: 58 }, () => this.movie.toggle(), false, this.movie.status === 'loading'); y += 75
+          this.button('pause', this.movie.status === 'paused' ? '继续播放' : '暂停播放', { x: 24, y, w: this.width - 48, h: 58 }, () => this.movie.toggle(), false, this.movie.status === 'loading'); y += 75
           const time = (s: number) => `${Math.floor(s / 60).toString().padStart(2, '0')}:${Math.floor(s % 60).toString().padStart(2, '0')}`
-          this.text(`${time(this.movie.time)}  /  ${time(this.movie.duration)}`, W / 2, y, 12, c.muted, sans, 'center'); y += 28
+          this.text(`${time(this.movie.time)}  /  ${time(this.movie.duration)}`, this.width / 2, y, 12, c.muted, sans, 'center'); y += 28
         }
       } else {
-        this.button('advance', '继续故事  ›', { x: 24, y, w: W - 48, h: 58 }, () => this.transition(() => this.session.engine.advance()), true); y += 76
+        this.button('advance', '继续故事  ›', { x: 24, y, w: this.width - 48, h: 58 }, () => this.transition(() => this.session.engine.advance()), true); y += 76
       }
     }
     const outcome=latestOutcome(this.session.state)
-    if(outcome){y+=16;y+=this.paragraph('上一步的回声 · '+outcome,26,y,W-52,12,c.accent,22)+20}
+    if(outcome){y+=16;y+=this.paragraph('上一步的回声 · '+outcome,26,y,this.width-52,12,c.accent,22)+20}
     this.endScroll(y)
     this.footer()
   }
   private footer() {
     const y = this.height - this.bottom - 44
-    this.rect(24, y - 4, W - 48, 1, this.colors.line)
+    this.rect(24, y - 4, this.width - 48, 1, this.colors.line)
     this.link('journal', '查看历程', 18, y, 112, () => this.show('journal'))
-    this.text(this.session.saveError ? '保存待重试' : '本机自动保存', W / 2, y + 16, 10, this.colors.muted, sans, 'center')
-    this.link('settings', '旅程设置', W - 130, y, 112, () => this.show('settings'))
+    this.text(this.session.saveError ? '保存待重试' : '本机自动保存', this.width / 2, y + 16, 10, this.colors.muted, sans, 'center')
+    this.link('settings', '旅程设置', this.width - 130, y, 112, () => this.show('settings'))
   }
   private result() {
     const n = this.node, c = this.colors, ending = endingDefinitions.find(e => e.id === n.id)
     let y = this.beginScroll(this.top + 78, this.height - this.bottom - 60)
-    const resultArt = { x: 24, y, w: W - 48, h: 170 }
+    const resultArt = { x: 24, y, w: this.width - 48, h: 170 }
     this.frameInterior('panel', resultArt, 22, () => this.image('hero', resultArt, 'cover', .5))
     this.frameArt(`${this.session.skin}-panel`, resultArt); y += 198
     this.text(ending ? `旅程结局  /  ${this.session.state.unlockedEndings.length} · ${endingDefinitions.length}` : '这段路暂时停在了这里', 26, y, 11, c.accent); y += 27
-    y += this.paragraph(n.title || '', 26, y, W - 52, 28, c.ink, 37, serif) + 20
-    y += this.paragraph(ending?.description || n.reason || n.description || '', 26, y, W - 52, 16, c.muted, 29) + 24
+    y += this.paragraph(n.title || '', 26, y, this.width - 52, 28, c.ink, 37, serif) + 20
+    y += this.paragraph(ending?.description || n.reason || n.description || '', 26, y, this.width - 52, 16, c.muted, 29) + 24
     if (!ending && this.session.state.checkpoint) {
-      this.button('checkpoint', '回到上次选择', { x: 24, y, w: W - 48, h: 58 }, () => this.transition(() => this.session.engine.restoreCheckpoint()), true); y += 72
+      this.button('checkpoint', '回到上次选择', { x: 24, y, w: this.width - 48, h: 58 }, () => this.transition(() => this.session.engine.restoreCheckpoint()), true); y += 72
     }
-    this.button('restart', '开启新的旅程', { x: 24, y, w: W - 48, h: 58 }, () => { void this.restart() }, !!ending); y += 72
-    if (this.platform.share) { this.button('share', '分享这段旅程', { x: 24, y, w: W - 48, h: 58 }, () => this.platform.share?.()); y += 72 }
+    this.button('restart', '开启新的旅程', { x: 24, y, w: this.width - 48, h: 58 }, () => { void this.restart() }, !!ending); y += 72
+    if (this.platform.share) { this.button('share', '分享这段旅程', { x: 24, y, w: this.width - 48, h: 58 }, () => this.platform.share?.()); y += 72 }
     this.endScroll(y); this.footer()
   }
   private journal() {
@@ -414,34 +457,34 @@ export class GameApp {
     for(let i=0;i<resources.length;i+=2){
       for(let j=0;j<2;j++){const r=resources[i+j],x=26+j*174;this.text(r.name+'  '+s.stats[r.id]+' / 100',x,y,13,c.ink);this.rect(x,y+23,154,3,c.line);this.rect(x,y+23,154*s.stats[r.id]/100,3,c.accent)}y+=45
     }
-    y+=this.paragraph('指数表示本周目建设状态，不代表实际库存。',26,y,W-52,11,c.muted,19)+22
-    for(const f of facilities){this.text((s.flags[f.flag]?'✓ ':'○ ')+f.name,26,y,16,c.ink,serif);this.text(s.flags[f.flag]?'已完成':'EP. '+f.episode+' 推进',W-26,y+2,11,c.muted,sans,'right');y+=36}
-    if(s.flags.contractSigned)y+=this.paragraph('合作商户 01 · 百鬼街商户联合体\n47 家商户 / 1 个合作主体',26,y,W-52,15,c.accent,25)+20
+    y+=this.paragraph('指数表示本周目建设状态，不代表实际库存。',26,y,this.width-52,11,c.muted,19)+22
+    for(const f of facilities){this.text((s.flags[f.flag]?'✓ ':'○ ')+f.name,26,y,16,c.ink,serif);this.text(s.flags[f.flag]?'已完成':'EP. '+f.episode+' 推进',this.width-26,y+2,11,c.muted,sans,'right');y+=36}
+    if(s.flags.contractSigned)y+=this.paragraph('合作商户 01 · 百鬼街商户联合体\n47 家商户 / 1 个合作主体',26,y,this.width-52,15,c.accent,25)+20
     y+=18;this.text('CR-07 · 已目击档案',26,y,21,c.ink,serif);y+=40
     for(const o of observations.filter(o=>s.evidenceIds.includes(o.id))){
-      this.image(o.scene,{x:26,y,w:W-52,h:142},'cover');y+=154;
+      this.image(o.scene,{x:26,y,w:this.width-52,h:142},'cover');y+=154;
       this.text(o.id+' / '+o.title,26,y,16,c.accent,serif);y+=29;
-      y+=this.paragraph(o.description,26,y,W-52,13,c.muted,23)+25
+      y+=this.paragraph(o.description,26,y,this.width-52,13,c.muted,23)+25
     }
     if(!s.evidenceIds.length){this.text('未接触的生命，不提前判断。',26,y,13,c.muted);y+=40}
     this.text('决定与回声',26,y,21,c.ink,serif);y+=40
-    if (!s.hasSave) { y += this.paragraph('你的第一段故事，正等待开启。', 26, y + 16, W - 52, 22, c.ink, 34, serif) + 50 }
+    if (!s.hasSave) { y += this.paragraph('你的第一段故事，正等待开启。', 26, y + 16, this.width - 52, 22, c.ink, 34, serif) + 50 }
     for (const entry of [...s.history].filter(h => !!h.choice || !!story[h.node]?.episode || story[h.node]?.type === 'ENDING').slice(-40).reverse()) {
       const label = entry.choice ? '你的决定' : story[entry.node]?.type === 'ENDING' ? '抵达结局' : '经历的片段'
       const title = entry.text || story[entry.node]?.title || entry.node
-      const h = 46 + this.lines(title, W - 90, 16, serif).length * 25
-      this.rect(24, y, W - 48, h, c.card, c.line)
+      const h = 46 + this.lines(title, this.width - 90, 16, serif).length * 25
+      this.rect(24, y, this.width - 48, h, c.card, c.line)
       this.text(label, 40, y + 12, 10, c.accent)
-      this.paragraph(title, 40, y + 34, W - 80, 16, c.ink, 25, serif); y += h + 12
+      this.paragraph(title, 40, y + 34, this.width - 80, 16, c.ink, 25, serif); y += h + 12
     }
     if (s.archives.length) {
       this.text(`已保留 ${s.archives.length} 段往期旅程`, 26, y + 8, 12, c.muted); y += 44
       for (const a of [...s.archives].reverse()) {
-        y += this.paragraph(`第 ${a.playthrough} 次 · ${a.run.choiceHistory.length} 次选择 · ${story[a.run.currentNodeId]?.title || '未完的故事'}`, 26, y, W - 52, 13, c.muted, 24) + 16
+        y += this.paragraph(`第 ${a.playthrough} 次 · ${a.run.choiceHistory.length} 次选择 · ${story[a.run.currentNodeId]?.title || '未完的故事'}`, 26, y, this.width - 52, 13, c.muted, 24) + 16
       }
     }
     this.endScroll(y)
-    this.button('resume', s.hasSave ? '继续旅程  ›' : '开启旅程  ›', { x: 30, y: this.height - this.bottom - 68, w: W - 60, h: 58 }, () => this.start(), true)
+    this.button('resume', s.hasSave ? '继续旅程  ›' : '开启旅程  ›', { x: 30, y: this.height - this.bottom - 68, w: this.width - 60, h: 58 }, () => this.start(), true)
   }
   private endings() {
     const s = this.session.state, c = this.colors
@@ -450,12 +493,12 @@ export class GameApp {
     for (const [i, e] of endingDefinitions.entries()) {
       const open = s.unlockedEndings.includes(e.id)
       const h = open ? 154 : 102
-      const card = { x: 22, y, w: W - 44, h }
+      const card = { x: 22, y, w: this.width - 44, h }
       this.frameInterior('panel', card, 22, () => this.rect(card.x, card.y, card.w, card.h, c.card))
       this.frameArt(`${this.session.skin}-panel`, card)
       this.text(String(i + 1).padStart(2, '0'), 44, y + 23, 29, c.accent, serif)
       this.text(open ? e.title : '尚未抵达的未来', 97, y + 22, 19, c.ink, serif)
-      if (open) this.paragraph(e.description, 97, y + 53, W - 146, 13, c.muted, 24)
+      if (open) this.paragraph(e.description, 97, y + 53, this.width - 146, 13, c.muted, 24)
       else this.text('完成第一卷，在百鬼街留下你的落款。', 44, y + 65, 11, c.muted)
       y += h + 15
     }
@@ -465,25 +508,26 @@ export class GameApp {
     const c = this.colors
     this.header('旅程设置', 'SETTINGS  /  按自己的节奏出发')
     let y = this.beginScroll(this.top + 78, this.height - this.bottom - 30)
+    y += this.paragraph('横竖屏跟随手机方向。转动手机即可切换，当前故事保持不变；部分抖音场景可能限制转屏。',26,y,this.width-52,12,c.muted,23)+24
     this.text('世界的另一面', 26, y, 23, c.ink, serif); y += 42
-    const preview = { x: 24, y, w: W - 48, h: 110 }
+    const preview = { x: 24, y, w: this.width - 48, h: 110 }
     this.frameInterior('panel', preview, 22, () => this.image('hero', preview, 'cover', .6))
     this.frameArt(`${this.session.skin}-panel`, preview); y += 131
-    this.button('skin', this.session.state.metaFlags.darkSkinUnlocked ? `${themes[this.session.skin].name} · 切换皮肤` : '余烬鎏金 · 通关序章解锁', { x: 24, y, w: W - 48, h: 60 }, () => {
+    this.button('skin', this.session.state.metaFlags.darkSkinUnlocked ? `${themes[this.session.skin].name} · 切换皮肤` : '余烬鎏金 · 通关序章解锁', { x: 24, y, w: this.width - 48, h: 60 }, () => {
       if (!this.session.switchSkin()) this.notify('完成序章「世界真的坏了」的选择后解锁黑金皮肤')
     }); y += 76
-    this.button('mute', this.session.muted ? '声音：已关闭' : '声音：已开启', { x: 24, y, w: W - 48, h: 58 }, () => { this.session.state.metaFlags.miniMuted = !this.session.muted; this.session.save() }); y += 71
-    this.button('motion', this.session.reducedMotion ? '光尘特效：已关闭' : '光尘特效：已开启', { x: 24, y, w: W - 48, h: 58 }, () => { this.session.state.metaFlags.miniReducedMotion = !this.session.reducedMotion; this.session.save() }); y += 71
+    this.button('mute', this.session.muted ? '声音：已关闭' : '声音：已开启', { x: 24, y, w: this.width - 48, h: 58 }, () => { this.session.state.metaFlags.miniMuted = !this.session.muted; this.session.save() }); y += 71
+    this.button('motion', this.session.reducedMotion ? '光尘特效：已关闭' : '光尘特效：已开启', { x: 24, y, w: this.width - 48, h: 58 }, () => { this.session.state.metaFlags.miniReducedMotion = !this.session.reducedMotion; this.session.save() }); y += 71
     if (this.platform.sidebar) {
-      this.button('sidebar', '从抖音侧边栏再相遇', { x: 24, y, w: W - 48, h: 58 }, () => this.platform.sidebar?.()); y += 71
+      this.button('sidebar', '从抖音侧边栏再相遇', { x: 24, y, w: this.width - 48, h: 58 }, () => this.platform.sidebar?.()); y += 71
     }
     if (this.session.state.hasSave) {
-      this.button('resume', '继续当前旅程', { x: 24, y, w: W - 48, h: 58 }, () => this.start(), true); y += 71
-      this.link('restart', '重新开启 · 保留已解锁收藏', 24, y, W - 48, () => { void this.restart() }); y += 60
+      this.button('resume', '继续当前旅程', { x: 24, y, w: this.width - 48, h: 58 }, () => this.start(), true); y += 71
+      this.link('restart', '重新开启 · 保留已解锁收藏', 24, y, this.width - 48, () => { void this.restart() }); y += 60
     }
-    y += this.paragraph('进度保存在当前设备。卸载或清理应用缓存可能导致进度丢失。', 28, y + 8, W - 56, 12, c.muted, 23) + 26
-    if (this.session.config.mode === 'demo') y += this.paragraph('第一卷已接入 35 段图文剧情。各项建设指数为试玩抽象数值。正式影像与平台发布能力仍待接入。旧试玩存档单独保留。', 28, y, W - 56, 12, c.muted, 23) + 20
-    if (this.assetErrors) y += this.paragraph('部分界面素材未加载，请重新打开试玩。', 28, y, W - 56, 12, c.muted, 23) + 20
+    y += this.paragraph('进度保存在当前设备。卸载或清理应用缓存可能导致进度丢失。', 28, y + 8, this.width - 56, 12, c.muted, 23) + 26
+    if (this.session.config.mode === 'demo') y += this.paragraph('第一卷已接入 35 段图文剧情。各项建设指数为试玩抽象数值。正式影像与平台发布能力仍待接入。旧试玩存档单独保留。', 28, y, this.width - 56, 12, c.muted, 23) + 20
+    if (this.assetErrors) y += this.paragraph('部分界面素材未加载，请重新打开试玩。', 28, y, this.width - 56, 12, c.muted, 23) + 20
     this.endScroll(y)
   }
 }

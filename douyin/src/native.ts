@@ -13,6 +13,13 @@ interface NativeVideo {
 export interface LaunchOptions { launch_from?: string; location?: string; scene?: string }
 interface TouchEvent { touches: Array<{ clientX: number; clientY: number }>; changedTouches: Array<{ clientX: number; clientY: number }> }
 export interface DouyinAPI {
+  canIUse?: (feature:string)=>boolean
+  setDeviceOrientation?: (options:{value:'portrait'|'landscape';success:()=>void;fail:()=>void})=>void
+  onDeviceOrientationChange?: (callback:()=>void)=>void
+  startAccelerometer?: (options:{success:()=>void;fail:()=>void})=>void
+  stopAccelerometer?: (options:Record<string,never>)=>void
+  onAccelerometerChange?: (callback:(sample:{x:number;y:number;z:number})=>void)=>void
+  offAccelerometerChange?: (callback:(sample:{x:number;y:number;z:number})=>void)=>void
   createCanvas(): HTMLCanvasElement
   createImage(): HTMLImageElement
   createOffscreenVideo?: () => NativeVideo

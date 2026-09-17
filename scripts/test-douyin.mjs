@@ -17,8 +17,8 @@ const canvas = () => {
   return { width: 0, height: 0, getContext: () => ctx }
 }
 try {
-  await build({ stdin: { contents: `export {Session,DEMO_SAVE_KEY} from './douyin/src/session';export {Movie} from './douyin/src/movie';export {GameApp} from './douyin/src/app';export {nativePlatform} from './douyin/src/native'`, resolveDir: process.cwd() }, bundle: true, platform: 'node', format: 'esm', outfile: path.join(temp, 'game.mjs') })
-  const { Session, DEMO_SAVE_KEY, Movie, GameApp, nativePlatform } = await import(pathToFileURL(path.join(temp, 'game.mjs')))
+  await build({ stdin: { contents: `export {AutoOrientation,gravityDirection} from './douyin/src/orientation';export {Session,DEMO_SAVE_KEY} from './douyin/src/session';export {Movie} from './douyin/src/movie';export {GameApp} from './douyin/src/app';export {nativePlatform} from './douyin/src/native'`, resolveDir: process.cwd() }, bundle: true, platform: 'node', format: 'esm', outfile: path.join(temp, 'game.mjs') })
+  const { AutoOrientation, gravityDirection, Session, DEMO_SAVE_KEY, Movie, GameApp, nativePlatform } = await import(pathToFileURL(path.join(temp, 'game.mjs')))
   const store = memory()
   let session = new Session(store, config)
   assert.equal(session.state.hasSave, false)
@@ -94,6 +94,37 @@ try {
     const first=app.targets.find(t=>t.id==='EP02_B');assert.ok(first);app.activate(first.id);app.activate(first.id);assert.equal(app.session.state.choiceHistory.length,1)
   }
   const now=Date.now()
+  // Resize the same running session: rotation must never advance/reload the story.
+  for(const [pw,ph] of [[320,568],[390,844],[430,932]]){
+    let viewport={width:pw,height:ph,dpr:2,top:20,bottom:16}
+    const app=new GameApp({...platform(pw,ph),viewport:()=>viewport},config)
+    app.render();app.targets.find(t=>t.id==='start').action();app.session.engine.enter('EP15');app.render()
+    const before=JSON.stringify(app.session.state)
+    app.touch('start',pw/2,ph/2)
+    viewport={...viewport,width:ph,height:pw};app.resize();app.touch('end',pw/2,ph/2);app.render()
+    assert.equal(JSON.stringify(app.session.state),before,'rotation cancels stale touches and preserves state')
+    for(const page of ['home','play','journal','endings','settings']){
+      app.page=page;app.render()
+      for(const t of app.targets){assert.ok(t.x>=0&&t.y>=0&&t.x+t.w<=ph+.1&&t.y+t.h<=pw+.1,`${ph}x${pw} ${page} ${t.id} bounds`)}
+      app.scrollBy(100000);app.render();assert.ok(app.targets.length>0)
+    }
+    app.page='play';viewport={...viewport,width:pw,height:ph};app.resize();app.render();assert.equal(JSON.stringify(app.session.state),before)
+  }
+  assert.equal(gravityDirection({x:1,y:0,z:0}),'landscape')
+  assert.equal(gravityDirection({x:0,y:-1,z:0}),'portrait')
+  assert.equal(gravityDirection({x:0,y:0,z:1}),undefined)
+  assert.equal(gravityDirection({x:.7,y:.7,z:0}),undefined)
+  let clock=0,gravity,request,resizes=0,stops=0,windowSize={windowWidth:390,windowHeight:844}
+  const sensor={canIUse:()=>true,getSystemInfoSync:()=>windowSize,onAccelerometerChange:cb=>gravity=cb,offAccelerometerChange:()=>{},startAccelerometer:opts=>opts.success(),stopAccelerometer:()=>stops++,setDeviceOrientation:opts=>request=opts}
+  const rotation=new AutoOrientation(sensor,()=>resizes++,()=>clock)
+  rotation.resume();gravity({x:1,y:0,z:0});clock=200;gravity({x:1,y:0,z:0});assert.equal(request,undefined)
+  clock=650;gravity({x:1,y:0,z:0});assert.equal(request.value,'landscape');assert.equal(resizes,0)
+  windowSize={windowWidth:844,windowHeight:390};request.success();assert.equal(resizes,1)
+  clock=2000;gravity({x:0,y:1,z:0});clock=2700;gravity({x:0,y:1,z:0});assert.equal(request.value,'portrait')
+  request.fail();assert.equal(stops,1);const failed=request;clock=5000;gravity({x:0,y:1,z:0});assert.equal(request,failed)
+  rotation.resume();rotation.pause();assert.equal(stops,2)
+  new AutoOrientation({canIUse:()=>false},()=>assert.fail()).resume()
+  console.log('PASS · portrait-landscape-portrait on 3 screen sizes, all pages, no state changes, cancelled stale touch, gravity debounce, async completion and host rejection')
   let paints = 0
   const staticPage = new GameApp({ ...platform(390, 844), targets() { paints++ } }, config)
   staticPage.render(); staticPage.targets.find(t => t.id === 'start').action()

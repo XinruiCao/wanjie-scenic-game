@@ -38,6 +38,7 @@ const bundled = await build({
 })
 const forbidden = Object.keys(bundled.metafile.inputs).filter(p => /node_modules\/(vue|@dcloudio)|douyin\/preview/.test(p))
 if (forbidden.length) throw new Error('Browser-only dependencies entered the game bundle: ' + forbidden.join(', '))
+// Douyin accepts portrait/landscape here, not auto. orientation.ts switches after stable gravity samples.
 await fs.writeFile(path.join(out, 'game.json'), JSON.stringify({ deviceOrientation: 'portrait' }, null, 2) + '\n')
 await fs.writeFile(path.join(out, 'project.config.json'), JSON.stringify({
   appid: config.appid, projectname: config.projectName,

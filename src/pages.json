@@ -1,36 +1,172 @@
 {
   "pages": [
-    { "path": "pages/home/index", "style": { "navigationStyle": "custom" } },
-    { "path": "pages/play/index", "style": { "navigationStyle": "custom", "pageOrientation": "landscape" } },
-    { "path": "pages/phone/index", "style": { "navigationStyle": "custom" } },
-    { "path": "pages/evidence/index", "style": { "navigationStyle": "custom" } },
-    { "path": "pages/destiny/index", "style": { "navigationStyle": "custom" } },
-    { "path": "pages/character/index", "style": { "navigationStyle": "custom" } },
-    { "path": "pages/chapters/index", "style": { "navigationStyle": "custom" } },
-    { "path": "pages/route-closed/index", "style": { "navigationStyle": "custom" } },
-    { "path": "pages/ending/index", "style": { "navigationStyle": "custom" } },
-    { "path": "pages/settings/index", "style": { "navigationStyle": "custom" } },
-    { "path": "pages/gallery/index", "style": { "navigationStyle": "custom" } },
-    { "path": "pages/save/index", "style": { "navigationStyle": "custom" } },
-    { "path": "pages/splash/index", "style": { "navigationStyle": "custom" } },
-    { "path": "pages/chapter/index", "style": { "navigationStyle": "custom" } },
-    { "path": "pages/message/index", "style": { "navigationStyle": "custom" } },
-    { "path": "pages/call/index", "style": { "navigationStyle": "custom" } },
-    { "path": "pages/feed/index", "style": { "navigationStyle": "custom" } },
-    { "path": "pages/news/index", "style": { "navigationStyle": "custom" } },
-    { "path": "pages/relationship/index", "style": { "navigationStyle": "custom" } },
-    { "path": "pages/document/index", "style": { "navigationStyle": "custom" } },
-    { "path": "pages/computer/index", "style": { "navigationStyle": "custom" } },
-    { "path": "pages/investigate-image/index", "style": { "navigationStyle": "custom" } },
-    { "path": "pages/investigate-text/index", "style": { "navigationStyle": "custom" } },
-    { "path": "pages/dialogue/index", "style": { "navigationStyle": "custom" } },
-    { "path": "pages/decision/index", "style": { "navigationStyle": "custom" } },
-    { "path": "pages/branch/index", "style": { "navigationStyle": "custom" } },
-    { "path": "pages/memory/index", "style": { "navigationStyle": "custom" } }
+    {
+      "path": "pages/home/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/play/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/phone/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/evidence/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/destiny/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/character/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/chapters/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/route-closed/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/ending/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/settings/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/gallery/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/save/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/splash/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/chapter/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/message/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/call/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/feed/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/news/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/relationship/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/document/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/computer/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/investigate-image/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/investigate-text/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/dialogue/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/decision/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/branch/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/memory/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    }
   ],
   "globalStyle": {
     "navigationBarTextStyle": "white",
     "navigationBarBackgroundColor": "#08090B",
-    "backgroundColor": "#08090B"
+    "backgroundColor": "#08090B",
+    "pageOrientation": "auto"
   }
 }
