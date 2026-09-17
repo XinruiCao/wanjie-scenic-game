@@ -1,3 +1,4 @@
+import {storyBeats,beatIndex,moveBeat,moodSprites,moodNames} from '../../src/data/story-performance'
 import {townPlaces,townSprites,townAvailable,townUnlocked,townResult,chooseTown,type TownPlace} from '../../src/data/town'
 import { resources, facilities, observations, latestOutcome } from '../../src/data/scenic-progress'
 import { story } from '../../src/data/story'
@@ -47,6 +48,7 @@ export class GameApp {
   private toastVisible = false
   private townSelected?: TownPlace
   private townStep = 0
+  private performanceChoices = false
   private movieStatus = ''
   constructor(readonly platform: Platform, config: ReleaseConfig) {
     const ctx = platform.canvas.getContext('2d')
@@ -87,7 +89,7 @@ export class GameApp {
     if (this.movieStatus !== this.movie.status) { this.movieStatus = this.movie.status; this.dirty = true }
     const showingToast = now < this.toastUntil
     if (showingToast !== this.toastVisible) { this.toastVisible = showingToast; this.dirty = true }
-    if (this.page === 'play' && this.remaining > 0) {
+    if (this.page === 'play' && this.remaining > 0 && (!storyBeats(this.node).length || this.performanceChoices)) {
       this.remaining = Math.max(0, this.remaining - dt / 1000)
       if (!this.remaining) {
         const choices = this.session.engine.getVisibleChoices()
@@ -96,7 +98,7 @@ export class GameApp {
       }
       this.dirty = true
     }
-    const animate = (this.page === 'home' && !this.session.reducedMotion) || ['loading', 'playing'].includes(this.movie.status) || now < this.toastUntil
+    const animate = (this.page==='play' && storyBeats(this.node).length>0 && !this.session.reducedMotion) || (this.page === 'home' && !this.session.reducedMotion) || ['loading', 'playing'].includes(this.movie.status) || now < this.toastUntil
     if ((this.dirty || animate) && now - this.lastPaint >= 32) { this.render(now); this.lastPaint = now; this.dirty = false }
   }
   background(hidden: boolean) {
@@ -115,6 +117,7 @@ export class GameApp {
     if (page === 'play') this.enterNode()
   }
   private enterNode() {
+    this.performanceChoices=false
     this.scroll = 0
     this.remaining = this.node.choices?.length ? this.node.countdown || 0 : 0
     if (this.node.type === 'VIDEO') this.movie.open(this.session.videoUrl(this.node.id), this.session.config.mode === 'demo', this.session.muted)
@@ -278,7 +281,7 @@ export class GameApp {
     this.rect(0, 0, this.width, this.height, this.colors.bg)
     this.image('grain', { x: 0, y: 0, w: this.width, h: this.height }, 'cover', .5, .2)
     if (this.page === 'home') {if(this.landscape)this.landscapeHome();else this.home(now)}
-    else if (this.page === 'play') {if(this.landscape&&this.node.type!=='ENDING'&&this.node.type!=='ROUTE_CLOSED')this.landscapePlay();else this.play()}
+    else if (this.page === 'play') {if(storyBeats(this.node).length)this.performance(now);else if(this.landscape&&this.node.type!=='ENDING'&&this.node.type!=='ROUTE_CLOSED')this.landscapePlay();else this.play()}
     else if (this.page === 'town') this.town()
     else if (this.page === 'journal') this.journal()
     else if (this.page === 'endings') this.endings()
@@ -293,6 +296,46 @@ export class GameApp {
       this.paragraph(this.toastText, 32, this.top + 69, this.width - 64, 12, '#fff4dc', 19)
     }
     this.platform.targets?.(this.targets.map(t => ({ ...t, x: t.x * this.scale, y: t.y * this.scale, w: t.w * this.scale, h: t.h * this.scale })))
+  }
+  private performance(now: number) {
+    const n=this.node,s=this.session.state,c=this.colors,beats=storyBeats(n),index=beatIndex(s,n),beat=beats[index]
+    const w=this.width,h=this.height
+    this.image(n.scene||'qingya',{x:0,y:0,w,h},'cover')
+    const shade=this.ctx.createLinearGradient(0,0,0,h);shade.addColorStop(0,'#07171380');shade.addColorStop(.5,'#07171305');shade.addColorStop(1,'#071713ed');this.ctx.fillStyle=shade;this.ctx.fillRect(0,0,w,h)
+    const panelY=this.landscape?Math.max(this.top+84,h*.46):Math.max(this.top+190,h*.56),panelX=this.landscape?w*.34:18,panelW=w-panelX-18
+    const actorW=this.landscape?w*.32:Math.min(300,w*.75),actorH=this.landscape?h-this.top:panelY-this.top+160
+    this.townSprite(moodSprites[beat.mood],{x:this.landscape?12:24,y:Math.max(this.top+58,panelY-actorH+80),w:actorW,h:actorH})
+    if(!this.session.reducedMotion){
+      const opacity=.2+Math.sin(now/1300)*.05
+      if(beat.effect==='water')this.image('town-water',{x:w*.53,y:panelY-150,w:w*.45,h:180},'contain',.5,opacity+ .12)
+      if(beat.effect==='signal'){this.rect(w-145,this.top+95,124,48,'#164852cc','#7cbab8');this.text('CR-07 / 记录中',w-135,this.top+110,12,'#b3e6dd')}
+      if(beat.effect==='warm'){this.ctx.save();this.ctx.globalAlpha=opacity;this.rect(0,this.top+70,w,panelY-this.top-70,'#eab34a');this.ctx.restore()}
+    }
+    this.rect(0,0,w,this.top+64,'#132623dc')
+    this.link('home','‹ 营地',10,this.top,68,()=>this.show(townUnlocked(s)?'town':'home'),'#e9dbc1')
+    this.text('EP.'+String(n.episode).padStart(2,'0')+' / '+n.title,94,this.top+15,14,'#f2e5c9',serif)
+    this.rect(panelX,panelY,panelW,h-panelY-this.bottom-52,'#142621f2','#cfb97e')
+    let y=this.beginScroll(panelY+12,h-this.bottom-60,panelX+10,panelW-20),x=panelX+18,cw=panelW-36
+    this.text(beat.speaker,x,y,21,'#f6dfb3',serif);y+=31
+    this.text(beat.speaker==='许知微'?moodNames[beat.mood]:'现场 / '+n.title,x,y,10,'#abc4b8');y+=25
+    y+=this.paragraph(beat.text,x,y,cw,this.landscape?14:17,'#f6eddb',this.landscape?24:29,serif)+18
+    if(this.performanceChoices){
+      for(const choice of this.session.engine.getVisibleChoices()){
+        const bh=Math.max(56,this.lines(choice.text,cw-48,16,serif).length*23+28)
+        this.button(choice.id,choice.text,{x,y,w:cw,h:bh},()=>this.transition(()=>this.session.engine.applyChoice(choice.id)),false,choice.disabled);y+=bh+6
+        if(choice.hint)y+=this.paragraph(choice.hint,x,y,cw,11,'#b6cdbb',20)+12
+      }
+      this.button('cancel-choice','返回对话',{x,y,w:cw,h:48},()=>{this.performanceChoices=false;this.scroll=0;this.dirty=true});y+=60
+    }else{
+      this.button('advance',index<beats.length-1?'继续对话  ›':n.choices?.length?'作出选择  ›':'继续故事  ›',{x,y,w:cw,h:54},()=>{
+        if(moveBeat(s,n,1,()=>this.session.save())){this.scroll=0;this.dirty=true;return}
+        if(n.choices?.length){this.performanceChoices=true;this.scroll=0;this.dirty=true}else this.transition(()=>this.session.engine.advance())
+      },true);y+=64
+      this.link('previous','‹ 上一句',x,y,90,()=>{moveBeat(s,n,-1,()=>this.session.save());this.scroll=0;this.dirty=true},'#dbcdaa')
+      this.text((index+1)+' / '+beats.length+' · 自动保存',x+104,y+16,10,'#acbdaf');y+=52
+    }
+    this.endScroll(y)
+    this.rect(0,h-this.bottom-48,w,this.bottom+48,c.bg);this.footer()
   }
   private townSprite(name: string, r: Rect) {
     const a=townSprites[name],img=this.images['town-'+a.sheet]

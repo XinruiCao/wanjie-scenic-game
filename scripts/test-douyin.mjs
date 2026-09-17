@@ -17,8 +17,8 @@ const canvas = () => {
   return { width: 0, height: 0, getContext: () => ctx }
 }
 try {
-  await build({ stdin: { contents: `export {townPlaces,townAvailable,townResult,chooseTown} from './src/data/town';export {AutoOrientation,gravityDirection} from './douyin/src/orientation';export {Session,DEMO_SAVE_KEY} from './douyin/src/session';export {Movie} from './douyin/src/movie';export {GameApp} from './douyin/src/app';export {nativePlatform} from './douyin/src/native'`, resolveDir: process.cwd() }, bundle: true, platform: 'node', format: 'esm', outfile: path.join(temp, 'game.mjs') })
-  const { townPlaces,townAvailable,townResult,chooseTown, AutoOrientation, gravityDirection, Session, DEMO_SAVE_KEY, Movie, GameApp, nativePlatform } = await import(pathToFileURL(path.join(temp, 'game.mjs')))
+  await build({ stdin: { contents: `export {storyBeats,beatIndex,moveBeat} from './src/data/story-performance';export {townPlaces,townAvailable,townResult,chooseTown} from './src/data/town';export {AutoOrientation,gravityDirection} from './douyin/src/orientation';export {Session,DEMO_SAVE_KEY} from './douyin/src/session';export {Movie} from './douyin/src/movie';export {GameApp} from './douyin/src/app';export {nativePlatform} from './douyin/src/native'`, resolveDir: process.cwd() }, bundle: true, platform: 'node', format: 'esm', outfile: path.join(temp, 'game.mjs') })
+  const { storyBeats,beatIndex,moveBeat,townPlaces,townAvailable,townResult,chooseTown, AutoOrientation, gravityDirection, Session, DEMO_SAVE_KEY, Movie, GameApp, nativePlatform } = await import(pathToFileURL(path.join(temp, 'game.mjs')))
   const store = memory()
   let session = new Session(store, config)
   assert.equal(session.state.hasSave, false)
@@ -54,6 +54,20 @@ try {
   assert.equal(chooseTown(restoredTown.state,'market',99,()=>restoredTown.save()),false)
   restoredTown.engine.startNewGame();assert.equal(townResult(restoredTown.state,townPlaces[0]),undefined,'new run resets its town decisions')
   console.log('PASS · town unlock gates, dialogue persistence, once-per-run rewards, unchanged main story, resource cap and new-run reset')
+
+  const performanceStore=memory(),performanceSession=new Session(performanceStore,config)
+  performanceSession.engine.enter('EP15')
+  const pn=performanceSession.engine.getNode(),baselineStats=JSON.stringify(performanceSession.state.stats)
+  assert.equal(storyBeats(pn).length,3)
+  assert.ok(moveBeat(performanceSession.state,pn,1,()=>performanceSession.save()))
+  assert.equal(beatIndex(new Session(performanceStore,config).state,pn),1)
+  assert.equal(performanceSession.state.currentNodeId,'EP15')
+  assert.equal(JSON.stringify(performanceSession.state.stats),baselineStats)
+  assert.ok(moveBeat(performanceSession.state,pn,1,()=>performanceSession.save()))
+  assert.equal(moveBeat(performanceSession.state,pn,1,()=>performanceSession.save()),false)
+  assert.ok(moveBeat(performanceSession.state,pn,-1,()=>performanceSession.save()))
+  performanceSession.engine.startNewGame();assert.equal(beatIndex(performanceSession.state,pn),0)
+  console.log('PASS · dialogue cursor save/reload, previous line, end boundary, unchanged story/resources and new-run reset')
 
   let callbacks = [], destroyed = 0, plays = 0, ended = 0, pauses = 0
   const movie = new Movie({ video: (_src, _muted, events) => {
@@ -110,7 +124,7 @@ try {
     }
     app.targets.find(t => t.id === 'start').action(); app.render()
     assert.equal(app.page,'play');app.scrollBy(10000);app.render();assert.ok(app.targets.some(t=>t.id==='advance'))
-    app.targets.find(t=>t.id==='advance').action();app.render();assert.equal(app.node.id,'EP02');app.scrollBy(10000);app.render()
+    for(let line=0;line<8&&app.node.id==='V_M01';line++){app.targets.find(t=>t.id==='advance').action();app.render();app.scrollBy(10000);app.render()}assert.equal(app.node.id,'EP02');app.scrollBy(10000);app.render()
     const first=app.targets.find(t=>t.id==='EP02_B');assert.ok(first);app.activate(first.id);app.activate(first.id);assert.equal(app.session.state.choiceHistory.length,1)
   }
   for(const [width,height] of [[320,568],[390,844],[844,390]]){
@@ -127,6 +141,15 @@ try {
     click('town-close');click('town-main');assert.equal(app.page,'play');assert.equal(app.node.id,'EP13')
   }
   console.log('PASS · town hotspot → NPC → choice → persisted result → map → unchanged main story on portrait and landscape')
+  for(const [width,height] of [[320,568],[390,844],[844,390]]){
+    const app=new GameApp(platform(width,height),config);app.session.engine.enter('EP15');app.page='play';app.render()
+    const click=id=>{let t=app.targets.find(t=>t.id===id);for(let i=0;!t&&i<80;i++){app.scrollBy(30);app.render();t=app.targets.find(t=>t.id===id)}assert.ok(t,`dialogue ${width}x${height} missing ${id}`);t.action();app.render()}
+    assert.equal(app.targets.some(t=>t.id==='EP15_A'),false)
+    click('advance');click('advance');assert.equal(app.node.id,'EP15')
+    click('advance');click('EP15_A');assert.equal(app.node.id,'EP16')
+    assert.equal(app.session.state.choiceHistory.length,1)
+  }
+  console.log('PASS · dialogue must finish before choices, choice advances exactly once, portrait and landscape')
   const now=Date.now()
   // Resize the same running session: rotation must never advance/reload the story.
   for(const [pw,ph] of [[320,568],[390,844],[430,932]]){

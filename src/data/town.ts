@@ -10,6 +10,8 @@ export const townSprites:Record<string,{sheet:string;size:[number,number];box:[n
  gate:{sheet:'buildings',size:[1448,1086],box:[1090,0,358,315]},
  tree:{sheet:'props',size:[1448,1086],box:[0,483,380,350]},
  cable:{sheet:'props',size:[1448,1086],box:[1160,245,145,245]},
+ 'actor-calm':{sheet:'xuzhiwei',size:[1122,1402],box:[0,0,280,500]},
+ 'actor-resolve':{sheet:'xuzhiwei',size:[1122,1402],box:[292,14,273,500]},
  portrait:{sheet:'xuzhiwei',size:[1122,1402],box:[846,75,276,535]},
  walker:{sheet:'xuzhiwei',size:[1122,1402],box:[0,1020,233,382]},
 }

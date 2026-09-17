@@ -1,7 +1,7 @@
 {
   "mode": "demo",
-  "packageBytes": 2459884,
-  "packageFiles": 25,
+  "packageBytes": 2608625,
+  "packageFiles": 26,
   "startupBudgetBytes": 4194304,
   "videoNodes": 0,
   "configuredVideos": 0,
@@ -132,6 +132,10 @@
     {
       "file": "assets/town-xuzhiwei.png",
       "bytes": 433832
+    },
+    {
+      "file": "assets/town-water.png",
+      "bytes": 144263
     }
   ]
 }

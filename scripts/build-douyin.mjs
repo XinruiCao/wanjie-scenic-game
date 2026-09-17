@@ -31,7 +31,7 @@ for (const [key, source, width] of [
   await sharp(path.join(root, 'src/static', source)).resize({ width, withoutEnlargement: true }).jpeg({ quality: 80, mozjpeg: true }).toFile(file)
   assets.push({ file: 'assets/' + key + '.jpg', bytes: (await fs.stat(file)).size })
 }
-for (const key of ['props','buildings','xuzhiwei']) {
+for (const key of ['props','buildings','xuzhiwei','water']) {
   const file=path.join(out,'assets','town-'+key+'.png')
   await sharp(path.join(root,'src/static/scenic/town',key+'.png')).resize({width:800}).png({palette:true,quality:85,effort:9}).toFile(file)
   assets.push({file:'assets/town-'+key+'.png',bytes:(await fs.stat(file)).size})
