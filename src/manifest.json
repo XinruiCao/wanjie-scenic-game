@@ -1,9 +1,9 @@
 {
   "name": "万界开了，我在末日景区搞基建",
   "appid": "__UNI__SHENZHIYI",
-  "description": "真人互动影游多端原型",
-  "versionName": "0.1.0",
-  "versionCode": "100",
+  "description": "手游 V1.0 · 青崖山剧情与营地对话",
+  "versionName": "1.0.0",
+  "versionCode": "10000",
   "transformPx": false,
   "app-plus": { "screenOrientation": ["portrait-primary", "landscape-primary", "landscape-secondary"] },
   "h5": { "title": "万界开了，我在末日景区搞基建" }

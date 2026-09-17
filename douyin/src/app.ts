@@ -415,7 +415,7 @@ export class GameApp {
     this.link('skin', this.session.state.metaFlags.darkSkinUnlocked ? `${themes[this.session.skin].name} · 切换外观` : '余烬鎏金 · 序章通关后解锁', 35, footerY, this.width - 70, () => {
       if (!this.session.switchSkin()) this.notify('完成序章「世界真的坏了」的选择后解锁黑金皮肤')
     })
-    this.text(this.session.config.mode === 'demo' ? '青崖山开门 / 35 段图文剧情' : 'STILL BEAUTIFUL · 青崖山景区', this.width / 2, H - this.bottom - 10, 9, c.muted, sans, 'center')
+    this.text(this.session.config.mode === 'demo' ? '手游 V1.0 / 青崖山开门' : 'STILL BEAUTIFUL · 青崖山景区', this.width / 2, H - this.bottom - 10, 9, c.muted, sans, 'center')
     if (!this.session.reducedMotion) {
       this.ctx.save(); this.ctx.fillStyle = dark ? '#f9dca8' : '#fff8e7'
       for (let i = 0; i < 14; i++) {

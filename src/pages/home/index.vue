@@ -11,7 +11,7 @@
  </view>
  <view class="home-bottom"><view class="field-journal"><ScenicFrame kind="panel" surface texture/><view class="journal-head"><text class="micro">FIELD JOURNAL / 旅程手记</text><text class="journal-number">NO. {{String(s.playthrough).padStart(3,'0')}}</text></view><view class="journal-body"><text class="journal-title">{{s.hasSave?'未完的旅程':'一切，从这里开始'}}</text><text class="journal-copy">{{s.hasSave?'每一个选择，都在留下你的足迹。':'世界崩塌了，但生活还在继续。'}}</text></view><view class="journal-progress"><view :style="{width:s.progress+'%'}"/></view><text class="micro">探索进度 {{s.progress}}% <text class="journal-status">{{skinStore.unlocked.value?'余烬鎏金 · 已解锁':'完成序章 · 开启深色篇章'}}</text></text></view>
  <view class="archive-links"><button role="button" tabindex="0" @keydown.enter.prevent="activateFocused" @keydown.space.prevent="activateFocused" v-for="item in links" :key="item.page" @click="go(item.page)"><ScenicSprite class="reference-icon" :name="dark?item.dark:item.light"/><view><text>{{item.label}}</text><text class="micro">{{item.en}}</text></view><text class="link-arrow">↗</text></button></view></view>
- <view class="scenic-footer"><text>在废墟之上，重建人间值得的风景。</text><text>青崖山 · {{skinStore.theme.value.name}} <text class="footer-dot">◆</text> STILL BEAUTIFUL</text></view>
+ <view class="scenic-footer"><text>在废墟之上，重建人间值得的风景。</text><text>青崖山 · {{skinStore.theme.value.name}} <text class="footer-dot">◆</text> 手游 V1.0 · STILL BEAUTIFUL</text></view>
 </view>
 </template>
 <script setup lang="ts">
