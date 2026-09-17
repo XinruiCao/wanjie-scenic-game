@@ -1,3 +1,4 @@
+import {townPlaces,townSprites,townAvailable,townUnlocked,townResult,chooseTown,type TownPlace} from '../../src/data/town'
 import { resources, facilities, observations, latestOutcome } from '../../src/data/scenic-progress'
 import { story } from '../../src/data/story'
 import { endingDefinitions } from '../../src/data/endings'
@@ -8,7 +9,7 @@ import { Session } from './session'
 import { Movie } from './movie'
 import type { Platform, Rect, HitTarget, ReleaseConfig } from './platform'
 
-type Page = 'home' | 'play' | 'journal' | 'endings' | 'settings'
+type Page = 'town' | 'home' | 'play' | 'journal' | 'endings' | 'settings'
 const serif = '"Songti SC", "STSong", serif'
 const sans = 'sans-serif'
 const palettes = {
@@ -44,6 +45,8 @@ export class GameApp {
   private toastUntil = 0
   private toastText = ''
   private toastVisible = false
+  private townSelected?: TownPlace
+  private townStep = 0
   private movieStatus = ''
   constructor(readonly platform: Platform, config: ReleaseConfig) {
     const ctx = platform.canvas.getContext('2d')
@@ -108,6 +111,7 @@ export class GameApp {
   }
   private show(page: Page) {
     this.movie.close(); this.page = page; this.scroll = 0; this.dirty = true
+    if(page==='town'){this.townSelected=undefined;this.townStep=0}
     if (page === 'play') this.enterNode()
   }
   private enterNode() {
@@ -119,14 +123,14 @@ export class GameApp {
   }
   private transition(action: () => unknown) {
     try {
-      action(); this.enterNode()
+      const before=this.node.id; action(); this.enterNode(); if(before!=='EP13'&&this.node.id==='EP13')this.show('town')
       if (this.session.unlockNotice) { this.session.unlockNotice = false; this.notify('序章已通关 · 余烬鎏金皮肤已解锁') }
     } catch (error) { this.notify(error instanceof Error ? error.message : '暂时无法前往这段剧情') }
   }
   private start() {
     if (this.session.state.hasSave) this.session.engine.continueGame()
     else this.session.engine.startNewGame()
-    this.show('play')
+    this.show(townUnlocked(this.session.state)?'town':'play')
   }
   private async restart() {
     if (this.session.state.hasSave && !await this.platform.confirm('开启新的旅程？', '本周目会留在历程中。已解锁的结局和皮肤会保留。')) return
@@ -275,6 +279,7 @@ export class GameApp {
     this.image('grain', { x: 0, y: 0, w: this.width, h: this.height }, 'cover', .5, .2)
     if (this.page === 'home') {if(this.landscape)this.landscapeHome();else this.home(now)}
     else if (this.page === 'play') {if(this.landscape&&this.node.type!=='ENDING'&&this.node.type!=='ROUTE_CLOSED')this.landscapePlay();else this.play()}
+    else if (this.page === 'town') this.town()
     else if (this.page === 'journal') this.journal()
     else if (this.page === 'endings') this.endings()
     else this.settings()
@@ -289,6 +294,59 @@ export class GameApp {
     }
     this.platform.targets?.(this.targets.map(t => ({ ...t, x: t.x * this.scale, y: t.y * this.scale, w: t.w * this.scale, h: t.h * this.scale })))
   }
+  private townSprite(name: string, r: Rect) {
+    const a=townSprites[name],img=this.images['town-'+a.sheet]
+    if(!img)return
+    const [x,y,w,h]=a.box, sx=img.width/a.size[0],sy=img.height/a.size[1],scale=Math.min(r.w/w,r.h/h)
+    this.ctx.drawImage(img,x*sx,y*sy,w*sx,h*sy,r.x+(r.w-w*scale)/2,r.y+(r.h-h*scale)/2,w*scale,h*scale)
+  }
+  private town() {
+    const s=this.session.state,c=this.colors,p=this.townSelected
+    this.header(p?p.name:'青崖山 · 营地',p?'NPC DIALOGUE / 对话':'CAMP / 地图与故事')
+    let y=this.beginScroll(this.top+70,this.height-this.bottom-10),x=24,w=this.width-48
+    if(p){
+      this.button('town-back','‹ 返回地图',{x,y,w,h:44},()=>{this.townSelected=undefined;this.scroll=0;this.dirty=true});y+=55
+      const result=townResult(s,p)
+      this.townSprite('portrait',{x:x+w-94,y,w:85,h:140})
+      this.text(result?'营地手记':this.townStep===1?'许知微':p.npc,x,y+12,24,c.ink,serif)
+      this.text(p.role,x,y+47,12,c.accent);y+=158
+      const message=!townAvailable(s,p)?(p.id==='cable'?'索道尚未完成安全检查，暂不开放。':'主线抵达 EP'+p.episode+' 后开启此处互动。'):result?result.reply:this.townStep===0?p.intro:'许知微：先把眼前能做的事安排好。'
+      y+=this.paragraph(message,x,y,w,17,c.ink,29)+25
+      if(!townAvailable(s,p)){
+        this.button('town-close','回到地图',{x,y,w,h:52},()=>{this.townSelected=undefined;this.scroll=0;this.dirty=true});y+=65
+      }else if(result){
+        y+=this.paragraph('已记录 · '+Object.entries(result.add).map(([k,v])=>(resources.find(r=>r.id===k)?.name||k)+' +'+v).join(' / ')+' · 本周目不重复获得',x,y,w,12,c.accent,22)+18
+        this.button('town-done','收起手记，返回营地',{x,y,w,h:52},()=>{this.townSelected=undefined;this.scroll=0;this.dirty=true});y+=65
+      }else if(this.townStep===0){
+        this.button('town-reply','回应 '+p.npc,{x,y,w,h:52},()=>{this.townStep=1;this.scroll=0;this.dirty=true});y+=65
+      }else{
+        p.choices.forEach((choice,i)=>{
+          const h=Math.max(62,this.lines(choice.text,w-50,15).length*24+28)
+          this.button('town-choice-'+i,choice.text,{x,y,w,h},()=>{chooseTown(s,p.id,i,()=>this.session.save());this.scroll=0;this.dirty=true});y+=h+5
+          y+=this.paragraph(Object.entries(choice.add).map(([k,v])=>(resources.find(r=>r.id===k)?.name||k)+' +'+v).join(' / '),x+10,y,w-20,11,c.accent,20)+14
+        })
+      }
+    }else{
+      this.text(townUnlocked(s)?'点亮一处地方，也听见一个故事。':'EP13 抵达青崖山后，开放营地互动。',x,y,12,c.accent);y+=30
+      const mapH=this.landscape?330:380,mapY=y
+      this.rect(x,mapY,w,mapH,'#687f61','#b4b891')
+      this.image('qingya',{x,y:mapY,w,h:mapH},'cover',.5,.2)
+      this.ctx.strokeStyle='#ccbf9480';this.ctx.lineWidth=10;this.ctx.beginPath();this.ctx.moveTo(x+w*.2,mapY+mapH*.3);this.ctx.lineTo(x+w*.7,mapY+mapH*.28);this.ctx.lineTo(x+w*.7,mapY+mapH*.65);this.ctx.lineTo(x+w*.28,mapY+mapH*.68);this.ctx.stroke()
+      for(const place of townPlaces){
+        const px=x+w*place.x/100,py=mapY+mapH*place.y/100,available=townAvailable(s,place),sw=this.landscape?80:60
+        this.ctx.save();this.ctx.globalAlpha=available?1:.48;this.townSprite(place.sprite,{x:px-sw/2,y:py-60,w:sw,h:70});this.ctx.restore()
+        const label=(!available?'锁 ':townResult(s,place)?'✓ ':'! ')+place.name
+        this.rect(px-40,py+10,80,24,'#203b31');this.text(label,px,py+15,10,'#fff0d1',sans,'center')
+        this.target('place-'+place.id,label,{x:px-40,y:py-50,w:80,h:84},()=>{this.townSelected=place;this.townStep=0;this.scroll=0;this.dirty=true})
+      }
+      y=mapY+mapH+20
+      y+=this.paragraph(resources.map(r=>r.name+' '+s.stats[r.id]).join('  /  '),x,y,w,12,c.accent,24)+16
+      this.button('town-main','继续主线 · '+this.node.title,{x,y,w,h:58},()=>{if(!s.hasSave)this.session.engine.startNewGame();this.show('play')},true);y+=72
+      this.button('town-journal','查看重建手记',{x,y,w,h:48},()=>this.show('journal'));y+=60
+      y+=this.paragraph('地图对话自动保存。每项安排本周目结算一次，不改变当前主线节点。',x,y,w,12,c.muted,22)+20
+    }
+    this.endScroll(y)
+  }
   private landscapeHome() {
     const c=this.colors, split=Math.round(this.width*.53), right=split+26, w=this.width-right-32
     this.image('hero',{x:0,y:0,w:split,h:this.height},'cover',.7)
@@ -299,7 +357,7 @@ export class GameApp {
     let y=this.beginScroll(this.top+8,this.height-this.bottom,right,w)
     this.text('从一张准考证开始',right+14,y,22,c.ink,serif);y+=43
     this.button('start',this.session.state.hasSave?'继续旅程  ›':'开启旅程  ›',{x:right,y,w,h:56},()=>this.start(),true);y+=68
-    for(const [page,label] of [['journal','重建手记'],['endings','结局收藏'],['settings','旅程设置']]){this.button(page,label,{x:right,y,w,h:48},()=>this.show(page as Page));y+=55}
+    for(const [page,label] of [['town','青崖山地图'],['journal','重建手记'],['endings','结局收藏'],['settings','旅程设置']]){this.button(page,label,{x:right,y,w,h:48},()=>this.show(page as Page));y+=55}
     this.link('skin',this.session.state.metaFlags.darkSkinUnlocked?'切换外观 · '+themes[this.session.skin].name:'深色外观 · 序章通关解锁',right,y,w,()=>{if(!this.session.switchSkin())this.notify('完成序章后开启深色外观')});y+=48
     this.text('转动手机，故事继续。',right+14,y,11,c.muted);y+=30
     this.endScroll(y)
@@ -346,7 +404,7 @@ export class GameApp {
     const label = this.lines(saveLabel, this.width - 48, 11)[0]
     this.text(label, this.width / 2, mainY + 66, 11, c.muted, sans, 'center')
     const navY = mainY + 102
-    ;[['icon-routes', '重建手记', 'journal'], ['icon-gallery', '结局收藏', 'endings'], ['icon-archive', '旅程设置', 'settings']].forEach(([icon, label, page], i) => {
+    ;[['icon-routes', '青崖山地图', 'town'], ['icon-gallery', '结局收藏', 'endings'], ['icon-archive', '旅程设置', 'settings']].forEach(([icon, label, page], i) => {
       const x = 37 + i * 109
       this.rect(x, navY, 98, 80, c.card, c.line)
       this.image(icon, { x: x + 31, y: navY + 9, w: 36, h: 36 })
@@ -429,7 +487,7 @@ export class GameApp {
   private footer() {
     const y = this.height - this.bottom - 44
     this.rect(24, y - 4, this.width - 48, 1, this.colors.line)
-    this.link('journal', '查看历程', 18, y, 112, () => this.show('journal'))
+    this.link('town', '青崖山地图', 18, y, 112, () => this.show('town'))
     this.text(this.session.saveError ? '保存待重试' : '本机自动保存', this.width / 2, y + 16, 10, this.colors.muted, sans, 'center')
     this.link('settings', '旅程设置', this.width - 130, y, 112, () => this.show('settings'))
   }

@@ -1,4 +1,5 @@
 export const art: Record<string, string> = {
+  ...Object.fromEntries(['props','buildings','xuzhiwei'].map(key=>['town-'+key,'assets/town-'+key+'.png'])),
   hero: 'assets/qingya.jpg',
   ...Object.fromEntries(['exam','qingya','wetland','refugees','market','titan'].map(key=>[key,'assets/'+key+'.jpg'])),
   'light-title': 'assets/light-title.png',

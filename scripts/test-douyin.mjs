@@ -17,8 +17,8 @@ const canvas = () => {
   return { width: 0, height: 0, getContext: () => ctx }
 }
 try {
-  await build({ stdin: { contents: `export {AutoOrientation,gravityDirection} from './douyin/src/orientation';export {Session,DEMO_SAVE_KEY} from './douyin/src/session';export {Movie} from './douyin/src/movie';export {GameApp} from './douyin/src/app';export {nativePlatform} from './douyin/src/native'`, resolveDir: process.cwd() }, bundle: true, platform: 'node', format: 'esm', outfile: path.join(temp, 'game.mjs') })
-  const { AutoOrientation, gravityDirection, Session, DEMO_SAVE_KEY, Movie, GameApp, nativePlatform } = await import(pathToFileURL(path.join(temp, 'game.mjs')))
+  await build({ stdin: { contents: `export {townPlaces,townAvailable,townResult,chooseTown} from './src/data/town';export {AutoOrientation,gravityDirection} from './douyin/src/orientation';export {Session,DEMO_SAVE_KEY} from './douyin/src/session';export {Movie} from './douyin/src/movie';export {GameApp} from './douyin/src/app';export {nativePlatform} from './douyin/src/native'`, resolveDir: process.cwd() }, bundle: true, platform: 'node', format: 'esm', outfile: path.join(temp, 'game.mjs') })
+  const { townPlaces,townAvailable,townResult,chooseTown, AutoOrientation, gravityDirection, Session, DEMO_SAVE_KEY, Movie, GameApp, nativePlatform } = await import(pathToFileURL(path.join(temp, 'game.mjs')))
   const store = memory()
   let session = new Session(store, config)
   assert.equal(session.state.hasSave, false)
@@ -34,6 +34,26 @@ try {
   const blockedStorage=new Session({get:()=>null,set:()=>{throw Error('quota')}},config);blockedStorage.engine.startNewGame();assert.match(blockedStorage.saveError,/保存失败/);assert.equal(blockedStorage.state.currentNodeId,'V_M01')
   assert.equal(new Session(memory(),{...config,videos:{V_M01:'http://insecure/movie.mp4'}}).videoUrl('V_M01'),'')
   console.log('PASS · complete first volume, epilogues, persistent skin, isolated saves, corruption recovery and write failure')
+
+  const townStore=memory(), townSession=new Session(townStore,config)
+  townSession.engine.startNewGame()
+  assert.equal(chooseTown(townSession.state,'visitor',0,()=>townSession.save()),false,'locked NPC cannot grant rewards')
+  townSession.engine.enter('EP13')
+  const mainNode=townSession.state.currentNodeId, beforeCare=townSession.state.stats.care
+  assert.equal(chooseTown(townSession.state,'visitor',0,()=>townSession.save()),true)
+  assert.equal(townSession.state.stats.care,beforeCare+3)
+  assert.equal(townSession.state.currentNodeId,mainNode,'conversation must not advance main story')
+  assert.equal(chooseTown(townSession.state,'visitor',1,()=>townSession.save()),false,'repeat clicks cannot change choice or farm rewards')
+  const restoredTown=new Session(townStore,config)
+  assert.equal(townResult(restoredTown.state,townPlaces[0]).text,townPlaces[0].choices[0].text)
+  assert.equal(townAvailable(restoredTown.state,townPlaces.find(p=>p.id==='market')),false,'do not spoil market before arrival')
+  restoredTown.engine.enter('EP30');restoredTown.state.stats.cooperation=99
+  assert.equal(chooseTown(restoredTown.state,'market',0,()=>restoredTown.save()),true)
+  assert.equal(restoredTown.state.stats.cooperation,100)
+  assert.equal(restoredTown.state.flags.contractSigned,undefined,'town negotiation must not sign the main-story contract')
+  assert.equal(chooseTown(restoredTown.state,'market',99,()=>restoredTown.save()),false)
+  restoredTown.engine.startNewGame();assert.equal(townResult(restoredTown.state,townPlaces[0]),undefined,'new run resets its town decisions')
+  console.log('PASS · town unlock gates, dialogue persistence, once-per-run rewards, unchanged main story, resource cap and new-run reset')
 
   let callbacks = [], destroyed = 0, plays = 0, ended = 0, pauses = 0
   const movie = new Movie({ video: (_src, _muted, events) => {
@@ -93,6 +113,20 @@ try {
     app.targets.find(t=>t.id==='advance').action();app.render();assert.equal(app.node.id,'EP02');app.scrollBy(10000);app.render()
     const first=app.targets.find(t=>t.id==='EP02_B');assert.ok(first);app.activate(first.id);app.activate(first.id);assert.equal(app.session.state.choiceHistory.length,1)
   }
+  for(const [width,height] of [[320,568],[390,844],[844,390]]){
+    const app=new GameApp(platform(width,height),config)
+    app.session.engine.enter('EP13');app.page='town';app.render()
+    const click=id=>{let t=app.targets.find(t=>t.id===id);for(let i=0;!t&&i<50;i++){app.scrollBy(40);app.render();t=app.targets.find(t=>t.id===id)}assert.ok(t,`town ${width}x${height} missing ${id}`);t.action();app.render()}
+    click('place-visitor');click('town-reply');click('town-choice-0')
+    assert.equal(app.session.state.flags['town:visitor'],0)
+    assert.equal(app.node.id,'EP13')
+    click('town-done');click('place-visitor')
+    assert.equal(app.targets.some(t=>t.id==='town-reply'),false)
+    click('town-done');click('place-market')
+    assert.equal(app.targets.some(t=>t.id==='town-reply'),false)
+    click('town-close');click('town-main');assert.equal(app.page,'play');assert.equal(app.node.id,'EP13')
+  }
+  console.log('PASS · town hotspot → NPC → choice → persisted result → map → unchanged main story on portrait and landscape')
   const now=Date.now()
   // Resize the same running session: rotation must never advance/reload the story.
   for(const [pw,ph] of [[320,568],[390,844],[430,932]]){
@@ -103,7 +137,7 @@ try {
     app.touch('start',pw/2,ph/2)
     viewport={...viewport,width:ph,height:pw};app.resize();app.touch('end',pw/2,ph/2);app.render()
     assert.equal(JSON.stringify(app.session.state),before,'rotation cancels stale touches and preserves state')
-    for(const page of ['home','play','journal','endings','settings']){
+    for(const page of ['home','play','town','journal','endings','settings']){
       app.page=page;app.render()
       for(const t of app.targets){assert.ok(t.x>=0&&t.y>=0&&t.x+t.w<=ph+.1&&t.y+t.h<=pw+.1,`${ph}x${pw} ${page} ${t.id} bounds`)}
       app.scrollBy(100000);app.render();assert.ok(app.targets.length>0)

@@ -31,6 +31,11 @@ for (const [key, source, width] of [
   await sharp(path.join(root, 'src/static', source)).resize({ width, withoutEnlargement: true }).jpeg({ quality: 80, mozjpeg: true }).toFile(file)
   assets.push({ file: 'assets/' + key + '.jpg', bytes: (await fs.stat(file)).size })
 }
+for (const key of ['props','buildings','xuzhiwei']) {
+  const file=path.join(out,'assets','town-'+key+'.png')
+  await sharp(path.join(root,'src/static/scenic/town',key+'.png')).resize({width:800}).png({palette:true,quality:85,effort:9}).toFile(file)
+  assets.push({file:'assets/town-'+key+'.png',bytes:(await fs.stat(file)).size})
+}
 const bundled = await build({
   absWorkingDir: root, entryPoints: ['douyin/src/main.ts'], outfile: path.join(out, 'game.js'),
   bundle: true, format: 'iife', platform: 'neutral', target: ['es2019'], minify: true,

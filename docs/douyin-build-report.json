@@ -1,7 +1,7 @@
 {
   "mode": "demo",
-  "packageBytes": 1495384,
-  "packageFiles": 22,
+  "packageBytes": 2459908,
+  "packageFiles": 25,
   "startupBudgetBytes": 4194304,
   "videoNodes": 0,
   "configuredVideos": 0,
@@ -120,6 +120,18 @@
     {
       "file": "assets/titan.jpg",
       "bytes": 144266
+    },
+    {
+      "file": "assets/town-props.png",
+      "bytes": 242744
+    },
+    {
+      "file": "assets/town-buildings.png",
+      "bytes": 276506
+    },
+    {
+      "file": "assets/town-xuzhiwei.png",
+      "bytes": 433832
     }
   ]
 }
