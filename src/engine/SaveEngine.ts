@@ -1,7 +1,7 @@
 import type { GameState, RunState } from '../types/state'
-export const SAVE_KEY='shen_zhiyi_game_state_v1'
+export const SAVE_KEY='wanjie_qingya_volume1_v1'
 export const clone = <T>(value:T):T => JSON.parse(JSON.stringify(value))
-export const freshRun = ():RunState => ({currentNodeId:'V_M01',currentChapterId:'序章',flags:{},stats:{independence:0,truth:0,career:0,family:0,control:0,anomaly:0},choiceHistory:[],visitedNodes:[],evidenceIds:[],currentEndingId:'',history:[]})
+export const freshRun = ():RunState => ({currentNodeId:'V_M01',currentChapterId:'世界真的坏了',flags:{},stats:{water:20,supply:40,care:20,order:25,ecology:0,cooperation:0},choiceHistory:[],visitedNodes:[],evidenceIds:[],currentEndingId:'',history:[]})
 export function snapshot(s:GameState):RunState { return clone(Object.fromEntries(Object.keys(freshRun()).map(k=>[k,s[k as keyof GameState]])) as unknown as RunState) }
 export function initialState():GameState { return {...freshRun(),playthrough:1,unlockedEndings:[],endingUnlockedAt:{},galleryUnlocks:[],metaFlags:{},developerMode:false,hasSave:false,checkpoint:null,chapterCheckpoint:null,archives:[],currentNode:'V_M01',chapter:1,loop:1,progress:0,clues:[],endings:[]} }
 export function migrateSave(raw:unknown):GameState {

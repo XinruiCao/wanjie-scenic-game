@@ -5,7 +5,7 @@ import { story } from '../../src/data/story'
 import type { GameState } from '../../src/types/state'
 import type { StoragePort, ReleaseConfig } from './platform'
 
-export const DEMO_SAVE_KEY = 'wanjie_douyin_demo_v1'
+export const DEMO_SAVE_KEY = 'wanjie_qingya_demo_v1'
 const isRecord = (value: unknown): value is Record<string, unknown> => !!value && typeof value === 'object' && !Array.isArray(value)
 function decode(raw: unknown): GameState | undefined {
   if (!raw) return
@@ -32,7 +32,7 @@ export class Session {
   private lastGood: unknown
   private damaged: unknown
   constructor(private storage: StoragePort, readonly config: ReleaseConfig) {
-    this.key = config.mode === 'demo' ? DEMO_SAVE_KEY : 'wanjie_douyin_v1'
+    this.key = config.mode === 'demo' ? DEMO_SAVE_KEY : 'wanjie_qingya_v1'
     let raw: unknown
     try { raw = storage.get(this.key) } catch { this.saveError = '暂时无法读取本机进度' }
     let loaded = decode(raw)

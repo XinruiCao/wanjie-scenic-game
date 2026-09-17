@@ -17,13 +17,18 @@ export class StoryEngine {
  if(!story[id]) id='V_M01'
  if(!this.canEnter(id)) throw new Error('尚未满足节点进入条件：'+id)
  const s=this.state,n=story[id]; s.currentNodeId=id;s.currentChapterId=n.chapter||s.currentChapterId;s.hasSave=true
- if(!s.visitedNodes.includes(id))s.visitedNodes.push(id)
+ if(!s.visitedNodes.includes(id)) {
+  Object.assign(s.flags,n.effects?.set||{})
+  for(const [k,v] of Object.entries(n.effects?.add||{}))s.stats[k]=Math.max(0,Math.min(100,(s.stats[k]||0)+v))
+  s.visitedNodes.push(id)
+ }
+ if(n.payloadId&&!s.evidenceIds.includes(n.payloadId))s.evidenceIds.push(n.payloadId)
  s.history.push({node:id,at:Date.now()})
- if(n.choices?.length)SaveEngine.createCheckpoint(s)
+ if(n.choices?.length&&!s.checkpoint)SaveEngine.createCheckpoint(s)
  if(n.type==='ENDING') this.endingEngine.unlockEnding(id)
  this.save();return n
  }
- applyChoice(choiceId:string){const c=this.getVisibleChoices().find(c=>c.id===choiceId);if(!c||c.disabled)throw new Error('选项不可用');const proposed=clone(this.state);Object.assign(proposed.flags,c.set||{});for(const [k,v] of Object.entries(c.add||{}))proposed.stats[k]=(proposed.stats[k]||0)+v;
+ applyChoice(choiceId:string){const c=this.getVisibleChoices().find(c=>c.id===choiceId);if(!c||c.disabled)throw new Error('选项不可用');const proposed=clone(this.state);Object.assign(proposed.flags,c.set||{});for(const [k,v] of Object.entries(c.add||{}))proposed.stats[k]=Math.max(0,Math.min(100,(proposed.stats[k]||0)+v));
  if(!this.canEnter(c.next,proposed))throw new Error('目标不可用');SaveEngine.createCheckpoint(this.state)
  this.state.flags=proposed.flags;this.state.stats=proposed.stats
  for(const id of c.evidenceIds||[])this.addEvidence(id)

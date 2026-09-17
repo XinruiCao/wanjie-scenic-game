@@ -1,598 +1,979 @@
 {
   "version": 1,
+  "title": "青崖山开门 · 第一卷",
   "nodes": {
     "V_M01": {
       "id": "V_M01",
-      "type": "VIDEO",
-      "title": "求婚，是他最后一次努力",
-      "next": "C_M01",
-      "chapter": "序章",
-      "video": "/static/videos/prologue/V_M01.mp4",
-      "poster": "/static/backgrounds/engagement.png",
-      "loop": false
+      "type": "PAGE",
+      "episode": 1,
+      "chapter": "世界真的坏了",
+      "chapterId": "prologue",
+      "title": "考完了",
+      "scene": "exam",
+      "location": "考场外 · 16:40",
+      "poster": "/static/scenic/worlds/exam.jpg",
+      "description": "许知微把准考证塞回文件袋。她今年二十三岁，刚考完公务员。\n药店旁的路不见了，玻璃里倒映着现实中没有的木楼。一只腹部像种子的四翼小虫落在路牌上。她收回伸出的手，手机定位开始跳动。",
+      "quote": "考完了。世界也坏了。",
+      "next": "EP02",
+      "payloadId": "E01"
     },
-    "C_M01": {
-      "id": "C_M01",
-      "type": "CHOICE",
-      "title": "婚后安排",
+    "EP02": {
+      "id": "EP02",
+      "type": "PAGE",
+      "episode": 2,
+      "chapter": "世界真的坏了",
+      "chapterId": "prologue",
+      "title": "那条路昨天不在",
+      "scene": "wetland",
+      "location": "新增水域 · 路口",
+      "poster": "/static/scenic/worlds/wetland.jpg",
+      "description": "昨天还通公交的路，今天成了一片芦苇湖。小男孩站在岸边喊妈妈，银色小鱼跃出水面，前肢像会抓握的手。\n许知微先把孩子带回有墙的店里，请店员联系家人。一个不属于手机的声音在耳边响起。",
+      "quote": "先离水远一点。看见，不等于认识。",
+      "payloadId": "E02",
       "choices": [
         {
-          "id": "C_M01_A",
-          "text": "今天开心，先不扫兴",
-          "next": "V_M02_A",
-          "set": {
-            "endure_engagement": true
-          },
+          "id": "EP02_A",
+          "text": "留在店里陪孩子等家人",
+          "next": "EP03",
+          "hint": "安置 +8 · 留下可靠联系点",
+          "outcome": "店员找到了孩子的母亲。孩子始终没有再靠近水边。",
           "add": {
-            "control": 1
+            "care": 8
           }
         },
         {
-          "id": "C_M01_B",
-          "text": "现在把话说清楚",
-          "next": "V_M02_B",
+          "id": "EP02_B",
+          "text": "请店员照看，记录水域边界",
+          "next": "EP03",
+          "hint": "观察 +8 · 提交已知路段",
+          "outcome": "店员接手照看孩子；你将断路与水岸位置交给路口值守人员。",
           "add": {
-            "independence": 1
-          }
-        },
-        {
-          "id": "C_M01_C",
-          "text": "不吵，拍下婚后安排",
-          "next": "V_M02_C",
-          "set": {
-            "evidence_marriage_plan": true,
-            "familyAgreementSaved": true
-          },
-          "add": {
-            "truth": 1
-          },
-          "evidenceIds": [
-            "marriage_plan"
-          ]
-        }
-      ]
-    },
-    "V_M02_A": {
-      "id": "V_M02_A",
-      "type": "VIDEO",
-      "title": "你笑着收起了自己的疑问。",
-      "next": "V_M03",
-      "chapter": "序章",
-      "video": "/static/videos/prologue/V_M02_A.mp4",
-      "poster": "/static/backgrounds/engagement.png",
-      "loop": false
-    },
-    "V_M02_B": {
-      "id": "V_M02_B",
-      "type": "VIDEO",
-      "title": "你要求他尊重自己的工作。",
-      "next": "V_M03",
-      "chapter": "序章",
-      "video": "/static/videos/prologue/V_M02_B.mp4",
-      "poster": "/static/backgrounds/engagement.png",
-      "loop": false
-    },
-    "V_M02_C": {
-      "id": "V_M02_C",
-      "type": "VIDEO",
-      "title": "照片留下了他要求你辞职的字句。",
-      "next": "V_M03",
-      "chapter": "序章",
-      "video": "/static/videos/prologue/V_M02_C.mp4",
-      "poster": "/static/backgrounds/engagement.png",
-      "loop": false
-    },
-    "V_M03": {
-      "id": "V_M03",
-      "type": "VIDEO",
-      "title": "手机震动：今晚的事，就当没发生。",
-      "next": "C_M03",
-      "chapter": "序章",
-      "video": "/static/videos/prologue/V_M03.mp4",
-      "poster": "/static/backgrounds/engagement.png",
-      "loop": false
-    },
-    "C_M03": {
-      "id": "C_M03",
-      "type": "CHOICE",
-      "title": "你决定先做什么？",
-      "choices": [
-        {
-          "id": "C_M03_A",
-          "text": "继续相信周叙川",
-          "next": "V_TRUST",
-          "set": {
-            "trust_zhou": true
-          },
-          "add": {
-            "control": 1
-          },
-          "defaultChoice": true
-        },
-        {
-          "id": "C_M03_B",
-          "text": "开始查他的手机",
-          "next": "V_PHONE",
-          "set": {
-            "checked_phone": true
-          },
-          "add": {
-            "truth": 1,
-            "independence": 1
-          }
-        },
-        {
-          "id": "C_M03_C",
-          "text": "先去见父亲",
-          "next": "V_FATHER",
-          "set": {
-            "met_father": true
-          },
-          "add": {
-            "family": 2
-          }
-        }
-      ],
-      "countdown": 30
-    },
-    "V_TRUST": {
-      "id": "V_TRUST",
-      "type": "VIDEO",
-      "title": "他的安慰，仍然避开了那个问题。",
-      "next": "P_PHONE",
-      "chapter": "序章",
-      "video": "/static/videos/prologue/V_TRUST.mp4",
-      "poster": "/static/backgrounds/engagement.png",
-      "loop": false
-    },
-    "V_PHONE": {
-      "id": "V_PHONE",
-      "type": "VIDEO",
-      "title": "消息里出现了反复修改的人生安排。",
-      "next": "P_PHONE",
-      "chapter": "序章",
-      "video": "/static/videos/prologue/V_PHONE.mp4",
-      "poster": "/static/backgrounds/engagement.png",
-      "loop": false
-    },
-    "V_FATHER": {
-      "id": "V_FATHER",
-      "type": "VIDEO",
-      "title": "父亲说：回家不是认输，你也可以自己决定。",
-      "next": "P_PHONE",
-      "chapter": "序章",
-      "video": "/static/videos/prologue/V_FATHER.mp4",
-      "poster": "/static/backgrounds/engagement.png",
-      "loop": false
-    },
-    "P_PHONE": {
-      "id": "P_PHONE",
-      "type": "PAGE",
-      "page": "phone",
-      "title": "深夜来信",
-      "description": "爸爸：无论如何，先确认你自己想要什么。周叙川：不要把事情闹大。",
-      "next": "P_EVIDENCE"
-    },
-    "P_EVIDENCE": {
-      "id": "P_EVIDENCE",
-      "type": "PAGE",
-      "page": "evidence",
-      "title": "戒指里的异物",
-      "description": "戒托内侧藏着一个微型元件。保存这条线索，继续核实。",
-      "payloadId": "ring_tracker",
-      "next": "V_M05"
-    },
-    "V_M05": {
-      "id": "V_M05",
-      "type": "VIDEO",
-      "title": "学校争议：他声称辞职完全是你的意愿。",
-      "next": "P_TEST_EVIDENCE",
-      "chapter": "序章",
-      "video": "/static/videos/prologue/V_M05.mp4",
-      "poster": "/static/backgrounds/engagement.png",
-      "loop": false
-    },
-    "P_TEST_EVIDENCE": {
-      "id": "P_TEST_EVIDENCE",
-      "type": "PAGE",
-      "title": "你如何回应这场争议？",
-      "choices": [
-        {
-          "id": "PROOF",
-          "text": "拿出当时拍下的婚后安排",
-          "next": "V_EVIDENCE",
-          "condition": {
-            "flag": "evidence_marriage_plan"
-          },
-          "set": {
-            "proved_pattern": true
-          },
-          "add": {
-            "truth": 1,
-            "independence": 1
-          }
-        },
-        {
-          "id": "ARGUE",
-          "text": "要求大家相信自己的口头解释",
-          "next": "V_NO_PROOF",
-          "set": {
-            "failed_claim": true
-          },
-          "add": {
-            "control": 1
-          }
-        },
-        {
-          "id": "LEAVE",
-          "text": "停止争辩，先离开这段关系",
-          "next": "V_LEAVE",
-          "add": {
-            "independence": 1
+            "ecology": 8
           }
         }
       ]
     },
-    "V_NO_PROOF": {
-      "id": "V_NO_PROOF",
-      "type": "VIDEO",
-      "title": "空口的辩解被新的说辞淹没了。",
-      "next": "R_NO_EVIDENCE",
-      "chapter": "序章",
-      "video": "/static/videos/prologue/V_NO_PROOF.mp4",
-      "poster": "/static/backgrounds/engagement.png",
-      "loop": false
+    "EP03": {
+      "id": "EP03",
+      "type": "PAGE",
+      "episode": 3,
+      "chapter": "世界真的坏了",
+      "chapterId": "prologue",
+      "title": "系统？",
+      "scene": "exam",
+      "location": "街边商店 · 临时避险",
+      "poster": "/static/scenic/worlds/exam.jpg",
+      "description": "“文明灾后重建辅助单元 CR-07，连接完成。”\n许知微要求解绑，答复却是任务期内无法解除。它原本负责灾后重建，如今灾难正在发生，连它也没有准备好。",
+      "quote": "所以，你这是售后来早了？",
+      "next": "EP04"
     },
-    "V_EVIDENCE": {
-      "id": "V_EVIDENCE",
-      "type": "VIDEO",
-      "title": "照片证实了他早已设计好的控制。",
-      "next": "V_M04",
-      "chapter": "序章",
-      "video": "/static/videos/prologue/V_EVIDENCE.mp4",
-      "poster": "/static/backgrounds/engagement.png",
-      "loop": false
+    "EP04": {
+      "id": "EP04",
+      "type": "PAGE",
+      "episode": 4,
+      "chapter": "世界真的坏了",
+      "chapterId": "prologue",
+      "title": "它也不知道",
+      "scene": "exam",
+      "location": "CR-07 · 首次记录",
+      "poster": "/static/scenic/worlds/exam.jpg",
+      "description": "这里是否安全？父母在哪里？灾难什么时候结束？三个问题，三个“无法确认”。\nCR-07只能记录走过的路、辅助评估眼前的结构和基础设施。它没有全地图，也不会给未接触的生命起名字。",
+      "quote": "那就从我们能确认的事开始。",
+      "next": "EP05"
     },
-    "V_LEAVE": {
-      "id": "V_LEAVE",
-      "type": "VIDEO",
-      "title": "你不再向他索取认可。",
-      "next": "V_M04",
-      "chapter": "序章",
-      "video": "/static/videos/prologue/V_LEAVE.mp4",
-      "poster": "/static/backgrounds/engagement.png",
-      "loop": false
+    "EP05": {
+      "id": "EP05",
+      "type": "PAGE",
+      "episode": 5,
+      "chapter": "世界真的坏了",
+      "chapterId": "prologue",
+      "title": "影子从天上来",
+      "scene": "exam",
+      "location": "城市上空 · 倒悬结构",
+      "poster": "/static/scenic/worlds/exam.jpg",
+      "description": "云后露出倒悬的街道与建筑。那不是投影：云层被它真实的体积推开，巨大的影子慢慢扫过楼群。\n许知微没有追着拍。妈妈的电话响了。",
+      "quote": "地貌和生命，是一起过来的。",
+      "next": "EP06",
+      "payloadId": "E03"
     },
-    "V_M04": {
-      "id": "V_M04",
-      "type": "VIDEO",
-      "title": "你的人生，由你决定。",
-      "next": "P028",
-      "chapter": "序章",
-      "video": "/static/videos/prologue/V_M04.mp4",
-      "poster": "/static/backgrounds/engagement.png",
-      "loop": false
+    "EP06": {
+      "id": "EP06",
+      "type": "PAGE",
+      "episode": 6,
+      "chapter": "世界真的坏了",
+      "chapterId": "prologue",
+      "title": "天上有城",
+      "scene": "exam",
+      "location": "母亲来电",
+      "poster": "/static/scenic/worlds/exam.jpg",
+      "description": "“妈，先接水。别去楼顶看。”许知微让母亲确认窗外还是原来的小区，再关好门窗。\n天上的城再大，也没有先联系上家人重要。她拨通父亲的电话，约定只去官方确认的集合点。",
+      "quote": "看见我发的位置，也先确认那条路还在。",
+      "next": "EP07"
     },
-    "P028": {
-      "id": "P028",
-      "type": "CHOICE",
-      "title": "命运裂缝",
+    "EP07": {
+      "id": "EP07",
+      "type": "PAGE",
+      "episode": 7,
+      "chapter": "世界真的坏了",
+      "chapterId": "prologue",
+      "title": "先回家",
+      "scene": "exam",
+      "location": "街边超市 · 物资有限",
+      "poster": "/static/scenic/worlds/exam.jpg",
+      "description": "水、食物、盐、绷带、手电、电池、雨衣。她只拿得动一袋，还要留出照应别人的手。\n广播正在要求居民避开新出现的水域与道路。她把导航关掉，记下最近一个有人值守的路口。",
+      "quote": "物资要算着带，路要确认了再走。",
       "choices": [
         {
-          "id": "C_P028_A",
-          "text": "退婚，隐藏身份",
-          "next": "V_A01",
-          "set": {
-            "route": "teacher"
-          }
-        },
-        {
-          "id": "C_P028_B",
-          "text": "公开身份",
-          "next": "V_B01",
-          "condition": {
-            "stat": "truth",
-            "gte": 2
-          },
-          "set": {
-            "route": "truth"
-          }
-        },
-        {
-          "id": "C_P028_C",
-          "text": "继续装普通人",
-          "next": "V_C01",
-          "set": {
-            "route": "control"
-          }
-        },
-        {
-          "id": "C_P028_D",
-          "text": "调查跟踪者",
-          "next": "V_D01",
-          "condition": {
-            "flag": "evidence_marriage_plan"
-          },
-          "set": {
-            "route": "investigation"
-          }
-        },
-        {
-          "id": "C_P028_E",
-          "text": "自己创业",
-          "next": "V_E01",
-          "condition": {
-            "stat": "independence",
-            "gte": 2
-          },
-          "set": {
-            "route": "career"
-          },
+          "id": "EP07_A",
+          "text": "多带饮水和即食食物",
+          "next": "EP08",
+          "hint": "供水 +10 · 后勤 +6",
+          "outcome": "你分出一瓶水给身旁的老人，剩下的物资登记入袋。",
           "add": {
-            "career": 2
+            "water": 10,
+            "supply": 6
           }
         },
         {
-          "id": "C_P028_F",
-          "text": "回沈氏掌权",
-          "next": "V_F01",
-          "condition": {
-            "stat": "family",
-            "gte": 2
-          },
-          "set": {
-            "route": "shen_group"
+          "id": "EP07_B",
+          "text": "留出绷带、手电和电池的位置",
+          "next": "EP08",
+          "hint": "安置 +6 · 后勤 +10",
+          "outcome": "有限的负重留给了照明和急救；饮水按每人用量携带。",
+          "add": {
+            "care": 6,
+            "supply": 10
           }
         }
       ]
     },
-    "V_A01": {
-      "id": "V_A01",
-      "type": "VIDEO",
-      "title": "在教室里找回自己的声音",
-      "next": "P_A02",
-      "chapter": "序章",
-      "video": "/static/videos/prologue/V_A01.mp4",
-      "poster": "/static/backgrounds/engagement.png",
-      "loop": false
-    },
-    "P_A02": {
-      "id": "P_A02",
+    "EP08": {
+      "id": "EP08",
       "type": "PAGE",
-      "title": "新的生活",
-      "description": "这一次决定留下的影响，正在成为你的日常。",
-      "next": "V_A03"
+      "episode": 8,
+      "chapter": "世界真的坏了",
+      "chapterId": "prologue",
+      "title": "要不要接",
+      "scene": "exam",
+      "location": "CR-07 · 第一项任务",
+      "poster": "/static/scenic/worlds/exam.jpg",
+      "description": "任务：返回稳定居所，完成安全评估，记录一条有效路线。奖励：基础区域扫描权限。\n“你能导航吗？”“不能。”许知微叹了口气，把已经走过的路标在纸上。系统没有答案，脚下这一步有。",
+      "quote": "接。至少把能走的路留下。",
+      "next": "EP09"
     },
-    "V_A03": {
-      "id": "V_A03",
-      "type": "VIDEO",
-      "title": "你承担选择，也收下它带来的未来。",
-      "next": "END01",
-      "chapter": "序章",
-      "video": "/static/videos/prologue/V_A03.mp4",
-      "poster": "/static/backgrounds/engagement.png",
-      "loop": false
-    },
-    "V_B01": {
-      "id": "V_B01",
-      "type": "VIDEO",
-      "title": "公开证据与真实身份",
-      "next": "P_B02",
-      "chapter": "序章",
-      "video": "/static/videos/prologue/V_B01.mp4",
-      "poster": "/static/backgrounds/engagement.png",
-      "loop": false
-    },
-    "P_B02": {
-      "id": "P_B02",
+    "EP09": {
+      "id": "EP09",
       "type": "PAGE",
-      "title": "新的生活",
-      "description": "这一次决定留下的影响，正在成为你的日常。",
-      "next": "V_B03"
-    },
-    "V_B03": {
-      "id": "V_B03",
-      "type": "VIDEO",
-      "title": "你承担选择，也收下它带来的未来。",
-      "next": "END02",
-      "chapter": "序章",
-      "video": "/static/videos/prologue/V_B03.mp4",
-      "poster": "/static/backgrounds/engagement.png",
-      "loop": false
-    },
-    "V_C01": {
-      "id": "V_C01",
-      "type": "VIDEO",
-      "title": "梁砚递来一份看似完美的契约",
-      "next": "P_C02",
-      "chapter": "序章",
-      "video": "/static/videos/prologue/V_C01.mp4",
-      "poster": "/static/backgrounds/engagement.png",
-      "loop": false
-    },
-    "P_C02": {
-      "id": "P_C02",
-      "type": "PAGE",
-      "title": "新的生活",
-      "description": "这一次决定留下的影响，正在成为你的日常。",
-      "next": "V_C03"
-    },
-    "V_C03": {
-      "id": "V_C03",
-      "type": "VIDEO",
-      "title": "你承担选择，也收下它带来的未来。",
-      "next": "END03",
-      "chapter": "序章",
-      "video": "/static/videos/prologue/V_C03.mp4",
-      "poster": "/static/backgrounds/engagement.png",
-      "loop": false
-    },
-    "V_E01": {
-      "id": "V_E01",
-      "type": "VIDEO",
-      "title": "第一份属于自己的订单",
-      "next": "P_E02",
-      "chapter": "序章",
-      "video": "/static/videos/prologue/V_E01.mp4",
-      "poster": "/static/backgrounds/engagement.png",
-      "loop": false
-    },
-    "P_E02": {
-      "id": "P_E02",
-      "type": "PAGE",
-      "title": "新的生活",
-      "description": "这一次决定留下的影响，正在成为你的日常。",
-      "next": "V_E03"
-    },
-    "V_E03": {
-      "id": "V_E03",
-      "type": "VIDEO",
-      "title": "你承担选择，也收下它带来的未来。",
-      "next": "END04",
-      "chapter": "序章",
-      "video": "/static/videos/prologue/V_E03.mp4",
-      "poster": "/static/backgrounds/engagement.png",
-      "loop": false
-    },
-    "V_F01": {
-      "id": "V_F01",
-      "type": "VIDEO",
-      "title": "你坐上沈氏的会议主位",
-      "next": "P_F02",
-      "chapter": "序章",
-      "video": "/static/videos/prologue/V_F01.mp4",
-      "poster": "/static/backgrounds/engagement.png",
-      "loop": false
-    },
-    "P_F02": {
-      "id": "P_F02",
-      "type": "PAGE",
-      "title": "新的生活",
-      "description": "这一次决定留下的影响，正在成为你的日常。",
-      "next": "V_F03"
-    },
-    "V_F03": {
-      "id": "V_F03",
-      "type": "VIDEO",
-      "title": "你承担选择，也收下它带来的未来。",
-      "next": "END05",
-      "chapter": "序章",
-      "video": "/static/videos/prologue/V_F03.mp4",
-      "poster": "/static/backgrounds/engagement.png",
-      "loop": false
-    },
-    "V_D01": {
-      "id": "V_D01",
-      "type": "VIDEO",
-      "title": "追踪信号指向旧影院",
-      "next": "P_D02",
-      "chapter": "序章",
-      "video": "/static/videos/prologue/V_D01.mp4",
-      "poster": "/static/backgrounds/hospital7.png",
-      "loop": false
-    },
-    "P_D02": {
-      "id": "P_D02",
-      "type": "CHOICE",
-      "title": "你看见了另一层世界",
+      "episode": 9,
+      "chapter": "世界真的坏了",
+      "chapterId": "prologue",
+      "title": "路不是路",
+      "scene": "titan",
+      "location": "断桥边 · 迁徙警戒线",
+      "poster": "/static/scenic/worlds/titan.jpg",
+      "description": "桥的另一头接上了沙漠，岩甲巨兽正在迁徙。士兵让人群后退，没有开枪。幼兽偏向围栏，被成年个体带回队列。\nCR-07记录：随群移动、成年个体引导幼体。危险程度仍然无法确认。父亲同意在体育场官方集合点等她。",
+      "quote": "让它们先过去。我们也有要回去的地方。",
+      "payloadId": "E04",
       "choices": [
         {
-          "id": "D_TRUTH",
-          "text": "公开调查结果，回到现实",
-          "next": "V_B01",
-          "set": {
-            "route": "truth"
-          },
+          "id": "EP09_A",
+          "text": "沿警戒线退后，帮忙分流人群",
+          "next": "EP10",
+          "hint": "秩序 +8 · 不干扰迁徙",
+          "outcome": "人群让出了足够的距离，幼兽重新跟上成年个体。",
           "add": {
-            "truth": 2
+            "order": 8
           }
         },
         {
-          "id": "D_TRUE",
-          "text": "带着记忆，走出既定剧本",
-          "next": "V_TRUE",
-          "condition": {
-            "all": [
-              {
-                "playthrough": 2
-              },
-              {
-                "flag": "proved_pattern"
-              },
-              {
-                "flag": "checked_phone"
-              },
-              {
-                "flag": "evidence_ring_tracker"
-              },
-              {
-                "flag": "route_locked",
-                "exists": false
-              }
-            ]
-          },
-          "set": {
-            "high_dimension": true,
-            "route": "high_dimension"
+          "id": "EP09_B",
+          "text": "在安全距离记录幼兽的行为",
+          "next": "EP10",
+          "hint": "观察 +8 · 不推断危险等级",
+          "outcome": "你记下了成年个体引导幼体的行为，危险程度仍标为未知。",
+          "add": {
+            "ecology": 8
           }
         }
       ]
     },
-    "V_TRUE": {
-      "id": "V_TRUE",
-      "type": "VIDEO",
-      "title": "你认出了每一段人生里，始终没有消失的自己。",
-      "next": "P_TRUE",
-      "chapter": "序章",
-      "video": "/static/videos/prologue/V_TRUE.mp4",
-      "poster": "/static/backgrounds/true-ending.png",
-      "loop": false
-    },
-    "P_TRUE": {
-      "id": "P_TRUE",
+    "EP10": {
+      "id": "EP10",
       "type": "PAGE",
-      "title": "完整的记忆",
-      "description": "不再用任何一个人的期待定义自己。",
-      "next": "END06"
+      "episode": 10,
+      "chapter": "世界真的坏了",
+      "chapterId": "prologue",
+      "title": "找到爸爸",
+      "scene": "refugees",
+      "location": "体育场 · 官方集合点",
+      "poster": "/static/scenic/worlds/refugees.jpg",
+      "description": "父亲站在救援帐篷旁，手里还攥着没喝的水。许知微终于叫出一声“爸”。\n跑道尽头连着雪原，长腿白色动物用柔软触须试探冰面。人群和它们隔着警戒线，谁也没有越过去。",
+      "quote": "别急着给陌生东西下结论。",
+      "next": "EP11",
+      "payloadId": "E05"
     },
-    "R_NO_EVIDENCE": {
-      "id": "R_NO_EVIDENCE",
-      "type": "ROUTE_CLOSED",
-      "title": "没有证据的争辩",
-      "description": "这一次，你无法证明他的安排早已存在。",
-      "reason": "第一幕没有保存婚后安排，或在争议时没有出示照片。回到本章可以重新收集。",
-      "returnNodeId": "P_TEST_EVIDENCE",
-      "chapterStartNodeId": "V_M01"
+    "EP11": {
+      "id": "EP11",
+      "type": "PAGE",
+      "episode": 11,
+      "chapter": "世界真的坏了",
+      "chapterId": "prologue",
+      "title": "河那边有人",
+      "scene": "refugees",
+      "location": "居民区外 · 新增盐水河",
+      "poster": "/static/scenic/worlds/refugees.jpg",
+      "description": "水生母亲抱着幼体从河岸爬上来，后面还有受伤的同伴。她们在逃离某种东西，水下的巨大影子仍在移动。\n许知微放下饮水后退，让出空间。梁策与医疗人员接手警戒和救治。这里首先是一次救援，不是招募。",
+      "quote": "她抱着孩子。我们先给她留一条路。",
+      "payloadId": "E06",
+      "choices": [
+        {
+          "id": "EP11_A",
+          "text": "把水放下，后退并引导医疗人员",
+          "next": "EP12",
+          "hint": "安置 +10 · 接触保持距离",
+          "outcome": "水生母亲停止后退，医疗人员在警戒配合下接近了她。",
+          "add": {
+            "care": 10
+          }
+        },
+        {
+          "id": "EP11_B",
+          "text": "给救援队标出水下影子的位置",
+          "next": "EP12",
+          "hint": "观察 +6 · 秩序 +6",
+          "outcome": "你没有靠近水面；梁策据现场信息调整了救援警戒线。",
+          "add": {
+            "ecology": 6,
+            "order": 6
+          }
+        }
+      ]
+    },
+    "EP12": {
+      "id": "EP12",
+      "type": "PAGE",
+      "episode": 12,
+      "chapter": "世界真的坏了",
+      "chapterId": "prologue",
+      "title": "家也会变",
+      "scene": "refugees",
+      "location": "统一转移 · 青崖山方向",
+      "poster": "/static/scenic/worlds/refugees.jpg",
+      "description": "官方继续安置水生难民。新闻里，新的植物、动物和智慧生命正随着地貌出现在各地；天上的居民也在向下看。\n青崖山游客中心被列为转移点。那里荒废三年，却还有水库。许知微和父母走进队伍，离开已经不再熟悉的家。",
+      "quote": "先让所有人，到得了下一站。",
+      "choices": [
+        {
+          "id": "EP12_A",
+          "text": "协助登记，跟随官方队伍转移",
+          "next": "EP13",
+          "hint": "安置 +6 · 序章通关",
+          "outcome": "你记下了同行者与走过的路。青崖山到了，黑金皮肤随本章通关开启。",
+          "add": {
+            "care": 6
+          },
+          "set": {
+            "evacuated": true
+          }
+        },
+        {
+          "id": "EP12_B",
+          "text": "沿途记录可复核的道路标记",
+          "next": "EP13",
+          "hint": "观察 +6 · 序章通关",
+          "outcome": "有效路线被记录下来，只包含实际走过的路。青崖山到了，黑金皮肤已解锁。",
+          "add": {
+            "ecology": 6
+          },
+          "set": {
+            "evacuated": true
+          }
+        }
+      ]
+    },
+    "EP13": {
+      "id": "EP13",
+      "type": "PAGE",
+      "episode": 13,
+      "chapter": "青崖山开门",
+      "chapterId": "rebuild",
+      "title": "青崖山",
+      "scene": "qingya",
+      "location": "游客中心 · 重建第 1 日",
+      "poster": "/static/scenic/worlds/qingya.jpg",
+      "description": "铁门生锈，索道停了三年。赵建国掏出一大串旧钥匙：“水库有水，龙头没有。”\n稳定居所任务完成。CR-07只开放游客中心、泵房、仓库、厨房和已知管线的基础扫描。她把背包放下，先找扳手。",
+      "quote": "先把水弄出来。",
+      "next": "EP14",
+      "payloadId": "E07",
+      "effects": {
+        "add": {
+          "supply": 12
+        },
+        "set": {
+          "scanningReady": true
+        }
+      }
+    },
+    "EP14": {
+      "id": "EP14",
+      "type": "PAGE",
+      "episode": 14,
+      "chapter": "青崖山开门",
+      "chapterId": "rebuild",
+      "title": "路断在身后",
+      "scene": "wetland",
+      "location": "景区后路 · 湿林边界",
+      "poster": "/static/scenic/worlds/wetland.jpg",
+      "description": "来时的路消失在潮湿森林里。一头三米高、似鹿又似蜥蜴的食草动物受惊跑开。安全边界只能重新画。\n许知微在白板上写下四件事：水、电、吃饭、床。青崖山还称不上避难所，但今晚总得有人住下。",
+      "quote": "白板上没有奇迹，只有今天得做完的事。",
+      "next": "EP15",
+      "payloadId": "E08"
+    },
+    "EP15": {
+      "id": "EP15",
+      "type": "PAGE",
+      "episode": 15,
+      "chapter": "青崖山开门",
+      "chapterId": "rebuild",
+      "title": "先让水出来",
+      "scene": "qingya",
+      "location": "泵房 · 第一次施工",
+      "poster": "/static/scenic/worlds/qingya.jpg",
+      "description": "系统标出漏点，却变不出零件。赵建国拆出旧泵，周芸坚持先把饮用水和杂用水分开。\n第一股水是黄的，冲洗后才慢慢变清。要先恢复哪些管线，得由你来安排。",
+      "quote": "水从管里出来，比任何提示音都让人安心。",
+      "choices": [
+        {
+          "id": "EP15_A",
+          "text": "优先诊疗区与饮用水管线",
+          "next": "EP16",
+          "hint": "供水 +24 · 安置 +8 · 后勤 −8",
+          "outcome": "赵建国修复饮水支线，周芸完成卫生分区。公共水点仍需排队，但诊疗区先用上了水。",
+          "add": {
+            "water": 24,
+            "care": 8,
+            "supply": -8
+          },
+          "set": {
+            "waterReady": true,
+            "waterPlan": "clinic"
+          }
+        },
+        {
+          "id": "EP15_B",
+          "text": "修复公共水点，实行分时供水",
+          "next": "EP16",
+          "hint": "供水 +30 · 秩序 +6 · 后勤 −12",
+          "outcome": "旧泵接通公共水点，周芸划清饮用与杂用区域。大家按时段取水，消耗了更多备件。",
+          "add": {
+            "water": 30,
+            "order": 6,
+            "supply": -12
+          },
+          "set": {
+            "waterReady": true,
+            "waterPlan": "public"
+          }
+        }
+      ]
+    },
+    "EP16": {
+      "id": "EP16",
+      "type": "PAGE",
+      "episode": 16,
+      "chapter": "青崖山开门",
+      "chapterId": "rebuild",
+      "title": "第一夜",
+      "scene": "qingya",
+      "location": "游客中心 · 临时生活区",
+      "poster": "/static/scenic/worlds/qingya.jpg",
+      "description": "吴大海的大锅冒起热气。发电机只能定时运行，折叠床、诊疗角与登记桌挤在一起。\n连续三晚，有六足小兽偷走厨房外的白菜。大家想投喂，许知微先竖起“不要喂食”的牌子，再登记每个人的姓名、技能和需要。",
+      "quote": "先记下名字，再分一张床。",
+      "payloadId": "E09",
+      "choices": [
+        {
+          "id": "EP16_A",
+          "text": "先安置老人、儿童与伤员",
+          "next": "EP17",
+          "hint": "安置 +14 · 后勤 −5",
+          "outcome": "靠近诊疗角的床位优先留给最需要的人，其余人协助搭建夜间休息区。",
+          "add": {
+            "care": 14,
+            "supply": -5
+          },
+          "set": {
+            "bedsReady": true
+          }
+        },
+        {
+          "id": "EP16_B",
+          "text": "按家庭登记，组织轮班与值守",
+          "next": "EP17",
+          "hint": "秩序 +12 · 安置 +6",
+          "outcome": "家庭尽量相邻，夜间值守排进公开名单。厨房外加上不投喂提醒。",
+          "add": {
+            "order": 12,
+            "care": 6
+          },
+          "set": {
+            "bedsReady": true
+          }
+        }
+      ]
+    },
+    "EP17": {
+      "id": "EP17",
+      "type": "PAGE",
+      "episode": 17,
+      "chapter": "青崖山开门",
+      "chapterId": "rebuild",
+      "title": "人越来越多",
+      "scene": "qingya",
+      "location": "物资白板 · 超过百人",
+      "poster": "/static/scenic/worlds/qingya.jpg",
+      "description": "新来的人超过一百。柴油要给水泵，也要给诊疗区；米面能熬几顿，药还够谁用，都得写清。\n许知微把剩余物资摊在桌上。周芸要急救用电，赵建国要抽水时段，吴大海要保证下一锅饭。",
+      "quote": "先公开账，再一起定怎么用。",
+      "choices": [
+        {
+          "id": "EP17_A",
+          "text": "保障急救电力，水泵错峰运行",
+          "next": "EP18",
+          "hint": "安置 +12 · 供水 −6",
+          "outcome": "诊疗区保住连续用电，供水时段缩短。公告栏写明了调整理由。",
+          "add": {
+            "care": 12,
+            "water": -6
+          },
+          "set": {
+            "powerReady": true,
+            "powerPlan": "clinic"
+          }
+        },
+        {
+          "id": "EP17_B",
+          "text": "公布轮用时间，保住抽水和开饭",
+          "next": "EP18",
+          "hint": "供水 +8 · 后勤 +8 · 秩序 −4",
+          "outcome": "水泵和厨房获得固定时段，周芸保留急救优先权。轮候更久，你需要解释每一笔安排。",
+          "add": {
+            "water": 8,
+            "supply": 8,
+            "order": -4
+          },
+          "set": {
+            "powerReady": true,
+            "powerPlan": "shared"
+          }
+        }
+      ]
+    },
+    "EP18": {
+      "id": "EP18",
+      "type": "PAGE",
+      "episode": 18,
+      "chapter": "青崖山开门",
+      "chapterId": "rebuild",
+      "title": "没有商店",
+      "scene": "qingya",
+      "location": "登记台 · 生活需求",
+      "poster": "/static/scenic/worlds/qingya.jpg",
+      "description": "鞋底开了、衣服破了、胶水没了。有人想买盐和香料，有人只想换一个老铜阀门。\n青崖山缺的不只是物资，还有修补、买卖和普通生活。地球商户不愿冒险跨过不稳定的道路，后山却出现了几点灯火。",
+      "quote": "活下来之后，人还想好好生活。",
+      "next": "EP19"
+    },
+    "EP19": {
+      "id": "EP19",
+      "type": "PAGE",
+      "episode": 19,
+      "chapter": "夜里多了一条街",
+      "chapterId": "contact",
+      "title": "夜里多了一条街",
+      "scene": "market",
+      "location": "N-17 · 夜间新增结构区",
+      "poster": "/static/scenic/worlds/market.jpg",
+      "description": "连续三夜，十九点，旧路仍在，商铺、屋檐与摊位却沿它对齐出现。原来的后停车场接上了一条完整的街。\n梁策划出观察线。CR-07登记 N-17，确认智慧生命活动，不能据此判断整条街的习俗和危险。",
+      "quote": "不是一扇门，是别人的生活接到了这里。",
+      "next": "EP20",
+      "payloadId": "E10"
+    },
+    "EP20": {
+      "id": "EP20",
+      "type": "PAGE",
+      "episode": 20,
+      "chapter": "夜里多了一条街",
+      "chapterId": "contact",
+      "title": "进去问问",
+      "scene": "market",
+      "location": "百鬼街 · 首次接触",
+      "poster": "/static/scenic/worlds/market.jpg",
+      "description": "备用水泵的铜阀坏了。许知微在官方人员陪同下进入街区，找能修老阀门的铺子。\n鱼脸屠户、纸扎小兽、争摊位边界的邻居。无晓拿漏水壶讨说法，镇纸低头修灯笼。师傅说能修，然后问：“你拿什么钱？”",
+      "quote": "文明相遇，先卡在买东西怎么付钱。",
+      "choices": [
+        {
+          "id": "EP20_A",
+          "text": "带来旧阀与修理需求清单",
+          "next": "EP21",
+          "hint": "合作 +10 · 先问能力与价格",
+          "outcome": "镇纸看完旧阀，记下可修的尺寸。双方仍没解决货币换算。",
+          "add": {
+            "cooperation": 10
+          }
+        },
+        {
+          "id": "EP20_B",
+          "text": "先说明来意，询问街区交易规则",
+          "next": "EP21",
+          "hint": "合作 +6 · 秩序 +6",
+          "outcome": "摊娘给你指出能修铜件的铺子，也提醒你别碰来历不明的商品。",
+          "add": {
+            "cooperation": 6,
+            "order": 6
+          }
+        }
+      ]
+    },
+    "EP21": {
+      "id": "EP21",
+      "type": "PAGE",
+      "episode": 21,
+      "chapter": "潮生百鬼夜",
+      "chapterId": "tide",
+      "title": "无晓入城",
+      "scene": "market",
+      "location": "码头边 · 重叠加深",
+      "poster": "/static/scenic/worlds/market.jpg",
+      "description": "无晓的膜袖映着灯光，身旁水母般的倒影总慢半拍。河水开始无风颤动。\nCR-07只依据现场变化更新：空间重叠层数，二变三。许知微把修到一半的铜阀收好，招呼商户注意撤离方向。",
+      "quote": "这条街，似乎又接上了别的地方。",
+      "next": "EP22"
+    },
+    "EP22": {
+      "id": "EP22",
+      "type": "PAGE",
+      "episode": 22,
+      "chapter": "潮生百鬼夜",
+      "chapterId": "tide",
+      "title": "阴兵破土",
+      "scene": "market",
+      "location": "桥头 · 疏散开始",
+      "poster": "/static/scenic/worlds/market.jpg",
+      "description": "古战场的地貌叠入街道，阴兵从地下先后出现。人群本能地挤向桥头，老人和孩子被堵在中间。\n梁策组织警戒。许知微没有冲向战场，她举起手电，照出一条撤离路线。",
+      "quote": "往后撤！别挤桥！",
+      "choices": [
+        {
+          "id": "EP22_A",
+          "text": "先引导老人儿童离开桥头",
+          "next": "EP23",
+          "hint": "安置 +12 · 秩序 +4",
+          "outcome": "许知微守住分流口，梁策维持警戒。拥堵缓了下来，没有人被推向河里。",
+          "add": {
+            "care": 12,
+            "order": 4
+          }
+        },
+        {
+          "id": "EP22_B",
+          "text": "与官方配合，分开撤离和救援通道",
+          "next": "EP23",
+          "hint": "秩序 +12 · 安置 +4",
+          "outcome": "两条通道分开，人群开始有序撤离，救援人员可以逆向进入。",
+          "add": {
+            "order": 12,
+            "care": 4
+          }
+        }
+      ]
+    },
+    "EP23": {
+      "id": "EP23",
+      "type": "PAGE",
+      "episode": 23,
+      "chapter": "潮生百鬼夜",
+      "chapterId": "tide",
+      "title": "摊娘下场",
+      "scene": "market",
+      "location": "街巷 · 狭窄交锋",
+      "poster": "/static/scenic/worlds/market.jpg",
+      "description": "摊娘踩着长凳与旗杆换位，布幡遮住视线，凳脚卡住长枪。她像醒狮踏桩，借的是整条街的东西。\n许知微在安全区清点撤离人数。小孩找不到祖母，她把名字交给登记组，沿警戒线继续寻找。",
+      "quote": "我们把人接住，她们才有地方退。",
+      "next": "EP24"
+    },
+    "EP24": {
+      "id": "EP24",
+      "type": "PAGE",
+      "episode": 24,
+      "chapter": "潮生百鬼夜",
+      "chapterId": "tide",
+      "title": "镇纸成人",
+      "scene": "market",
+      "location": "纸铺前 · 机械重构",
+      "poster": "/static/scenic/worlds/market.jpg",
+      "description": "铜销松开，竹骨展开，木片与红绳相互牵引。小纸虎折叠成戴书生帽的少年，纸甲覆上肩背。\n镇纸摘下帽子交给店主。CR-07记下能看到的材料与关节，没有把它解释成凭空变化。",
+      "quote": "连他的变化，也有一套真实的结构。",
+      "next": "EP25",
+      "payloadId": "E11"
+    },
+    "EP25": {
+      "id": "EP25",
+      "type": "PAGE",
+      "episode": 25,
+      "chapter": "潮生百鬼夜",
+      "chapterId": "tide",
+      "title": "虎出笼",
+      "scene": "market",
+      "location": "码头街 · 纸虎形态",
+      "poster": "/static/scenic/worlds/market.jpg",
+      "description": "竹骨再次伸展，纸层叠合，一头肩高近三米的纸虎撞开杂物。摊娘借虎背跃起，无晓转身拉起两股河水。\n那是从真实江面抽起的水，不是无尽的法术。许知微催促最后一队人离开岸边。",
+      "quote": "把河岸让出来。还有人在后面。",
+      "next": "EP26"
+    },
+    "EP26": {
+      "id": "EP26",
+      "type": "PAGE",
+      "episode": 26,
+      "chapter": "潮生百鬼夜",
+      "chapterId": "tide",
+      "title": "过江",
+      "scene": "market",
+      "location": "江面 · 水改变了战场",
+      "poster": "/static/scenic/worlds/market.jpg",
+      "description": "腐栈桥断了，纸虎踏过浮板与半沉船。湿纸开始失去刚性，镇纸主动收回纸层，逆向重构成人。\n胸腔的灯笼火沿喉部喷出短促的橙金火流，湿帆先冒汽，再燃烧。冷水与火光照亮同一条江。",
+      "quote": "强大也有边界，纸会湿，人会累。",
+      "next": "EP27"
+    },
+    "EP27": {
+      "id": "EP27",
+      "type": "PAGE",
+      "episode": 27,
+      "chapter": "潮生百鬼夜",
+      "chapterId": "tide",
+      "title": "水火风",
+      "scene": "market",
+      "location": "江面 · 协作脱险",
+      "poster": "/static/scenic/worlds/market.jpg",
+      "description": "无晓让水卷起船板、麻绳与残旗，摊娘借旗杆换位。镇纸把火喷向湿帆，蒸汽遮住了阴兵的视线。\n没有人独自结束这场危机。无晓已接近极限，主动把龙卷拉向江心，让整根水柱塌回真实的河里。",
+      "quote": "让他们回来。每个人都得回来。",
+      "next": "EP28"
+    },
+    "EP28": {
+      "id": "EP28",
+      "type": "PAGE",
+      "episode": 28,
+      "chapter": "潮生百鬼夜",
+      "chapterId": "tide",
+      "title": "雨停",
+      "scene": "market",
+      "location": "江岸 · 黎明",
+      "poster": "/static/scenic/worlds/market.jpg",
+      "description": "天快亮了。镇纸拿回帽子，摊娘坐在箱子上拆鬃发里的红绳，无晓站在退去的江水旁。\n许知微从撤离区回来，以为要处理伤员，却看见商户疯狂搬货。远处第一间木铺正在变透明。",
+      "quote": "战斗结束了，生活的麻烦才刚开始。",
+      "next": "EP29"
+    },
+    "EP29": {
+      "id": "EP29",
+      "type": "PAGE",
+      "episode": 29,
+      "chapter": "救命变成做生意",
+      "chapterId": "covenant",
+      "title": "打完了，街没了",
+      "scene": "market",
+      "location": "百鬼街 · 锚点失同步",
+      "poster": "/static/scenic/worlds/market.jpg",
+      "description": "“收摊？”“抢东西。”“抢谁的？”“自己的。”镇纸捧着裂开的街契石：这里钉不住了。\n十一间固定铺、四十七家摊商，还有老人和孩子。许知微想起青崖山的空铺。“你们要是不嫌远……我那边有铺子。”",
+      "quote": "水刚通。——那就带路。",
+      "next": "EP30"
+    },
+    "EP30": {
+      "id": "EP30",
+      "type": "PAGE",
+      "episode": 30,
+      "chapter": "救命变成做生意",
+      "chapterId": "covenant",
+      "title": "先借你三天",
+      "scene": "qingya",
+      "location": "废弃商业街 · 72 小时安置",
+      "poster": "/static/scenic/worlds/qingya.jpg",
+      "description": "商户检查排烟、水电和铺位。镇纸把手按在地上：“稳。”摊娘问租金，许知微伸出三根手指。\n三天不收钱，先搬人、搬货。第四天再谈。危险品分开，明火别进屋，人和货都要登记。",
+      "quote": "不是马上招商，是先别让人丢了生活。",
+      "choices": [
+        {
+          "id": "EP30_A",
+          "text": "先安置人，再按批次搬货",
+          "next": "EP31",
+          "hint": "安置 +10 · 合作 +6",
+          "outcome": "三天免租与安全底线写上公告，孩子与老人先落脚，货物分批进入。",
+          "add": {
+            "care": 10,
+            "cooperation": 6
+          },
+          "set": {
+            "marketShelter": true
+          }
+        },
+        {
+          "id": "EP30_B",
+          "text": "一组接人，一组登记货物与铺位",
+          "next": "EP31",
+          "hint": "秩序 +10 · 合作 +6",
+          "outcome": "志愿者按两组行动，人货分流，危险物单独封存。72 小时临时安置开始。",
+          "add": {
+            "order": 10,
+            "cooperation": 6
+          },
+          "set": {
+            "marketShelter": true
+          }
+        }
+      ]
+    },
+    "EP31": {
+      "id": "EP31",
+      "type": "PAGE",
+      "episode": 31,
+      "chapter": "救命变成做生意",
+      "chapterId": "covenant",
+      "title": "鬼也得过消防",
+      "scene": "market",
+      "location": "临时街区 · 营业边界",
+      "poster": "/static/scenic/worlds/market.jpg",
+      "description": "火盆刚搬进木铺，赵建国就盖上灭火毯。会动的黑水、不照人的镜子、自行卷回的红线，都得单独记录。\n许知微划出普通商品区、明火石坪区、危险品封存区。寿数、魂魄、姓名和永久影契，一律不能交易。",
+      "quote": "没管过鬼。管过摊位申请。",
+      "payloadId": "E12",
+      "choices": [
+        {
+          "id": "EP31_A",
+          "text": "与商户一起实走三类分区",
+          "next": "EP32",
+          "hint": "秩序 +10 · 合作 +4",
+          "outcome": "普通商品、明火石坪、危险品封存三条边界落到现场。危险交易不进入市场。",
+          "add": {
+            "order": 10,
+            "cooperation": 4
+          },
+          "set": {
+            "fireZones": true
+          }
+        },
+        {
+          "id": "EP31_B",
+          "text": "把案例写成公示，再逐摊确认",
+          "next": "EP32",
+          "hint": "秩序 +6 · 观察 +8",
+          "outcome": "规则不靠猜。每家摊位确认明火与商品类别，未知物品继续封存观察。",
+          "add": {
+            "order": 6,
+            "ecology": 8
+          },
+          "set": {
+            "fireZones": true
+          }
+        }
+      ]
+    },
+    "EP32": {
+      "id": "EP32",
+      "type": "PAGE",
+      "episode": 32,
+      "chapter": "救命变成做生意",
+      "chapterId": "covenant",
+      "title": "第一晚",
+      "scene": "market",
+      "location": "百鬼夜市 · 试营业",
+      "poster": "/static/scenic/worlds/market.jpg",
+      "description": "最先走进去的是修理工，然后有人买到针线、香料、旧铜阀和防水纸灯。孩子问里面是不是都是鬼。\n“都是商户。”吴大海换回一口合用的锅。百鬼街补上了青崖山缺失的生活服务。三天到了，接下来要谈长期。",
+      "quote": "今天终于有人把鞋修好了。",
+      "next": "EP33",
+      "effects": {
+        "set": {
+          "marketOpen": true
+        },
+        "add": {
+          "supply": 10
+        }
+      }
+    },
+    "EP33": {
+      "id": "EP33",
+      "type": "PAGE",
+      "episode": 33,
+      "chapter": "救命变成做生意",
+      "chapterId": "covenant",
+      "title": "你们的钱不算钱",
+      "scene": "market",
+      "location": "协商桌 · 实物与服务",
+      "poster": "/static/scenic/worlds/market.jpg",
+      "description": "铜钱、骨筹、香与液体，没有共同的计价标准。许知微不急着造一种通用货币。\n商户提供修理、夜食、货物和巡夜，景区提供铺位、水电、垃圾处理与安全协调。租金先用实物和公共服务抵。",
+      "quote": "我们先交换彼此真正缺的东西。",
+      "choices": [
+        {
+          "id": "EP33_A",
+          "text": "优先修理、铜阀与基础设施维护",
+          "next": "EP34",
+          "hint": "供水 +10 · 后勤 +10 · 合作 +8",
+          "outcome": "第一份抵租清单写进阀门修复和日常维护，水与灯终于有了持续保障。",
+          "add": {
+            "water": 10,
+            "supply": 10,
+            "cooperation": 8
+          },
+          "set": {
+            "rentPlan": "repair"
+          }
+        },
+        {
+          "id": "EP33_B",
+          "text": "优先夜食、针线与公共巡夜",
+          "next": "EP34",
+          "hint": "安置 +10 · 秩序 +10 · 合作 +8",
+          "outcome": "生活服务与巡夜进入合同，修理项目保留在下一期协商清单里。",
+          "add": {
+            "care": 10,
+            "order": 10,
+            "cooperation": 8
+          },
+          "set": {
+            "rentPlan": "living"
+          }
+        }
+      ]
+    },
+    "EP34": {
+      "id": "EP34",
+      "type": "PAGE",
+      "episode": 34,
+      "chapter": "救命变成做生意",
+      "chapterId": "covenant",
+      "title": "街契",
+      "scene": "market",
+      "location": "商业街 · 正式签约",
+      "poster": "/static/scenic/worlds/market.jpg",
+      "description": "纸合同铺在桌上，裂开的街契石压住一角。四十七家商户放下信物，摊娘放下一枚小铃铛。\n“有冲突先按合同。”CR-07登记：合作商户 01，百鬼街商户联合体；登记商铺四十七，合作主体一。",
+      "quote": "忙了半天，一个客户？",
+      "choices": [
+        {
+          "id": "EP34_A",
+          "text": "签下街契，登记 47 家商户",
+          "next": "EP35",
+          "hint": "正式合作 · 合作主体 1",
+          "outcome": "四十七枚信物落下，合同与街契同时生效。百鬼街商户联合体正式成为合作商户 01。",
+          "add": {
+            "cooperation": 14
+          },
+          "set": {
+            "contractSigned": true,
+            "shops": 47,
+            "partners": 1
+          }
+        }
+      ]
+    },
+    "EP35": {
+      "id": "EP35",
+      "type": "PAGE",
+      "episode": 35,
+      "chapter": "救命变成做生意",
+      "chapterId": "covenant",
+      "title": "青崖山 · 百鬼街",
+      "scene": "market",
+      "location": "青崖山万界生态旅游景区",
+      "poster": "/static/scenic/worlds/market.jpg",
+      "description": "灯笼下仍看得见消防栓、电箱和店铺编号。普通人和异族坐在一起吃热食，夜市终于成了生活的一部分。\n禁止交易清单旁，许知微划掉“临时影子可议”。北门的对讲机响了：“又来了东西……一座山。”新的共生故事，才刚开始。",
+      "quote": "万界不远，就在下一盏山灯背后。",
+      "choices": [
+        {
+          "id": "EP35_A",
+          "text": "下一步，让服务在山间继续生长",
+          "next": "END01",
+          "hint": "落款：人间烟火",
+          "outcome": "你的第一卷落款：把生存，慢慢过成生活。",
+          "set": {
+            "route": "living"
+          }
+        },
+        {
+          "id": "EP35_B",
+          "text": "下一步，建立共同协商的秩序",
+          "next": "END02",
+          "hint": "落款：共生之约",
+          "outcome": "你的第一卷落款：让不同文明，有规则地生活在一起。",
+          "set": {
+            "route": "covenant"
+          }
+        },
+        {
+          "id": "EP35_C",
+          "text": "下一步，守住未知生态的边界",
+          "next": "END03",
+          "hint": "落款：生态守望",
+          "outcome": "你的第一卷落款：保留好奇，也保留对未知的尊重。",
+          "set": {
+            "route": "ecology"
+          }
+        }
+      ]
     },
     "END01": {
       "id": "END01",
       "type": "ENDING",
-      "title": "沈老师"
+      "title": "人间烟火",
+      "chapter": "第一卷完",
+      "chapterId": "covenant",
+      "scene": "market",
+      "poster": "/static/scenic/worlds/market.jpg",
+      "description": "一口热饭，一双修好的鞋，一盏防水的纸灯。百鬼街的 47 家商户正式落脚，青崖山有了继续生活的理由。",
+      "quote": "北门之外，新的世界正在抵达。",
+      "condition": {
+        "all": [
+          {
+            "flag": "contractSigned"
+          },
+          {
+            "flag": "route",
+            "equals": "living"
+          }
+        ]
+      }
     },
     "END02": {
       "id": "END02",
       "type": "ENDING",
-      "title": "真相大白"
+      "title": "共生之约",
+      "chapter": "第一卷完",
+      "chapterId": "covenant",
+      "scene": "market",
+      "poster": "/static/scenic/worlds/market.jpg",
+      "description": "没有通用货币，先交换彼此所需。合同与街契共同约束 47 家商户，百鬼街商户联合体成为青崖山的第一位商业伙伴。",
+      "quote": "北门之外，新的世界正在抵达。",
+      "condition": {
+        "all": [
+          {
+            "flag": "contractSigned"
+          },
+          {
+            "flag": "route",
+            "equals": "covenant"
+          }
+        ]
+      }
     },
     "END03": {
       "id": "END03",
       "type": "ENDING",
-      "title": "梁砚的王国"
-    },
-    "END04": {
-      "id": "END04",
-      "type": "ENDING",
-      "title": "第一个亿"
-    },
-    "END05": {
-      "id": "END05",
-      "type": "ENDING",
-      "title": "新任掌舵者"
-    },
-    "END06": {
-      "id": "END06",
-      "type": "ENDING",
-      "title": "完整的沈知意"
+      "title": "生态守望",
+      "chapter": "第一卷完",
+      "chapterId": "covenant",
+      "scene": "market",
+      "poster": "/static/scenic/worlds/market.jpg",
+      "description": "从四翼小虫到河岸的母亲，你没有把未知直接当成敌人。百鬼街已经开门，生态观察与安全边界将伴随每一次相遇。",
+      "quote": "北门之外，新的世界正在抵达。",
+      "condition": {
+        "all": [
+          {
+            "flag": "contractSigned"
+          },
+          {
+            "flag": "route",
+            "equals": "ecology"
+          }
+        ]
+      }
     }
   },
   "layout": {
@@ -600,181 +981,153 @@
       "x": 0,
       "y": 0
     },
-    "C_M01": {
-      "x": 360,
+    "EP02": {
+      "x": 300,
       "y": 0
     },
-    "V_M02_A": {
-      "x": 720,
+    "EP03": {
+      "x": 600,
       "y": 0
     },
-    "V_M02_B": {
-      "x": 720,
-      "y": 390
-    },
-    "V_M02_C": {
-      "x": 720,
-      "y": 780
-    },
-    "V_M03": {
-      "x": 1080,
+    "EP04": {
+      "x": 900,
       "y": 0
     },
-    "C_M03": {
-      "x": 1440,
+    "EP05": {
+      "x": 1200,
       "y": 0
     },
-    "V_TRUST": {
+    "EP06": {
+      "x": 1500,
+      "y": 0
+    },
+    "EP07": {
       "x": 1800,
       "y": 0
     },
-    "V_PHONE": {
+    "EP08": {
+      "x": 0,
+      "y": 220
+    },
+    "EP09": {
+      "x": 300,
+      "y": 220
+    },
+    "EP10": {
+      "x": 600,
+      "y": 220
+    },
+    "EP11": {
+      "x": 900,
+      "y": 220
+    },
+    "EP12": {
+      "x": 1200,
+      "y": 220
+    },
+    "EP13": {
+      "x": 1500,
+      "y": 220
+    },
+    "EP14": {
       "x": 1800,
-      "y": 390
+      "y": 220
     },
-    "V_FATHER": {
+    "EP15": {
+      "x": 0,
+      "y": 440
+    },
+    "EP16": {
+      "x": 300,
+      "y": 440
+    },
+    "EP17": {
+      "x": 600,
+      "y": 440
+    },
+    "EP18": {
+      "x": 900,
+      "y": 440
+    },
+    "EP19": {
+      "x": 1200,
+      "y": 440
+    },
+    "EP20": {
+      "x": 1500,
+      "y": 440
+    },
+    "EP21": {
       "x": 1800,
-      "y": 780
+      "y": 440
     },
-    "P_PHONE": {
-      "x": 2160,
-      "y": 0
+    "EP22": {
+      "x": 0,
+      "y": 660
     },
-    "P_EVIDENCE": {
-      "x": 2520,
-      "y": 0
+    "EP23": {
+      "x": 300,
+      "y": 660
     },
-    "V_M05": {
-      "x": 2880,
-      "y": 0
+    "EP24": {
+      "x": 600,
+      "y": 660
     },
-    "P_TEST_EVIDENCE": {
-      "x": 3240,
-      "y": 0
+    "EP25": {
+      "x": 900,
+      "y": 660
     },
-    "V_NO_PROOF": {
-      "x": 3600,
-      "y": 0
+    "EP26": {
+      "x": 1200,
+      "y": 660
     },
-    "V_EVIDENCE": {
-      "x": 3600,
-      "y": 390
+    "EP27": {
+      "x": 1500,
+      "y": 660
     },
-    "V_LEAVE": {
-      "x": 3600,
-      "y": 780
+    "EP28": {
+      "x": 1800,
+      "y": 660
     },
-    "V_M04": {
-      "x": 3960,
-      "y": 0
+    "EP29": {
+      "x": 0,
+      "y": 880
     },
-    "P028": {
-      "x": 4320,
-      "y": 0
+    "EP30": {
+      "x": 300,
+      "y": 880
     },
-    "V_A01": {
-      "x": 4680,
-      "y": 0
+    "EP31": {
+      "x": 600,
+      "y": 880
     },
-    "P_A02": {
-      "x": 5040,
-      "y": 0
+    "EP32": {
+      "x": 900,
+      "y": 880
     },
-    "V_A03": {
-      "x": 5400,
-      "y": 0
+    "EP33": {
+      "x": 1200,
+      "y": 880
     },
-    "V_B01": {
-      "x": 4680,
-      "y": 390
+    "EP34": {
+      "x": 1500,
+      "y": 880
     },
-    "P_B02": {
-      "x": 5040,
-      "y": 390
-    },
-    "V_B03": {
-      "x": 5400,
-      "y": 390
-    },
-    "V_C01": {
-      "x": 4680,
-      "y": 780
-    },
-    "P_C02": {
-      "x": 5040,
-      "y": 780
-    },
-    "V_C03": {
-      "x": 5400,
-      "y": 780
-    },
-    "V_E01": {
-      "x": 4680,
-      "y": 1170
-    },
-    "P_E02": {
-      "x": 5040,
-      "y": 1170
-    },
-    "V_E03": {
-      "x": 5400,
-      "y": 1170
-    },
-    "V_F01": {
-      "x": 4680,
-      "y": 1560
-    },
-    "P_F02": {
-      "x": 5040,
-      "y": 1560
-    },
-    "V_F03": {
-      "x": 5400,
-      "y": 1560
-    },
-    "V_D01": {
-      "x": 4680,
-      "y": 1950
-    },
-    "P_D02": {
-      "x": 5040,
-      "y": 1950
-    },
-    "V_TRUE": {
-      "x": 5400,
-      "y": 1950
-    },
-    "P_TRUE": {
-      "x": 5760,
-      "y": 0
-    },
-    "R_NO_EVIDENCE": {
-      "x": 3960,
-      "y": 390
+    "EP35": {
+      "x": 1800,
+      "y": 880
     },
     "END01": {
-      "x": 5760,
-      "y": 390
+      "x": 0,
+      "y": 1100
     },
     "END02": {
-      "x": 5760,
-      "y": 780
+      "x": 300,
+      "y": 1100
     },
     "END03": {
-      "x": 5760,
-      "y": 1170
-    },
-    "END04": {
-      "x": 5760,
-      "y": 1560
-    },
-    "END05": {
-      "x": 5760,
-      "y": 1950
-    },
-    "END06": {
-      "x": 6120,
-      "y": 0
+      "x": 600,
+      "y": 1100
     }
   },
   "trash": []

@@ -2,8 +2,8 @@ import {readFile,writeFile,rename,access} from 'node:fs/promises'
 import path from 'node:path'
 import {fileURLToPath} from 'node:url'
 export const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..')
-const keys='id type title chapter video poster next loop loopAtEnd choices page payloadId quote description reason returnNodeId chapterStartNodeId condition countdown'.split(' ')
-const choiceKeys='id text next set add condition disabled defaultChoice locked evidenceIds require'.split(' ')
+const keys='id type title chapter video poster next loop loopAtEnd choices page payloadId quote description reason returnNodeId chapterStartNodeId condition countdown episode chapterId scene location effects'.split(' ')
+const choiceKeys='id text next set add condition disabled defaultChoice locked evidenceIds require hint outcome'.split(' ')
 const pick=(o,ks)=>Object.fromEntries(ks.filter(k=>o[k]!==undefined).map(k=>[k,o[k]]))
 export function validate(project){
  const errors=[],warnings=[],nodes=project?.nodes

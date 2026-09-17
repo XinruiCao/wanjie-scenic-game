@@ -3,6 +3,8 @@ import runtimeStory from './story.runtime.json'
 export type NodeType = 'VIDEO' | 'PAGE' | 'CHOICE' | 'ROUTE_CLOSED' | 'ENDING'
 
 export interface ChoiceItem {
+  hint?: string
+  outcome?: string
   id: string
   text: string
   next: string
@@ -17,6 +19,11 @@ export interface ChoiceItem {
 }
 
 export interface StoryNode {
+  episode?: number
+  chapterId?: string
+  scene?: string
+  location?: string
+  effects?: {set?: Record<string,string|number|boolean>; add?: Record<string,number>}
   id: string
   type: NodeType
   title?: string

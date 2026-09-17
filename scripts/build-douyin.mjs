@@ -9,6 +9,7 @@ const config = JSON.parse(await fs.readFile(path.join(root, 'douyin/config/relea
 if (!['demo', 'production'].includes(config.mode)) throw new Error('release.mode must be demo or production')
 // Production requires a separate platform integration pass; the current output is a reviewable demo.
 if (config.mode !== 'demo') throw new Error('当前客户端是试玩接入包。完成账号、实名防沉迷及正式内容接入后再启用 production。')
+await fs.rm(out, {recursive:true,force:true})
 await fs.mkdir(path.join(out, 'assets'), { recursive: true })
 const metadata = JSON.parse(await fs.readFile(path.join(root, 'src/config/generated-scenic-assets.json'), 'utf8'))
 const assets = []
@@ -24,10 +25,7 @@ for (const [key, item] of Object.entries(metadata)) {
   assets.push({ file: 'assets/' + key + '.png', bytes: (await fs.stat(file)).size, width: info.width, height: info.height, alpha: info.hasAlpha })
 }
 for (const [key, source, width] of [
-  ['hero', 'scenic/hero.png', 1280],
-  ['engagement', 'backgrounds/engagement.png', 800],
-  ['hospital7', 'backgrounds/hospital7.png', 800],
-  ['true-ending', 'backgrounds/true-ending.png', 800],
+  ...['exam','qingya','wetland','refugees','market','titan'].map(key=>[key, 'scenic/worlds/'+key+'.jpg', 1280]),
 ]) {
   const file = path.join(out, 'assets', key + '.jpg')
   await sharp(path.join(root, 'src/static', source)).resize({ width, withoutEnlargement: true }).jpeg({ quality: 80, mozjpeg: true }).toFile(file)

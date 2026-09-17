@@ -67,3 +67,8 @@
 .scenic-home[data-skin='dark'] .journey-button{--scenic-fill:#54242a}
 .scenic-home[data-skin] .continue-button{--scenic-fill:var(--panel-2)}
 .scenic-home[data-skin] .journey-button::after,.scenic-home[data-skin] .continue-button::after{border:0}
+/* Cinematic story scenes retain their full color; only the reading area is shaded. */
+.visual-page.scenic-player[data-skin]{color:#f7eddb;background:#142322}
+.visual-page.scenic-player[data-skin] .scene-backdrop{opacity:1;filter:none}
+.visual-page.scenic-player[data-skin] .eyebrow{color:#ddc994}
+.visual-page.scenic-player[data-skin] .save-note{color:#c4c1ad}

@@ -1,8 +1,6 @@
 export const art: Record<string, string> = {
-  hero: 'assets/hero.jpg',
-  engagement: 'assets/engagement.jpg',
-  hospital: 'assets/hospital7.jpg',
-  ending: 'assets/true-ending.jpg',
+  hero: 'assets/qingya.jpg',
+  ...Object.fromEntries(['exam','qingya','wetland','refugees','market','titan'].map(key=>[key,'assets/'+key+'.jpg'])),
   'light-title': 'assets/light-title.png',
   'dark-title': 'assets/dark-title.png',
   'light-button': 'assets/light-button.png',

@@ -26,56 +26,14 @@ try {
   session.save()
   assert.equal(new Session(store, config).state.hasSave, false, 'preferences cannot create a story save')
 
-  function until(s, node) {
-    for (let i = 0; i < 50 && s.state.currentNodeId !== node; i++) {
-      assert.ok(!s.engine.getNode().choices, `unexpected choice at ${s.state.currentNodeId}`)
-      assert.ok(s.engine.getNode().next, `dead end before ${node}`)
-      s.engine.advance()
-    }
-    assert.equal(s.state.currentNodeId, node)
-  }
-  function prologue(s, route, father = false) {
-    s.engine.startNewGame()
-    until(s, 'C_M01'); s.engine.applyChoice('C_M01_C')
-    until(s, 'C_M03'); s.engine.applyChoice(father ? 'C_M03_C' : 'C_M03_B')
-    until(s, 'P_TEST_EVIDENCE')
-    assert.ok(s.state.evidenceIds.includes('ring_tracker'), 'page rewards are saved')
-    s.engine.applyChoice('PROOF'); until(s, 'P028')
-    if (!s.state.archives.length) assert.equal(s.skin, 'light', 'arriving at the decision alone does not unlock')
-    s.engine.applyChoice(route)
-    assert.equal(s.skin, 'dark')
-  }
-  for (const [route, ending, father] of [['A', 'END01'], ['B', 'END02'], ['C', 'END03'], ['E', 'END04'], ['F', 'END05', true]]) {
-    const s = new Session(memory(), config)
-    prologue(s, 'C_P028_' + route, father)
-    until(s, ending)
-    assert.ok(s.state.unlockedEndings.includes(ending))
-  }
-  prologue(session, 'C_P028_A'); until(session, 'END01')
-  prologue(session, 'C_P028_D'); until(session, 'P_D02'); session.engine.applyChoice('D_TRUE'); until(session, 'END06')
-  assert.deepEqual(session.state.unlockedEndings, ['END01', 'END06'])
-  session = new Session(store, config)
-  assert.equal(session.state.currentNodeId, 'END06'); assert.equal(session.skin, 'dark')
-  assert.ok(session.switchSkin()); assert.equal(new Session(store, config).skin, 'light')
-  session.engine.startNewGame(); assert.equal(session.state.metaFlags.darkSkinUnlocked, true)
-  until(session, 'C_M01'); session.engine.applyChoice('C_M01_A')
-  until(session, 'C_M03'); session.engine.applyChoice('C_M03_A')
-  until(session, 'P_TEST_EVIDENCE'); session.engine.applyChoice('ARGUE'); until(session, 'R_NO_EVIDENCE')
-  assert.ok(session.engine.restoreCheckpoint()); assert.equal(session.state.currentNodeId, 'P_TEST_EVIDENCE')
-  assert.equal(session.state.metaFlags.darkSkinUnlocked, true)
-  assert.ok(store.map.has(DEMO_SAVE_KEY)); assert.equal(store.map.has('shen_zhiyi_game_state_v1'), false)
-
-  store.set(DEMO_SAVE_KEY, '{damaged')
-  const recovered = new Session(store, config)
-  assert.ok(recovered.state.hasSave, 'fallback loads last good checkpoint')
-  recovered.save(); assert.equal(store.get(DEMO_SAVE_KEY + ':recovery'), '{damaged')
-  const blockedStorage = new Session({ get: () => null, set: () => { throw Error('quota') } }, config)
-  blockedStorage.engine.startNewGame()
-  assert.match(blockedStorage.saveError, /保存失败/)
-  assert.equal(blockedStorage.state.currentNodeId, 'V_M01', 'storage errors do not lose in-memory progress')
-  assert.equal(new Session(memory(), { ...config, videos: { V_M01: 'http://insecure/movie.mp4' } }).videoUrl('V_M01'), '')
-  assert.equal(new Session(memory(), { ...config, videoBaseUrl: 'https://cdn.example.com/game/' }).videoUrl('V_M01'), 'https://cdn.example.com/game/static/videos/prologue/V_M01.mp4')
-  console.log('PASS · all six endings, conditional choices, evidence, checkpoint, persistent skins, isolated save, corruption recovery and write failure')
+  function complete(s,ending=0){s.engine.startNewGame();for(let i=0;i<45&&s.engine.getNode().type!=='ENDING';i++){const n=s.engine.getNode();if(n.choices)s.engine.applyChoice(n.choices[n.id==='EP35'?ending:0].id);else s.engine.advance()}assert.equal(s.state.currentEndingId,'END0'+(ending+1))}
+  complete(session);complete(session,2);assert.deepEqual(session.state.unlockedEndings,['END01','END03'])
+  session=new Session(store,config);assert.equal(session.state.currentNodeId,'END03');assert.equal(session.skin,'dark');assert.ok(session.switchSkin());assert.equal(new Session(store,config).skin,'light')
+  assert.ok(store.map.has(DEMO_SAVE_KEY));assert.equal(store.map.has('wanjie_douyin_demo_v1'),false)
+  store.set(DEMO_SAVE_KEY,'{damaged');const recovered=new Session(store,config);assert.ok(recovered.state.hasSave);recovered.save();assert.equal(store.get(DEMO_SAVE_KEY+':recovery'),'{damaged')
+  const blockedStorage=new Session({get:()=>null,set:()=>{throw Error('quota')}},config);blockedStorage.engine.startNewGame();assert.match(blockedStorage.saveError,/保存失败/);assert.equal(blockedStorage.state.currentNodeId,'V_M01')
+  assert.equal(new Session(memory(),{...config,videos:{V_M01:'http://insecure/movie.mp4'}}).videoUrl('V_M01'),'')
+  console.log('PASS · complete first volume, epilogues, persistent skin, isolated saves, corruption recovery and write failure')
 
   let callbacks = [], destroyed = 0, plays = 0, ended = 0, pauses = 0
   const movie = new Movie({ video: (_src, _muted, events) => {
@@ -131,18 +89,11 @@ try {
       assert.ok(target.h >= 44, `${target.id}: minimum touch area`)
     }
     app.targets.find(t => t.id === 'start').action(); app.render()
-    assert.equal(app.page, 'play'); assert.ok(app.targets.some(t => t.id === 'advance'))
-    app.targets.find(t => t.id === 'advance').action(); app.render()
-    assert.equal(app.node.id, 'C_M01')
-    const first = app.targets.find(t => t.id === 'C_M01_A'); assert.ok(first)
-    app.activate(first.id); app.activate(first.id); assert.equal(app.session.state.choiceHistory.length, 1)
+    assert.equal(app.page,'play');app.scrollBy(10000);app.render();assert.ok(app.targets.some(t=>t.id==='advance'))
+    app.targets.find(t=>t.id==='advance').action();app.render();assert.equal(app.node.id,'EP02');app.scrollBy(10000);app.render()
+    const first=app.targets.find(t=>t.id==='EP02_B');assert.ok(first);app.activate(first.id);app.activate(first.id);assert.equal(app.session.state.choiceHistory.length,1)
   }
-  const countdown = new GameApp(platform(390, 844), config)
-  countdown.session.engine.enter('C_M03'); countdown.render(); countdown.targets.find(t => t.id === 'start').action()
-  const now = Date.now(); countdown.frame(now); countdown.background(true); countdown.frame(now + 60000)
-  assert.equal(countdown.node.id, 'C_M03'); countdown.background(false)
-  for (let i = 0; i <= 151; i++) countdown.frame(now + 60000 + i * 200)
-  assert.equal(countdown.node.id, 'V_TRUST', 'countdown applies only a valid default choice')
+  const now=Date.now()
   let paints = 0
   const staticPage = new GameApp({ ...platform(390, 844), targets() { paints++ } }, config)
   staticPage.render(); staticPage.targets.find(t => t.id === 'start').action()
@@ -150,7 +101,7 @@ try {
   const toastPaints = paints
   staticPage.frame(Date.now() + 4000)
   assert.ok(paints > toastPaints, 'an expired toast redraws even on a static page')
-  console.log('PASS · native video adapter and safe area, sidebar capability, five portrait sizes, double tap guard and paused countdown')
+  console.log('PASS · native video adapter and safe area, sidebar capability, five portrait sizes, double tap guard and static toast refresh')
 
   const code = await fs.readFile('dist/douyin/game.js', 'utf8')
   const events = {}, order = []

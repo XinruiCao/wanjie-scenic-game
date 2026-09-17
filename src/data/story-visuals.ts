@@ -1,4 +1,3 @@
+import {story} from './story'
 export interface StoryVisual {characterId?:string;theme?:string}
-export const storyVisuals:Record<string,StoryVisual>={
- V_M01:{characterId:'zhouxuchuan',theme:'prologue'},C_M01:{theme:'prologue'},V_M03:{characterId:'zhouxuchuan'},V_FATHER:{characterId:'shentingshan'},P_PHONE:{characterId:'zhouxuchuan'},P_EVIDENCE:{theme:'prologue'},V_M05:{theme:'school'},P_TEST_EVIDENCE:{theme:'school'},V_EVIDENCE:{theme:'school'},V_NO_PROOF:{theme:'school'},V_LEAVE:{theme:'school'},V_M04:{characterId:'shenzhiyi'},P028:{characterId:'shenzhiyi'},V_A01:{theme:'school'},V_C01:{characterId:'liangyan'},V_D01:{characterId:'wuxuanzhen',theme:'painted-skin'},P_D02:{theme:'painted-skin'},V_TRUE:{characterId:'shenzhiyi',theme:'high-dimension'},P_TRUE:{theme:'high-dimension'},END06:{theme:'high-dimension'},R_NO_EVIDENCE:{theme:'school'}
-}
+export const storyVisuals:Record<string,StoryVisual>=Object.fromEntries(Object.values(story).map(n=>[n.id,{characterId:'xuzhiwei',theme:n.chapterId}]))

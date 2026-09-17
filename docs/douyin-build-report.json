@@ -1,9 +1,9 @@
 {
   "mode": "demo",
-  "packageBytes": 711316,
-  "packageFiles": 20,
+  "packageBytes": 1488869,
+  "packageFiles": 22,
   "startupBudgetBytes": 4194304,
-  "videoNodes": 25,
+  "videoNodes": 0,
   "configuredVideos": 0,
   "assets": [
     {
@@ -98,20 +98,28 @@
       "alpha": true
     },
     {
-      "file": "assets/hero.jpg",
-      "bytes": 153367
+      "file": "assets/exam.jpg",
+      "bytes": 189416
     },
     {
-      "file": "assets/engagement.jpg",
-      "bytes": 48045
+      "file": "assets/qingya.jpg",
+      "bytes": 196368
     },
     {
-      "file": "assets/hospital7.jpg",
-      "bytes": 32692
+      "file": "assets/wetland.jpg",
+      "bytes": 178675
     },
     {
-      "file": "assets/true-ending.jpg",
-      "bytes": 75147
+      "file": "assets/refugees.jpg",
+      "bytes": 133609
+    },
+    {
+      "file": "assets/market.jpg",
+      "bytes": 211565
+    },
+    {
+      "file": "assets/titan.jpg",
+      "bytes": 144266
     }
   ]
 }

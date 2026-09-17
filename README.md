@@ -1,3 +1,11 @@
+# 万界开了，我在末日景区搞基建
+
+当前主线为《青崖山开门》第一卷：35 段图文剧情、五幕、12 项生态观察、建设手记与通关解锁双皮肤。横版运行 `npm run dev:h5`，抖音竖屏预览运行 `npm run dev:douyin`。
+
+本次设计、素材来源和验证见 [青崖山设计说明](docs/qingya-art-and-design.md)。正式抖音发布尚需 AppID、平台接入与真机验证。
+
+---
+
 # 万界景区 · 互动剧情项目
 
 已新增抖音小游戏竖屏试玩客户端：`npm run dev:douyin` 启动预览，`npm run build:douyin` 生成 `dist/douyin/`。使用独立 Canvas / tt API，复用剧情引擎与双皮肤解锁；不会覆盖 H5 的存档。

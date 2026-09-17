@@ -10,7 +10,7 @@ Object.defineProperties(state,{
  clues:{get:()=>state.evidenceIds,set:(v:string[])=>state.evidenceIds=v,enumerable:true,configurable:true},
  endings:{get:()=>state.unlockedEndings,set:(v:string[])=>state.unlockedEndings=v,enumerable:true,configurable:true}
 })
-function persist(){const unlocked=syncSkinProgress(state);if(unlocked)uni.showToast({title:'章节通关 · 余烬鎏金皮肤已开启',icon:'none',duration:3000});state.progress=Math.round(state.visitedNodes.length/Object.keys(story).length*100);try{uni.setStorageSync(SAVE_KEY,JSON.stringify(state))}catch{uni.showToast({title:'存档失败，请检查存储空间',icon:'none'})}}
+function persist(){const unlocked=syncSkinProgress(state);if(unlocked)uni.showToast({title:'章节通关 · 余烬鎏金皮肤已开启',icon:'none',duration:3000});state.progress=Math.round(state.visitedNodes.filter(id=>story[id]?.episode).length/35*100);try{uni.setStorageSync(SAVE_KEY,JSON.stringify(state))}catch{uni.showToast({title:'存档失败，请检查存储空间',icon:'none'})}}
 export const storyEngine=new StoryEngine(state,persist)
 function hydrate(){try{const raw=uni.getStorageSync(SAVE_KEY);if(raw){const data=migrateSave(typeof raw==='string'?JSON.parse(raw):raw); const {currentNode,loop,clues,endings,...canonical}=data;Object.assign(state,canonical);if(storyEngine.getNode(state.currentNodeId).id!==state.currentNodeId)state.currentNodeId='V_M01'}}catch{} if(syncSkinProgress(state))persist();state.developerMode=import.meta.env.DEV}
 function clearSave(){Object.assign(state,initialState());state.developerMode=import.meta.env.DEV;uni.removeStorageSync(SAVE_KEY)}
